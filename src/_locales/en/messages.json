@@ -1,0 +1,150 @@
+{
+  "extName": {
+    "message": "Trana",
+    "description": "Name of the extension"
+  },
+  "extDescription": {
+    "message": "Learn Swedish while you browse: Trana swaps some words on English, German, French and Spanish pages for Swedish ones.",
+    "description": "Store description"
+  },
+  "actionTitle": {
+    "message": "Trana: learn Swedish while browsing",
+    "description": "Toolbar button tooltip"
+  },
+  "cmdToggleSite": {
+    "message": "Turn Trana on or off for the current site",
+    "description": "Keyboard command description"
+  },
+  "popupGlobal": {
+    "message": "Swedish words",
+    "description": "Main on/off switch"
+  },
+  "popupGlobalHint": {
+    "message": "On all websites",
+    "description": "Under the main switch"
+  },
+  "popupSite": {
+    "message": "On $HOST$",
+    "description": "Per-site switch; $HOST$ is a domain",
+    "placeholders": {
+      "HOST": {
+        "content": "$1",
+        "example": "example.com"
+      }
+    }
+  },
+  "popupSiteHint": {
+    "message": "Only this website",
+    "description": "Under the per-site switch"
+  },
+  "popupDensity": {
+    "message": "Amount of words",
+    "description": "Slider label"
+  },
+  "popupDensityFew": {
+    "message": "Few",
+    "description": "Slider minimum"
+  },
+  "popupDensityMany": {
+    "message": "Many",
+    "description": "Slider maximum"
+  },
+  "popupDensityValue": {
+    "message": "About $PCT$% of the words",
+    "description": "Slider value; $PCT$ is a number",
+    "placeholders": {
+      "PCT": {
+        "content": "$1",
+        "example": "4"
+      }
+    }
+  },
+  "statusActive": {
+    "message": "$LANG$ page · $COUNT$ words in Swedish",
+    "description": "$LANG$ is a language name, $COUNT$ a number",
+    "placeholders": {
+      "LANG": {
+        "content": "$1",
+        "example": "English"
+      },
+      "COUNT": {
+        "content": "$2",
+        "example": "37"
+      }
+    }
+  },
+  "statusLoading": {
+    "message": "Reading the page…",
+    "description": "Status"
+  },
+  "statusOff": {
+    "message": "Trana is switched off.",
+    "description": "Status"
+  },
+  "statusSiteOff": {
+    "message": "Switched off on this site.",
+    "description": "Status"
+  },
+  "statusSwedish": {
+    "message": "This page is already in Swedish.",
+    "description": "Status"
+  },
+  "statusUnsupported": {
+    "message": "This page's language isn't supported.",
+    "description": "Status"
+  },
+  "statusNoText": {
+    "message": "No longer texts on this page yet.",
+    "description": "Status"
+  },
+  "statusUnavailable": {
+    "message": "Trana can't run on this page.",
+    "description": "Status"
+  },
+  "statusReload": {
+    "message": "Reload the page to start Trana here.",
+    "description": "Status"
+  },
+  "shortcutSet": {
+    "message": "Set a keyboard shortcut",
+    "description": "Link"
+  },
+  "shortcutIs": {
+    "message": "Shortcut for this site: $KEYS$",
+    "description": "$KEYS$ is a key combination",
+    "placeholders": {
+      "KEYS": {
+        "content": "$1",
+        "example": "Ctrl+Shift+Y"
+      }
+    }
+  },
+  "shortcutHowTo": {
+    "message": "Open the browser's extension settings and choose \"Manage shortcuts\".",
+    "description": "Shown when the shortcut page cannot be opened directly"
+  },
+  "grantAccess": {
+    "message": "Allow Trana on websites",
+    "description": "Button"
+  },
+  "grantAccessHint": {
+    "message": "Trana needs access to websites to show Swedish words.",
+    "description": "Above the button"
+  },
+  "credits": {
+    "message": "Dictionaries built from WikDict (Wiktionary, CC BY-SA) and FrequencyWords (CC BY-SA 4.0). Works offline, no data leaves your browser.",
+    "description": "Attribution"
+  },
+  "creditsTitle": {
+    "message": "About Trana",
+    "description": "Expandable section"
+  },
+  "tooltipListen": {
+    "message": "Listen",
+    "description": "Speaker button"
+  },
+  "tooltipPlural": {
+    "message": "plural",
+    "description": "Tag for plural forms"
+  }
+}

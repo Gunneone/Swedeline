@@ -1,0 +1,284 @@
+{
+  "block": [
+    "might",
+    "may",
+    "must",
+    "shall",
+    "will",
+    "would",
+    "could",
+    "should",
+    "ought",
+    "can",
+    "lot",
+    "lots",
+    "course",
+    "matter",
+    "order",
+    "front",
+    "ahead",
+    "rest",
+    "worth",
+    "finish",
+    "ride",
+    "stand",
+    "happening",
+    "charge",
+    "mile",
+    "miles",
+    "space",
+    "kind",
+    "sort",
+    "means",
+    "bit",
+    "jack",
+    "john",
+    "mike",
+    "tom",
+    "bill",
+    "mark",
+    "pat",
+    "rob",
+    "sue",
+    "nick",
+    "ray",
+    "rose",
+    "grace",
+    "fuck",
+    "fucking",
+    "fucker",
+    "shit",
+    "bitch",
+    "ass",
+    "damn",
+    "crap",
+    "dick",
+    "cock",
+    "pussy",
+    "bastard",
+    "whore",
+    "slut",
+    "cunt",
+    "hell",
+    "goddamn"
+  ],
+  "fix": {
+    "people": [
+      "människor",
+      "människa",
+      "en",
+      "n",
+      "p"
+    ],
+    "kid": [
+      "unge",
+      "unge",
+      "en",
+      "n",
+      ""
+    ],
+    "kids": [
+      "ungar",
+      "unge",
+      "en",
+      "n",
+      "p"
+    ],
+    "top": [
+      "topp",
+      "topp",
+      "en",
+      "n",
+      "d"
+    ],
+    "power": [
+      "makt",
+      "makt",
+      "en",
+      "n",
+      ""
+    ],
+    "security": [
+      "säkerhet",
+      "säkerhet",
+      "en",
+      "n",
+      ""
+    ],
+    "fault": [
+      "fel",
+      "fel",
+      "ett",
+      "n",
+      "d"
+    ],
+    "attention": [
+      "uppmärksamhet",
+      "uppmärksamhet",
+      "en",
+      "n",
+      ""
+    ],
+    "number": [
+      "nummer",
+      "nummer",
+      "ett",
+      "n",
+      "d"
+    ],
+    "gun": [
+      "pistol",
+      "pistol",
+      "en",
+      "n",
+      ""
+    ],
+    "guns": [
+      "pistoler",
+      "pistol",
+      "en",
+      "n",
+      "p"
+    ],
+    "different": [
+      "annorlunda",
+      "annorlunda",
+      "",
+      "a",
+      ""
+    ],
+    "great": [
+      "fantastisk",
+      "fantastisk",
+      "",
+      "a",
+      ""
+    ],
+    "father": [
+      "far",
+      "far",
+      "en",
+      "n",
+      ""
+    ],
+    "mother": [
+      "mor",
+      "mor",
+      "en",
+      "n",
+      ""
+    ],
+    "baby": [
+      "bebis",
+      "bebis",
+      "en",
+      "n",
+      ""
+    ],
+    "babies": [
+      "bebisar",
+      "bebis",
+      "en",
+      "n",
+      "p"
+    ],
+    "talk": [
+      "samtal",
+      "samtal",
+      "ett",
+      "n",
+      "d"
+    ],
+    "call": [
+      "samtal",
+      "samtal",
+      "ett",
+      "n",
+      "d"
+    ],
+    "wife": [
+      "fru",
+      "fru",
+      "en",
+      "n",
+      ""
+    ],
+    "lucky": [
+      "lyckosam",
+      "lyckosam",
+      "",
+      "a",
+      ""
+    ],
+    "quite": [
+      "ganska",
+      "ganska",
+      "",
+      "r",
+      ""
+    ],
+    "actually": [
+      "faktiskt",
+      "faktiskt",
+      "",
+      "r",
+      ""
+    ],
+    "chance": [
+      "chans",
+      "chans",
+      "en",
+      "n",
+      "d"
+    ],
+    "rock": [
+      "sten",
+      "sten",
+      "en",
+      "n",
+      "d"
+    ],
+    "rocks": [
+      "stenar",
+      "sten",
+      "en",
+      "n",
+      "dp"
+    ],
+    "doctor": [
+      "läkare",
+      "läkare",
+      "en",
+      "n",
+      "d"
+    ],
+    "doctors": [
+      "läkare",
+      "läkare",
+      "en",
+      "n",
+      "p"
+    ],
+    "news": [
+      "nyheter",
+      "nyhet",
+      "en",
+      "n",
+      "p"
+    ],
+    "edge": [
+      "kant",
+      "kant",
+      "en",
+      "n",
+      "d"
+    ],
+    "edges": [
+      "kanter",
+      "kant",
+      "en",
+      "n",
+      "dp"
+    ]
+  }
+}

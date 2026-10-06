@@ -1,0 +1,17 @@
+Trana
+=====
+
+The source code is licensed under the MIT License (see LICENSE).
+
+The dictionaries in src/dict/*.json are derived data and are licensed under
+Creative Commons Attribution-ShareAlike (CC BY-SA 4.0, compatible with the
+CC BY-SA 3.0 source data):
+
+  - WikDict (https://www.wikdict.com), bilingual dictionaries generated from
+    Wiktionary (https://www.wiktionary.org) via DBnary. Wiktionary content is
+    available under CC BY-SA. Contributors: see the history of each Wiktionary page.
+
+  - FrequencyWords by Hermit Dave (https://github.com/hermitdave/FrequencyWords),
+    word frequency lists from OpenSubtitles 2018, CC BY-SA 4.0.
+
+Hand-made corrections in src/dict/overrides/ are released under the same terms.

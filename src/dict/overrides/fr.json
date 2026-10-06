@@ -1,0 +1,42 @@
+{
+  "block": [
+    "accord", "personne", "raison", "coup", "suite", "envie", "abord", "tour", "face", "rapport",
+    "grâce", "lieu", "pièce", "sort", "bois", "putain", "merde", "bordel", "autour", "or", "but",
+    "exact", "avance", "mal", "fond", "espèce", "six"
+  ],
+  "fix": {
+    "beaucoup": ["mycket", "mycket", "", "r", ""],
+    "argent": ["pengar", "pengar", "", "n", ""],
+    "place": ["plats", "plats", "en", "n", "d"],
+    "attention": ["uppmärksamhet", "uppmärksamhet", "en", "n", ""],
+    "terre": ["jord", "jord", "en", "n", ""],
+    "journée": ["dag", "dag", "en", "n", ""],
+    "près": ["nära", "nära", "", "r", ""],
+    "fête": ["fest", "fest", "en", "n", "d"],
+    "retour": ["återkomst", "återkomst", "en", "n", ""],
+    "plaisir": ["nöje", "nöje", "ett", "n", ""],
+    "état": ["tillstånd", "tillstånd", "ett", "n", ""],
+    "salle": ["sal", "sal", "en", "n", ""],
+    "seigneur": ["herre", "herre", "en", "n", ""],
+    "faux": ["falsk", "falsk", "", "a", ""],
+    "appel": ["samtal", "samtal", "ett", "n", ""],
+    "noël": ["jul", "jul", "en", "n", ""],
+    "patron": ["chef", "chef", "en", "n", ""],
+    "accident": ["olycka", "olycka", "en", "n", ""],
+    "ordre": ["ordning", "ordning", "en", "n", ""],
+    "fille": ["flicka", "flicka", "en", "n", ""],
+    "filles": ["flickor", "flicka", "en", "n", "p"],
+    "père": ["far", "far", "en", "n", ""],
+    "mère": ["mor", "mor", "en", "n", ""],
+    "bébé": ["bebis", "bebis", "en", "n", ""],
+    "dernier": ["sista", "sista", "", "a", ""],
+    "dernière": ["sista", "sista", "", "a", ""],
+    "livre": ["bok", "bok", "en", "n", "d"],
+    "livres": ["böcker", "bok", "en", "n", "dp"],
+    "chambre": ["rum", "rum", "ett", "n", ""],
+    "docteur": ["läkare", "läkare", "en", "n", ""],
+    "magnifique": ["underbar", "underbar", "", "a", ""],
+    "tueur": ["mördare", "mördare", "en", "n", ""],
+    "exactement": ["precis", "precis", "", "r", ""]
+  }
+}

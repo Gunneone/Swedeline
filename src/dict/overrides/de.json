@@ -1,0 +1,19 @@
+{
+  "block": [
+    "da", "her", "hin", "rein", "hi", "super", "cool", "daran", "darauf", "dran", "drin", "worauf",
+    "Erzählen", "Lieben", "Bleiben", "Brauche", "Halten", "Halte", "Trinken", "Eins", "Sechs",
+    "Scheiße", "Scheiß", "Arsch", "Hölle", "Los", "Gut", "Muss", "Nein", "Selbst", "Gerade", "Hoch"
+  ],
+  "fix": {
+    "Vater": ["far", "far", "en", "n", ""],
+    "Mutter": ["mor", "mor", "en", "n", ""],
+    "Platz": ["plats", "plats", "en", "n", ""],
+    "ständig": ["ständig", "ständig", "", "a", ""],
+    "letzter": ["sista", "sista", "", "a", ""],
+    "letzte": ["sista", "sista", "", "a", ""],
+    "letzten": ["sista", "sista", "", "a", ""],
+    "letztes": ["sista", "sista", "", "a", ""],
+    "unbedingt": ["absolut", "absolut", "", "r", ""],
+    "tatsächlich": ["faktiskt", "faktiskt", "", "r", ""]
+  }
+}

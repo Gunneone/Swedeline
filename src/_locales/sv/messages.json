@@ -1,0 +1,150 @@
+{
+  "extName": {
+    "message": "Trana",
+    "description": "Name of the extension"
+  },
+  "extDescription": {
+    "message": "Lär dig svenska medan du surfar: Trana byter ut några ord på engelska, tyska, franska och spanska sidor mot svenska.",
+    "description": "Store description"
+  },
+  "actionTitle": {
+    "message": "Trana: lär dig svenska medan du surfar",
+    "description": "Toolbar button tooltip"
+  },
+  "cmdToggleSite": {
+    "message": "Slå på eller av Trana för den aktuella webbplatsen",
+    "description": "Keyboard command description"
+  },
+  "popupGlobal": {
+    "message": "Svenska ord",
+    "description": "Main on/off switch"
+  },
+  "popupGlobalHint": {
+    "message": "På alla webbplatser",
+    "description": "Under the main switch"
+  },
+  "popupSite": {
+    "message": "På $HOST$",
+    "description": "Per-site switch; $HOST$ is a domain",
+    "placeholders": {
+      "HOST": {
+        "content": "$1",
+        "example": "example.com"
+      }
+    }
+  },
+  "popupSiteHint": {
+    "message": "Bara den här webbplatsen",
+    "description": "Under the per-site switch"
+  },
+  "popupDensity": {
+    "message": "Antal ord",
+    "description": "Slider label"
+  },
+  "popupDensityFew": {
+    "message": "Få",
+    "description": "Slider minimum"
+  },
+  "popupDensityMany": {
+    "message": "Många",
+    "description": "Slider maximum"
+  },
+  "popupDensityValue": {
+    "message": "Ungefär $PCT$ % av orden",
+    "description": "Slider value; $PCT$ is a number",
+    "placeholders": {
+      "PCT": {
+        "content": "$1",
+        "example": "4"
+      }
+    }
+  },
+  "statusActive": {
+    "message": "Sida på $LANG$ · $COUNT$ ord på svenska",
+    "description": "$LANG$ is a language name, $COUNT$ a number",
+    "placeholders": {
+      "LANG": {
+        "content": "$1",
+        "example": "English"
+      },
+      "COUNT": {
+        "content": "$2",
+        "example": "37"
+      }
+    }
+  },
+  "statusLoading": {
+    "message": "Läser sidan…",
+    "description": "Status"
+  },
+  "statusOff": {
+    "message": "Trana är avstängt.",
+    "description": "Status"
+  },
+  "statusSiteOff": {
+    "message": "Avstängt på den här webbplatsen.",
+    "description": "Status"
+  },
+  "statusSwedish": {
+    "message": "Den här sidan är redan på svenska.",
+    "description": "Status"
+  },
+  "statusUnsupported": {
+    "message": "Sidans språk stöds inte.",
+    "description": "Status"
+  },
+  "statusNoText": {
+    "message": "Inga längre texter på sidan ännu.",
+    "description": "Status"
+  },
+  "statusUnavailable": {
+    "message": "Trana kan inte köras på den här sidan.",
+    "description": "Status"
+  },
+  "statusReload": {
+    "message": "Ladda om sidan för att starta Trana här.",
+    "description": "Status"
+  },
+  "shortcutSet": {
+    "message": "Välj ett kortkommando",
+    "description": "Link"
+  },
+  "shortcutIs": {
+    "message": "Kortkommando för webbplatsen: $KEYS$",
+    "description": "$KEYS$ is a key combination",
+    "placeholders": {
+      "KEYS": {
+        "content": "$1",
+        "example": "Ctrl+Shift+Y"
+      }
+    }
+  },
+  "shortcutHowTo": {
+    "message": "Öppna webbläsarens tilläggsinställningar och välj \"Hantera kortkommandon\".",
+    "description": "Shown when the shortcut page cannot be opened directly"
+  },
+  "grantAccess": {
+    "message": "Tillåt Trana på webbplatser",
+    "description": "Button"
+  },
+  "grantAccessHint": {
+    "message": "Trana behöver åtkomst till webbplatser för att visa svenska ord.",
+    "description": "Above the button"
+  },
+  "credits": {
+    "message": "Ordböckerna bygger på WikDict (Wiktionary, CC BY-SA) och FrequencyWords (CC BY-SA 4.0). Fungerar offline, ingen data lämnar webbläsaren.",
+    "description": "Attribution"
+  },
+  "creditsTitle": {
+    "message": "Om Trana",
+    "description": "Expandable section"
+  },
+  "tooltipListen": {
+    "message": "Lyssna",
+    "description": "Speaker button"
+  },
+  "tooltipPlural": {
+    "message": "plural",
+    "description": "Tag for plural forms"
+  }
+}

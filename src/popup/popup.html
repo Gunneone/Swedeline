@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trana</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="brand">
+    <img src="../icons/icon-48.png" width="36" height="36" alt="">
+    <div>
+      <h1>Trana</h1>
+      <p class="tagline">svenska · swedish</p>
+    </div>
+  </header>
+
+  <section id="permission" class="banner" hidden>
+    <p data-i18n="grantAccessHint"></p>
+    <button id="grant" class="primary" data-i18n="grantAccess"></button>
+  </section>
+
+  <section class="card">
+    <label class="row">
+      <span class="text">
+        <span class="title" data-i18n="popupGlobal"></span>
+        <span class="hint" data-i18n="popupGlobalHint"></span>
+      </span>
+      <input id="enabled" type="checkbox" class="switch" role="switch">
+    </label>
+    <label class="row" id="site-row">
+      <span class="text">
+        <span class="title" id="site-title"></span>
+        <span class="hint" data-i18n="popupSiteHint"></span>
+      </span>
+      <input id="site" type="checkbox" class="switch" role="switch">
+    </label>
+  </section>
+
+  <section class="card" id="density-card">
+    <div class="slider-head">
+      <label for="density" class="title" data-i18n="popupDensity"></label>
+      <output id="density-value" for="density"></output>
+    </div>
+    <input id="density" type="range" min="1" max="10" step="1">
+    <div class="scale"><span data-i18n="popupDensityFew"></span><span data-i18n="popupDensityMany"></span></div>
+  </section>
+
+  <p id="status" class="status" role="status"><span class="dot"></span><span id="status-text"></span></p>
+
+  <footer>
+    <button id="shortcut" class="link"></button>
+    <p id="shortcut-help" class="hint" hidden data-i18n="shortcutHowTo"></p>
+    <details>
+      <summary data-i18n="creditsTitle"></summary>
+      <p class="hint" data-i18n="credits"></p>
+    </details>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

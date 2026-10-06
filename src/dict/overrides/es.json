@@ -1,0 +1,38 @@
+{
+  "block": [
+    "favor", "acuerdo", "media", "sal", "principio", "mierda", "puta", "culo", "demonios", "diablos",
+    "maldición", "dado", "haya", "pasa", "sitio", "asunto", "vez"
+  ],
+  "fix": {
+    "hombre": ["man", "man", "en", "n", ""],
+    "hombres": ["män", "man", "en", "n", "p"],
+    "manos": ["händer", "hand", "en", "n", "p"],
+    "mano": ["hand", "hand", "en", "n", ""],
+    "manera": ["sätt", "sätt", "ett", "n", ""],
+    "padre": ["far", "far", "en", "n", ""],
+    "madre": ["mor", "mor", "en", "n", ""],
+    "mamá": ["mamma", "mamma", "en", "n", ""],
+    "padres": ["föräldrar", "förälder", "en", "n", "p"],
+    "esposa": ["fru", "fru", "en", "n", ""],
+    "único": ["enda", "enda", "", "a", ""],
+    "única": ["enda", "enda", "", "a", ""],
+    "diferente": ["annorlunda", "annorlunda", "", "a", ""],
+    "aire": ["luft", "luft", "en", "n", ""],
+    "simplemente": ["helt enkelt", "helt enkelt", "", "r", ""],
+    "raro": ["konstig", "konstig", "", "a", ""],
+    "rara": ["konstig", "konstig", "", "a", ""],
+    "triste": ["ledsen", "ledsen", "", "a", ""],
+    "maestro": ["lärare", "lärare", "en", "n", ""],
+    "permiso": ["tillstånd", "tillstånd", "ett", "n", ""],
+    "canción": ["sång", "sång", "en", "n", ""],
+    "comida": ["mat", "mat", "en", "n", ""],
+    "señora": ["dam", "dam", "en", "n", ""],
+    "auto": ["bil", "bil", "en", "n", ""],
+    "doctor": ["läkare", "läkare", "en", "n", ""],
+    "compañía": ["företag", "företag", "ett", "n", ""],
+    "amable": ["snäll", "snäll", "", "a", ""],
+    "totalmente": ["helt", "helt", "", "r", ""],
+    "última": ["sista", "sista", "", "a", ""],
+    "último": ["sista", "sista", "", "a", ""]
+  }
+}

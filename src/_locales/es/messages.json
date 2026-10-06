@@ -1,0 +1,150 @@
+{
+  "extName": {
+    "message": "Trana",
+    "description": "Name of the extension"
+  },
+  "extDescription": {
+    "message": "Aprende sueco mientras navegas: Trana cambia algunas palabras de páginas en inglés, alemán, francés y español por palabras suecas.",
+    "description": "Store description"
+  },
+  "actionTitle": {
+    "message": "Trana: aprende sueco mientras navegas",
+    "description": "Toolbar button tooltip"
+  },
+  "cmdToggleSite": {
+    "message": "Activar o desactivar Trana en el sitio actual",
+    "description": "Keyboard command description"
+  },
+  "popupGlobal": {
+    "message": "Palabras en sueco",
+    "description": "Main on/off switch"
+  },
+  "popupGlobalHint": {
+    "message": "En todos los sitios",
+    "description": "Under the main switch"
+  },
+  "popupSite": {
+    "message": "En $HOST$",
+    "description": "Per-site switch; $HOST$ is a domain",
+    "placeholders": {
+      "HOST": {
+        "content": "$1",
+        "example": "example.com"
+      }
+    }
+  },
+  "popupSiteHint": {
+    "message": "Solo este sitio",
+    "description": "Under the per-site switch"
+  },
+  "popupDensity": {
+    "message": "Cantidad de palabras",
+    "description": "Slider label"
+  },
+  "popupDensityFew": {
+    "message": "Pocas",
+    "description": "Slider minimum"
+  },
+  "popupDensityMany": {
+    "message": "Muchas",
+    "description": "Slider maximum"
+  },
+  "popupDensityValue": {
+    "message": "Aproximadamente el $PCT$ % de las palabras",
+    "description": "Slider value; $PCT$ is a number",
+    "placeholders": {
+      "PCT": {
+        "content": "$1",
+        "example": "4"
+      }
+    }
+  },
+  "statusActive": {
+    "message": "Página en $LANG$ · $COUNT$ palabras en sueco",
+    "description": "$LANG$ is a language name, $COUNT$ a number",
+    "placeholders": {
+      "LANG": {
+        "content": "$1",
+        "example": "English"
+      },
+      "COUNT": {
+        "content": "$2",
+        "example": "37"
+      }
+    }
+  },
+  "statusLoading": {
+    "message": "Leyendo la página…",
+    "description": "Status"
+  },
+  "statusOff": {
+    "message": "Trana está desactivado.",
+    "description": "Status"
+  },
+  "statusSiteOff": {
+    "message": "Desactivado en este sitio.",
+    "description": "Status"
+  },
+  "statusSwedish": {
+    "message": "Esta página ya está en sueco.",
+    "description": "Status"
+  },
+  "statusUnsupported": {
+    "message": "El idioma de esta página no es compatible.",
+    "description": "Status"
+  },
+  "statusNoText": {
+    "message": "Todavía no hay textos largos en esta página.",
+    "description": "Status"
+  },
+  "statusUnavailable": {
+    "message": "Trana no puede funcionar en esta página.",
+    "description": "Status"
+  },
+  "statusReload": {
+    "message": "Recarga la página para iniciar Trana aquí.",
+    "description": "Status"
+  },
+  "shortcutSet": {
+    "message": "Definir un atajo de teclado",
+    "description": "Link"
+  },
+  "shortcutIs": {
+    "message": "Atajo para este sitio: $KEYS$",
+    "description": "$KEYS$ is a key combination",
+    "placeholders": {
+      "KEYS": {
+        "content": "$1",
+        "example": "Ctrl+Shift+Y"
+      }
+    }
+  },
+  "shortcutHowTo": {
+    "message": "Abre la configuración de extensiones del navegador y elige \"Administrar atajos\".",
+    "description": "Shown when the shortcut page cannot be opened directly"
+  },
+  "grantAccess": {
+    "message": "Permitir Trana en los sitios web",
+    "description": "Button"
+  },
+  "grantAccessHint": {
+    "message": "Trana necesita acceso a los sitios web para mostrar palabras en sueco.",
+    "description": "Above the button"
+  },
+  "credits": {
+    "message": "Diccionarios basados en WikDict (Wiktionary, CC BY-SA) y FrequencyWords (CC BY-SA 4.0). Funciona sin conexión, ningún dato sale del navegador.",
+    "description": "Attribution"
+  },
+  "creditsTitle": {
+    "message": "Acerca de Trana",
+    "description": "Expandable section"
+  },
+  "tooltipListen": {
+    "message": "Escuchar",
+    "description": "Speaker button"
+  },
+  "tooltipPlural": {
+    "message": "plural",
+    "description": "Tag for plural forms"
+  }
+}
