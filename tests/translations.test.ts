@@ -19,6 +19,8 @@ const CASES: Record<SourceLang, [string, string[], string[]][]> = {
     ['Some felt that the team had done a good job this year.', ['good=bra'], ['felt', 'done']],
     ['He paid in cash and the law says that the suit is his.', ['cash=kontanter', 'law=lag', 'suit=kostym'], []],
     ['It was a common mistake with a fresh team and a new trick.', ['common=vanlig', 'fresh=färsk', 'trick=knep'], []],
+    ['The knight and the bishop took a cab to the port.', ['knight=riddare', 'bishop=biskop', 'cab=taxi', 'port=hamn'], []],
+    ['Throw the trash in the corner, because the elevator is broken.', ['trash=skräp', 'elevator=hiss'], []],
   ],
   es: [
     ['Mañana ellos van a la playa con sus amigos del colegio.', ['playa=strand'], ['van']],
@@ -27,6 +29,8 @@ const CASES: Record<SourceLang, [string, string[], string[]][]> = {
     ['Mi madre prepara una cena sencilla con pescado y patatas.', ['patatas=potatisar'], []],
     ['Las reglas del colegio son claras y corren cien metros en la pista.', ['reglas=regler', 'colegio=skola', 'metros=meter'], ['pista']],
     ['En julio vamos a la isla con un miembro de la familia.', ['julio=juli', 'isla=ö', 'miembro=medlem'], []],
+    ['No sé cuyo es el perro, pero vimos una colina muy verde.', ['colina=kulle'], ['cuyo']],
+    ['Los músicos tienen un plazo muy corto para el concurso.', ['músicos=musiker', 'plazo=frist'], []],
   ],
   fr: [
     ["Je pense que je l'aime beaucoup, et tu l'as bien vu.", ['beaucoup=mycket'], ['aime', 'as']],
@@ -35,6 +39,8 @@ const CASES: Record<SourceLang, [string, string[], string[]][]> = {
     ['Il le lit souvent, puis il dort dans le lit.', ['lit=säng'], []],
     ["C'est formidable, mais c'est dommage pour le bar du village.", ['formidable=fantastisk', 'dommage=synd'], ['bar']],
     ['Il est membre du club depuis huit ans avec un professeur.', ['membre=medlem', 'professeur=lärare'], ['huit']],
+    ['Elle cherche un indice dans la vieille cassette de la demoiselle.', ['indice=ledtråd', 'cassette=kassett', 'demoiselle=fröken'], []],
+    ['Il nous faut un enregistrement de la réception pour le dossier.', ['enregistrement=inspelning', 'réception=mottagning'], []],
   ],
   de: [
     ['Ich war zum ersten Mal in der großen Stadt bei meiner Mutter.', ['Mal=gång', 'Stadt=stad'], []],
@@ -43,6 +49,8 @@ const CASES: Record<SourceLang, [string, string[], string[]][]> = {
     ['Heute Abend trinken wir eine Tasse Kaffee mit Herrn Vogel.', ['Abend=kväll', 'Kaffee=kaffe'], ['Vogel']],
     ['Er hat das ganze Zeug in die alte Kiste gelegt und plötzlich gelacht.', ['Zeug=grejer', 'Kiste=låda', 'plötzlich=plötsligt'], []],
     ['Der lange Flug war um Acht vorbei, sagte der kleine Geist.', ['Flug=flygning', 'Geist=ande'], ['Acht']],
+    ['Nach dem Vorfall hat die alte Puppe ihre Stärke verloren.', ['Vorfall=incident', 'Puppe=docka', 'Stärke=styrka'], []],
+    ['Der junge Künstler wohnt jetzt im Westen der Stadt.', ['Künstler=konstnär', 'Westen=väster'], []],
   ],
 };
 

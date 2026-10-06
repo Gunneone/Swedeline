@@ -126,7 +126,46 @@
     "bullshit",
     "appointment",
     "appointments",
-    "rick"
+    "rick",
+    "drag",
+    "joey",
+    "helps",
+    "stock",
+    "cutting",
+    "policy",
+    "chick",
+    "sally",
+    "firing",
+    "quarter",
+    "kills",
+    "joint",
+    "gear",
+    "bust",
+    "bond",
+    "buck",
+    "deputy",
+    "deputies",
+    "stake",
+    "wrap",
+    "randy",
+    "trunk",
+    "backup",
+    "cooper",
+    "noon",
+    "offense",
+    "chop",
+    "pole",
+    "coke",
+    "dope",
+    "smash",
+    "chicks",
+    "polish",
+    "plot",
+    "quarters",
+    "tits",
+    "motor",
+    "prick",
+    "bonnie"
   ],
   "fix": {
     "people": [
@@ -911,6 +950,671 @@
       "vanlig",
       "",
       "a",
+      ""
+    ],
+    "cab": [
+      "taxi",
+      "taxi",
+      "en",
+      "n",
+      "d"
+    ],
+    "cabs": [
+      "taxibilar",
+      "taxibil",
+      "en",
+      "n",
+      "dp"
+    ],
+    "score": [
+      "poäng",
+      "poäng",
+      "en",
+      "n",
+      "d"
+    ],
+    "scores": [
+      "poäng",
+      "poäng",
+      "en",
+      "n",
+      "dp"
+    ],
+    "talks": [
+      "samtal",
+      "samtal",
+      "ett",
+      "n",
+      "dp"
+    ],
+    "chances": [
+      "chanser",
+      "chans",
+      "en",
+      "n",
+      "dp"
+    ],
+    "nasty": [
+      "otäck",
+      "otäck",
+      "",
+      "a",
+      ""
+    ],
+    "elevator": [
+      "hiss",
+      "hiss",
+      "en",
+      "n",
+      "d"
+    ],
+    "elevators": [
+      "hissar",
+      "hiss",
+      "en",
+      "n",
+      "dp"
+    ],
+    "shoulder": [
+      "axel",
+      "axel",
+      "en",
+      "n",
+      "d"
+    ],
+    "shoulders": [
+      "axlar",
+      "axel",
+      "en",
+      "n",
+      "dp"
+    ],
+    "trash": [
+      "skräp",
+      "skräp",
+      "ett",
+      "n",
+      "d"
+    ],
+    "percent": [
+      "procent",
+      "procent",
+      "",
+      "n",
+      ""
+    ],
+    "lack": [
+      "brist",
+      "brist",
+      "en",
+      "n",
+      "d"
+    ],
+    "lacks": [
+      "brister",
+      "brist",
+      "en",
+      "n",
+      "dp"
+    ],
+    "teaching": [
+      "undervisning",
+      "undervisning",
+      "en",
+      "n",
+      "d"
+    ],
+    "guts": [
+      "mod",
+      "mod",
+      "ett",
+      "n",
+      "dp"
+    ],
+    "closet": [
+      "garderob",
+      "garderob",
+      "en",
+      "n",
+      "d"
+    ],
+    "recent": [
+      "nylig",
+      "nylig",
+      "",
+      "a",
+      ""
+    ],
+    "distant": [
+      "avlägsen",
+      "avlägsen",
+      "",
+      "a",
+      ""
+    ],
+    "port": [
+      "hamn",
+      "hamn",
+      "en",
+      "n",
+      ""
+    ],
+    "pet": [
+      "husdjur",
+      "husdjur",
+      "ett",
+      "n",
+      "d"
+    ],
+    "pets": [
+      "husdjur",
+      "husdjur",
+      "ett",
+      "n",
+      "dp"
+    ],
+    "basic": [
+      "grundläggande",
+      "grundläggande",
+      "",
+      "a",
+      ""
+    ],
+    "nail": [
+      "spik",
+      "spik",
+      "en",
+      "n",
+      "d"
+    ],
+    "nails": [
+      "spikar",
+      "spik",
+      "en",
+      "n",
+      "dp"
+    ],
+    "booth": [
+      "bås",
+      "bås",
+      "ett",
+      "n",
+      ""
+    ],
+    "booths": [
+      "bås",
+      "bås",
+      "ett",
+      "n",
+      "p"
+    ],
+    "bishop": [
+      "biskop",
+      "biskop",
+      "en",
+      "n",
+      "d"
+    ],
+    "bishops": [
+      "biskopar",
+      "biskop",
+      "en",
+      "n",
+      "dp"
+    ],
+    "knight": [
+      "riddare",
+      "riddare",
+      "en",
+      "n",
+      "d"
+    ],
+    "knights": [
+      "riddare",
+      "riddare",
+      "en",
+      "n",
+      "dp"
+    ],
+    "laundry": [
+      "tvätt",
+      "tvätt",
+      "en",
+      "n",
+      ""
+    ],
+    "lousy": [
+      "usel",
+      "usel",
+      "",
+      "a",
+      ""
+    ],
+    "ward": [
+      "avdelning",
+      "avdelning",
+      "en",
+      "n",
+      "d"
+    ],
+    "wards": [
+      "avdelningar",
+      "avdelning",
+      "en",
+      "n",
+      "dp"
+    ],
+    "agency": [
+      "byrå",
+      "byrå",
+      "en",
+      "n",
+      ""
+    ],
+    "facts": [
+      "fakta",
+      "faktum",
+      "ett",
+      "n",
+      "p"
+    ],
+    "wide": [
+      "bred",
+      "bred",
+      "",
+      "a",
+      ""
+    ],
+    "limit": [
+      "gräns",
+      "gräns",
+      "en",
+      "n",
+      "d"
+    ],
+    "limits": [
+      "gränser",
+      "gräns",
+      "en",
+      "n",
+      "dp"
+    ],
+    "underwear": [
+      "underkläder",
+      "underkläder",
+      "",
+      "n",
+      ""
+    ],
+    "technically": [
+      "tekniskt sett",
+      "tekniskt sett",
+      "",
+      "r",
+      ""
+    ],
+    "dates": [
+      "datum",
+      "datum",
+      "ett",
+      "n",
+      "dp"
+    ],
+    "pin": [
+      "nål",
+      "nål",
+      "en",
+      "n",
+      "d"
+    ],
+    "pins": [
+      "nålar",
+      "nål",
+      "en",
+      "n",
+      "dp"
+    ],
+    "romance": [
+      "romantik",
+      "romantik",
+      "en",
+      "n",
+      "d"
+    ],
+    "romances": [
+      "romanser",
+      "romans",
+      "en",
+      "n",
+      "dp"
+    ],
+    "instance": [
+      "exempel",
+      "exempel",
+      "ett",
+      "n",
+      "d"
+    ],
+    "instances": [
+      "exempel",
+      "exempel",
+      "ett",
+      "n",
+      "dp"
+    ],
+    "rubbish": [
+      "skräp",
+      "skräp",
+      "ett",
+      "n",
+      "d"
+    ],
+    "fighter": [
+      "kämpe",
+      "kämpe",
+      "en",
+      "n",
+      ""
+    ],
+    "fighters": [
+      "kämpar",
+      "kämpe",
+      "en",
+      "n",
+      "p"
+    ],
+    "core": [
+      "kärna",
+      "kärna",
+      "en",
+      "n",
+      "d"
+    ],
+    "cores": [
+      "kärnor",
+      "kärna",
+      "en",
+      "n",
+      "dp"
+    ],
+    "tap": [
+      "kran",
+      "kran",
+      "en",
+      "n",
+      "d"
+    ],
+    "taps": [
+      "kranar",
+      "kran",
+      "en",
+      "n",
+      "dp"
+    ],
+    "soap": [
+      "tvål",
+      "tvål",
+      "en",
+      "n",
+      "d"
+    ],
+    "soaps": [
+      "tvålar",
+      "tvål",
+      "en",
+      "n",
+      "dp"
+    ],
+    "corn": [
+      "majs",
+      "majs",
+      "en",
+      "n",
+      "d"
+    ],
+    "review": [
+      "recension",
+      "recension",
+      "en",
+      "n",
+      "d"
+    ],
+    "reviews": [
+      "recensioner",
+      "recension",
+      "en",
+      "n",
+      "dp"
+    ],
+    "possession": [
+      "innehav",
+      "innehav",
+      "ett",
+      "n",
+      "d"
+    ],
+    "assignment": [
+      "uppdrag",
+      "uppdrag",
+      "ett",
+      "n",
+      ""
+    ],
+    "assignments": [
+      "uppdrag",
+      "uppdrag",
+      "ett",
+      "n",
+      "p"
+    ],
+    "soda": [
+      "läsk",
+      "läsk",
+      "en",
+      "n",
+      ""
+    ],
+    "steak": [
+      "biff",
+      "biff",
+      "en",
+      "n",
+      "d"
+    ],
+    "steaks": [
+      "biffar",
+      "biff",
+      "en",
+      "n",
+      "dp"
+    ],
+    "potato": [
+      "potatis",
+      "potatis",
+      "en",
+      "n",
+      "d"
+    ],
+    "potatoes": [
+      "potatisar",
+      "potatis",
+      "en",
+      "n",
+      "dp"
+    ],
+    "entry": [
+      "inträde",
+      "inträde",
+      "ett",
+      "n",
+      ""
+    ],
+    "entries": [
+      "inträden",
+      "inträde",
+      "ett",
+      "n",
+      "p"
+    ],
+    "brick": [
+      "tegelsten",
+      "tegelsten",
+      "en",
+      "n",
+      "d"
+    ],
+    "badge": [
+      "bricka",
+      "bricka",
+      "en",
+      "n",
+      "d"
+    ],
+    "badges": [
+      "brickor",
+      "bricka",
+      "en",
+      "n",
+      "dp"
+    ],
+    "jersey": [
+      "tröja",
+      "tröja",
+      "en",
+      "n",
+      ""
+    ],
+    "jerseys": [
+      "tröjor",
+      "tröja",
+      "en",
+      "n",
+      "p"
+    ],
+    "privacy": [
+      "privatliv",
+      "privatliv",
+      "ett",
+      "n",
+      ""
+    ],
+    "proposal": [
+      "förslag",
+      "förslag",
+      "ett",
+      "n",
+      ""
+    ],
+    "proposals": [
+      "förslag",
+      "förslag",
+      "ett",
+      "n",
+      "p"
+    ],
+    "basis": [
+      "grund",
+      "grund",
+      "en",
+      "n",
+      ""
+    ],
+    "fund": [
+      "fond",
+      "fond",
+      "en",
+      "n",
+      "d"
+    ],
+    "web": [
+      "nät",
+      "nät",
+      "ett",
+      "n",
+      "d"
+    ],
+    "nut": [
+      "nöt",
+      "nöt",
+      "en",
+      "n",
+      "d"
+    ],
+    "executive": [
+      "direktör",
+      "direktör",
+      "en",
+      "n",
+      ""
+    ],
+    "executives": [
+      "direktörer",
+      "direktör",
+      "en",
+      "n",
+      "p"
+    ],
+    "demand": [
+      "krav",
+      "krav",
+      "ett",
+      "n",
+      "d"
+    ],
+    "demands": [
+      "krav",
+      "krav",
+      "ett",
+      "n",
+      "dp"
+    ],
+    "fairly": [
+      "ganska",
+      "ganska",
+      "",
+      "r",
+      ""
+    ],
+    "splendid": [
+      "strålande",
+      "strålande",
+      "",
+      "a",
+      ""
+    ],
+    "groom": [
+      "brudgum",
+      "brudgum",
+      "en",
+      "n",
+      "d"
+    ],
+    "grooms": [
+      "brudgummar",
+      "brudgum",
+      "en",
+      "n",
+      "dp"
+    ],
+    "confident": [
+      "säker",
+      "säker",
+      "",
+      "a",
+      ""
+    ],
+    "furniture": [
+      "möbler",
+      "möbel",
+      "en",
+      "n",
+      "p"
+    ],
+    "cinema": [
+      "bio",
+      "bio",
+      "en",
+      "n",
       ""
     ]
   }
