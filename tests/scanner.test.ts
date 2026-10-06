@@ -39,6 +39,16 @@ describe('findBlocks', () => {
     expect(block.text).toBe('The small house near the lake has a red door and a garden full of flowers.');
   });
 
+  it('keeps words apart across line breaks and whitespace between elements', () => {
+    document.body.innerHTML =
+      '<p>We walked along the quiet road for an hour<br>and then we saw the <em>old</em> <em>house</em> by the lake.</p>';
+    const [block] = findBlocks(document.body);
+    expect(block.text).toBe('We walked along the quiet road for an hour and then we saw the old house by the lake.');
+    for (const [i, node] of block.nodes.entries()) {
+      expect(block.text.slice(block.offsets[i], block.offsets[i] + node.data.length)).toBe(node.data);
+    }
+  });
+
   it('skips link lists', () => {
     document.body.innerHTML =
       '<div><a href="#">First related article about houses</a>. <a href="#">Second related article about water</a>. <a href="#">Third one</a>.</div>';

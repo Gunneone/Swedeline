@@ -60,7 +60,73 @@
     "slut",
     "cunt",
     "hell",
-    "goddamn"
+    "goddamn",
+    "right",
+    "first",
+    "else",
+    "pretty",
+    "hold",
+    "hard",
+    "cool",
+    "sex",
+    "rather",
+    "felt",
+    "pick",
+    "lead",
+    "sir",
+    "sirs",
+    "cant",
+    "chi",
+    "hop",
+    "shaw",
+    "guv",
+    "shithead",
+    "disposition",
+    "guarding",
+    "tag",
+    "spend",
+    "madam",
+    "gibberish",
+    "general",
+    "sitting",
+    "count",
+    "likes",
+    "board",
+    "grunts",
+    "race",
+    "spot",
+    "stole",
+    "due",
+    "sight",
+    "pack",
+    "condition",
+    "conditions",
+    "ho",
+    "male",
+    "lift",
+    "lifts",
+    "bucks",
+    "fan",
+    "fans",
+    "cares",
+    "sees",
+    "flat",
+    "rush",
+    "aside",
+    "studio",
+    "studios",
+    "carter",
+    "rate",
+    "rates",
+    "goodness",
+    "jerk",
+    "jerks",
+    "glasses",
+    "asshole",
+    "bullshit",
+    "appointment",
+    "appointments",
+    "rick"
   ],
   "fix": {
     "people": [
@@ -279,6 +345,573 @@
       "en",
       "n",
       "dp"
+    ],
+    "good": [
+      "bra",
+      "bra",
+      "",
+      "a",
+      ""
+    ],
+    "sorry": [
+      "ledsen",
+      "ledsen",
+      "",
+      "a",
+      ""
+    ],
+    "money": [
+      "pengar",
+      "pengar",
+      "",
+      "n",
+      ""
+    ],
+    "phone": [
+      "telefon",
+      "telefon",
+      "en",
+      "n",
+      "d"
+    ],
+    "phones": [
+      "telefoner",
+      "telefon",
+      "en",
+      "n",
+      "dp"
+    ],
+    "shot": [
+      "skott",
+      "skott",
+      "ett",
+      "n",
+      "d"
+    ],
+    "shots": [
+      "skott",
+      "skott",
+      "ett",
+      "n",
+      "dp"
+    ],
+    "proximity": [
+      "närhet",
+      "närhet",
+      "en",
+      "n",
+      ""
+    ],
+    "zodiac": [
+      "zodiak",
+      "zodiak",
+      "en",
+      "n",
+      ""
+    ],
+    "amazing": [
+      "fantastisk",
+      "fantastisk",
+      "",
+      "a",
+      ""
+    ],
+    "law": [
+      "lag",
+      "lag",
+      "en",
+      "n",
+      "d"
+    ],
+    "laws": [
+      "lagar",
+      "lag",
+      "en",
+      "n",
+      "dp"
+    ],
+    "seriously": [
+      "allvarligt",
+      "allvarligt",
+      "",
+      "r",
+      ""
+    ],
+    "forever": [
+      "för evigt",
+      "för evigt",
+      "",
+      "r",
+      ""
+    ],
+    "gold": [
+      "guld",
+      "guld",
+      "ett",
+      "n",
+      ""
+    ],
+    "trip": [
+      "resa",
+      "resa",
+      "en",
+      "n",
+      "d"
+    ],
+    "trips": [
+      "resor",
+      "resa",
+      "en",
+      "n",
+      "dp"
+    ],
+    "tough": [
+      "tuff",
+      "tuff",
+      "",
+      "a",
+      ""
+    ],
+    "smell": [
+      "lukt",
+      "lukt",
+      "en",
+      "n",
+      "d"
+    ],
+    "calls": [
+      "samtal",
+      "samtal",
+      "ett",
+      "n",
+      "dp"
+    ],
+    "relationship": [
+      "relation",
+      "relation",
+      "en",
+      "n",
+      ""
+    ],
+    "relationships": [
+      "relationer",
+      "relation",
+      "en",
+      "n",
+      "p"
+    ],
+    "jail": [
+      "fängelse",
+      "fängelse",
+      "ett",
+      "n",
+      "d"
+    ],
+    "cash": [
+      "kontanter",
+      "kontanter",
+      "",
+      "n",
+      "d"
+    ],
+    "favor": [
+      "tjänst",
+      "tjänst",
+      "en",
+      "n",
+      "d"
+    ],
+    "favors": [
+      "tjänster",
+      "tjänst",
+      "en",
+      "n",
+      "dp"
+    ],
+    "suit": [
+      "kostym",
+      "kostym",
+      "en",
+      "n",
+      "d"
+    ],
+    "suits": [
+      "kostymer",
+      "kostym",
+      "en",
+      "n",
+      "dp"
+    ],
+    "form": [
+      "form",
+      "form",
+      "en",
+      "n",
+      "d"
+    ],
+    "forms": [
+      "former",
+      "form",
+      "en",
+      "n",
+      "dp"
+    ],
+    "interest": [
+      "intresse",
+      "intresse",
+      "ett",
+      "n",
+      "d"
+    ],
+    "interests": [
+      "intressen",
+      "intresse",
+      "ett",
+      "n",
+      "dp"
+    ],
+    "clearly": [
+      "tydligt",
+      "tydligt",
+      "",
+      "r",
+      ""
+    ],
+    "note": [
+      "anteckning",
+      "anteckning",
+      "en",
+      "n",
+      "d"
+    ],
+    "notes": [
+      "anteckningar",
+      "anteckning",
+      "en",
+      "n",
+      "dp"
+    ],
+    "leaves": [
+      "löv",
+      "löv",
+      "ett",
+      "n",
+      "dp"
+    ],
+    "breath": [
+      "andetag",
+      "andetag",
+      "ett",
+      "n",
+      "d"
+    ],
+    "breaths": [
+      "andetag",
+      "andetag",
+      "ett",
+      "n",
+      "dp"
+    ],
+    "trick": [
+      "knep",
+      "knep",
+      "ett",
+      "n",
+      "d"
+    ],
+    "tricks": [
+      "knep",
+      "knep",
+      "ett",
+      "n",
+      "dp"
+    ],
+    "nuts": [
+      "nötter",
+      "nöt",
+      "en",
+      "n",
+      "dp"
+    ],
+    "tie": [
+      "slips",
+      "slips",
+      "en",
+      "n",
+      "d"
+    ],
+    "ties": [
+      "slipsar",
+      "slips",
+      "en",
+      "n",
+      "dp"
+    ],
+    "season": [
+      "säsong",
+      "säsong",
+      "en",
+      "n",
+      "d"
+    ],
+    "seasons": [
+      "säsonger",
+      "säsong",
+      "en",
+      "n",
+      "dp"
+    ],
+    "alarm": [
+      "larm",
+      "larm",
+      "ett",
+      "n",
+      "d"
+    ],
+    "alarms": [
+      "larm",
+      "larm",
+      "ett",
+      "n",
+      "dp"
+    ],
+    "chef": [
+      "kock",
+      "kock",
+      "en",
+      "n",
+      "d"
+    ],
+    "chefs": [
+      "kockar",
+      "kock",
+      "en",
+      "n",
+      "dp"
+    ],
+    "personally": [
+      "personligen",
+      "personligen",
+      "",
+      "r",
+      ""
+    ],
+    "subject": [
+      "ämne",
+      "ämne",
+      "ett",
+      "n",
+      "d"
+    ],
+    "subjects": [
+      "ämnen",
+      "ämne",
+      "ett",
+      "n",
+      "dp"
+    ],
+    "century": [
+      "århundrade",
+      "århundrade",
+      "ett",
+      "n",
+      ""
+    ],
+    "centuries": [
+      "århundraden",
+      "århundrade",
+      "ett",
+      "n",
+      "p"
+    ],
+    "square": [
+      "torg",
+      "torg",
+      "ett",
+      "n",
+      "d"
+    ],
+    "squares": [
+      "torg",
+      "torg",
+      "ett",
+      "n",
+      "dp"
+    ],
+    "woods": [
+      "skog",
+      "skog",
+      "en",
+      "n",
+      "d"
+    ],
+    "proper": [
+      "ordentlig",
+      "ordentlig",
+      "",
+      "a",
+      ""
+    ],
+    "powers": [
+      "krafter",
+      "kraft",
+      "en",
+      "n",
+      "dp"
+    ],
+    "switch": [
+      "strömbrytare",
+      "strömbrytare",
+      "en",
+      "n",
+      "d"
+    ],
+    "switches": [
+      "strömbrytare",
+      "strömbrytare",
+      "en",
+      "n",
+      "dp"
+    ],
+    "chocolate": [
+      "choklad",
+      "choklad",
+      "en",
+      "n",
+      "d"
+    ],
+    "chocolates": [
+      "chokladbitar",
+      "chokladbit",
+      "en",
+      "n",
+      "dp"
+    ],
+    "butt": [
+      "rumpa",
+      "rumpa",
+      "en",
+      "n",
+      "d"
+    ],
+    "butts": [
+      "rumpor",
+      "rumpa",
+      "en",
+      "n",
+      "dp"
+    ],
+    "courage": [
+      "mod",
+      "mod",
+      "ett",
+      "n",
+      ""
+    ],
+    "physical": [
+      "fysisk",
+      "fysisk",
+      "",
+      "a",
+      ""
+    ],
+    "hook": [
+      "krok",
+      "krok",
+      "en",
+      "n",
+      "d"
+    ],
+    "hooks": [
+      "krokar",
+      "krok",
+      "en",
+      "n",
+      "dp"
+    ],
+    "dean": [
+      "dekan",
+      "dekan",
+      "en",
+      "n",
+      "d"
+    ],
+    "candy": [
+      "godis",
+      "godis",
+      "ett",
+      "n",
+      "d"
+    ],
+    "candies": [
+      "godis",
+      "godis",
+      "ett",
+      "n",
+      "dp"
+    ],
+    "gentleman": [
+      "herre",
+      "herre",
+      "en",
+      "n",
+      ""
+    ],
+    "weight": [
+      "vikt",
+      "vikt",
+      "en",
+      "n",
+      "d"
+    ],
+    "weights": [
+      "vikter",
+      "vikt",
+      "en",
+      "n",
+      "dp"
+    ],
+    "statement": [
+      "uttalande",
+      "uttalande",
+      "ett",
+      "n",
+      "d"
+    ],
+    "statements": [
+      "uttalanden",
+      "uttalande",
+      "ett",
+      "n",
+      "dp"
+    ],
+    "manager": [
+      "chef",
+      "chef",
+      "en",
+      "n",
+      ""
+    ],
+    "managers": [
+      "chefer",
+      "chef",
+      "en",
+      "n",
+      "p"
+    ],
+    "fresh": [
+      "färsk",
+      "färsk",
+      "",
+      "a",
+      ""
+    ],
+    "common": [
+      "vanlig",
+      "vanlig",
+      "",
+      "a",
+      ""
     ]
   }
 }

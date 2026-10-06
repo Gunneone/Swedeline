@@ -83,19 +83,50 @@ export function findBlocks(root: Node): Block[] {
 
 /** Builds a block from its text nodes if it qualifies as longer text, else null. */
 export function makeBlock(el: Element, nodes: Text[]): Block | null {
+  // Cheap check first: the separators added below only split words, at most one per node boundary.
+  let raw = '';
+  for (const node of nodes) raw += node.data;
+  if ((raw.match(WORD)?.length ?? 0) + nodes.length - 1 < MIN_WORDS || !SENTENCE_PUNCT.test(raw)) return null;
+
   const offsets: number[] = [];
   let text = '';
   let linkChars = 0;
-  for (const node of nodes) {
+  const breaks = breaksBefore(el, nodes);
+  nodes.forEach((node, i) => {
+    // "hour<br>and" or "<em>Every</em> <em>summer</em>" must not read as one word.
+    if (breaks[i] && text && !/\s$/.test(text) && !/^\s/.test(node.data)) text += ' ';
     offsets.push(text.length);
     text += node.data;
     if (node.parentElement?.closest('a')) linkChars += node.data.trim().length;
-  }
+  });
   const words = text.match(WORD)?.length ?? 0;
-  if (words < MIN_WORDS || !SENTENCE_PUNCT.test(text)) return null;
+  if (words < MIN_WORDS) return null;
   if (linkChars / Math.max(1, text.trim().length) > MAX_LINK_SHARE) return null;
   return { el, nodes, offsets, text, words };
 }
+
+/**
+ * For each of a block's text nodes, whether something separates it from the
+ * previous one: a line break or other non-inline element, or text that is not
+ * part of the block (whitespace-only nodes, excluded or nested content).
+ */
+function breaksBefore(el: Element, nodes: Text[]): boolean[] {
+  const breaks = nodes.map(() => false);
+  const walker = el.ownerDocument.createTreeWalker(el, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT);
+  let i = 0;
+  let gap = false;
+  for (let n = walker.nextNode(); n && i < nodes.length; n = walker.nextNode()) {
+    if (n === nodes[i]) {
+      breaks[i++] = gap;
+      gap = false;
+    } else if (n.nodeType === Node.TEXT_NODE || !isInline(n as Element)) {
+      gap = true;
+    }
+  }
+  return breaks;
+}
+
+const isInline = (el: Element): boolean => INLINE.has(el.tagName) || el.tagName.includes('-');
 
 /** Re-reads a block's current text nodes (after the page changed it). */
 export function rescanBlock(el: Element): Block | null {

@@ -20,6 +20,32 @@ describe('findCandidates', () => {
     const found = findCandidates(tokenize('we drank the cold water slowly', 'en'), 'en', lookup).map((c) => c.token.text);
     expect(found).toContain('water');
   });
+
+  it('does not take pronouns that usually precede a verb as noun context', () => {
+    const found = (text: string) => findCandidates(tokenize(text, 'en'), 'en', lookup).map((c) => c.token.text);
+    expect(found('these are the things that need attention')).not.toContain('need');
+    expect(found('they said we all want the same')).not.toContain('want');
+    expect(found('there is a real need for change')).toContain('need');
+  });
+
+  it('reads French and Spanish object pronouns as pronouns', () => {
+    const SANG: Entry = ['säng', 'säng', 'en', 'n', 'd'];
+    const HUS: Entry = ['hus', 'hus', 'ett', 'n', 'd'];
+    const fr = (text: string) => findCandidates(tokenize(text, 'fr'), 'fr', (k) => (k === 'lit' ? SANG : undefined));
+    expect(fr('il le lit souvent le soir')).toHaveLength(0);
+    expect(fr('elle dort dans le lit ce soir')).toHaveLength(1);
+    const es = (text: string) => findCandidates(tokenize(text, 'es'), 'es', (k) => (k === 'casa' ? HUS : undefined));
+    expect(es('ayer ella la casa con su novio')).toHaveLength(0);
+    expect(es('ayer vimos la casa de mi abuela')).toHaveLength(1);
+  });
+
+  it('skips German surnames that are also nouns', () => {
+    const de = dictionary('de');
+    const found = (text: string) => findCandidates(tokenize(text, 'de'), 'de', (k) => de[k]).map((c) => c.token.text);
+    expect(found('gestern hat Joschka Fischer mit Herr Koch gesprochen')).toEqual([]);
+    expect(found('der alte Fischer fährt mit dem Boot hinaus')).toContain('Fischer');
+    expect(found('weil der Vater Geld braucht')).toEqual(['Vater', 'Geld']);
+  });
 });
 
 describe('selectReplacements', () => {

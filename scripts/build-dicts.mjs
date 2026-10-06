@@ -47,6 +47,16 @@ const MAX_VERB_RATIO = 0.25;
 const MAX_NOUN_VERB_RATIO = 1.0;
 
 const isWord = (s) => /^\p{L}+$/u.test(s);
+/** Swedish language names: used without en/ett ("talar tyska"), and their plurals in the source mean people. */
+const LANGUAGES = new Set(
+  `svenska engelska tyska franska spanska italienska portugisiska ryska kinesiska japanska koreanska
+  arabiska grekiska danska norska finska polska nederländska holländska turkiska hebreiska persiska
+  ungerska tjeckiska`.split(/\s+/),
+);
+/** Month names take no en/ett either ("i juli"). */
+const MONTHS = new Set('januari februari mars april maj juni juli augusti september oktober november december'.split(' '));
+/** Swedish nouns for digits and grades (en åtta = an eight), almost never what a source number word means. */
+const NUMBER_NOUNS = new Set('nolla etta tvåa trea fyra femma sexa sjua åtta nia tia elva tolva'.split(' '));
 /** Words to trace through the ambiguity check: DEBUG=car,happy node scripts/build-dicts.mjs en */
 const DEBUG = new Set((process.env.DEBUG ?? '').split(',').filter(Boolean));
 const lower = (s) => s.toLocaleLowerCase();
@@ -189,6 +199,8 @@ const isVowel = (c) => VOWELS.includes(c);
 
 /** English verb forms by rule plus common irregulars (WikDict has no English verb forms). */
 function englishVerbForms(v) {
+  // Rules on very short verbs only produce noise (be -> bed); their irregular forms still count.
+  if (v.length < 3) return new Set([v, ...(EN_IRREGULAR[v] ?? [])]);
   const out = new Set([v]);
   const last = v.at(-1);
   const cvc = v.length >= 3 && !isVowel(v.at(-3)) && isVowel(v.at(-2)) && !isVowel(last) && !'wxy'.includes(last);
@@ -477,7 +489,8 @@ async function buildLanguage(lang, sv) {
     posOf.set(r.lexentry, r.part_of_speech);
     repOf.set(r.lexentry, r.written_rep);
     addReading(r.written_rep, r.lexentry, r.part_of_speech, false);
-    if (r.part_of_speech === 'verb' && r.written_rep.length >= 3 && isWord(r.written_rep) && inFreq(r.written_rep)) {
+    // Short verbs (do, go, be, ir) count too: done, gone, van are among their forms.
+    if (r.part_of_speech === 'verb' && r.written_rep.length >= 2 && isWord(r.written_rep) && inFreq(r.written_rep)) {
       const gen = { en: englishVerbForms, fr: frenchVerbForms, es: spanishVerbForms }[lang];
       if (gen) for (const f of gen(lower(r.written_rep))) if (f !== lower(r.written_rep)) addReading(f, r.lexentry, 'verb', 'rule');
     }
@@ -549,6 +562,10 @@ async function buildLanguage(lang, sv) {
     if (verdict !== 'ok') { stats[verdict]++; continue; }
 
     const info = main.lex.svInfo;
+    // "Acht", "huit": numbers, not the digit nouns (en åtta) WikDict offers.
+    if (NUMBER_NOUNS.has(main.lex.sv)) { stats.ambiguous++; continue; }
+    const noArticle = main.lex.pos === 'noun' && (LANGUAGES.has(main.lex.sv) || MONTHS.has(main.lex.sv));
+    if (noArticle && main.plural) { stats.ambiguous++; continue; } // espagnols: Spaniards, not "spanskor"
     let display = main.lex.sv;
     if (main.plural && main.lex.pos === 'noun') {
       if (!info.plural) { stats.noPlural++; continue; }
@@ -557,11 +574,12 @@ async function buildLanguage(lang, sv) {
       display = info.adjPlural;
     }
     const flags = flag + (main.plural ? 'p' : '');
-    out[caseSensitive ? main.surface : k] = [display, main.lex.sv, info.gender, POS_CODE[main.lex.pos], flags];
+    out[caseSensitive ? main.surface : k] = [display, main.lex.sv, noArticle ? '' : info.gender, POS_CODE[main.lex.pos], flags];
     stats.kept++;
     if (flag) stats.flagged++;
   }
 
+  for (const surface of overrides.drop) delete out[key(surface)];
   for (const [surface, entry] of Object.entries(overrides.fix)) out[key(surface)] = entry;
   console.log(`  kept ${stats.kept} (${stats.flagged} need a determiner), dropped: ` +
     `${stats.ambiguous} ambiguous, ${stats.function} function words, ${stats.noPlural} without Swedish plural`);
@@ -613,7 +631,8 @@ function chooseTranslation(lex, sv) {
 function loadOverrides(lang) {
   const file = path.join(OUT_DIR, 'overrides', `${lang}.json`);
   const data = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {};
-  return { block: data.block ?? [], fix: data.fix ?? {} };
+  // block: the word and all its forms; drop: only this surface form (einfach, but not einfache).
+  return { block: data.block ?? [], drop: data.drop ?? [], fix: data.fix ?? {} };
 }
 
 // ---------------------------------------------------------------- main
