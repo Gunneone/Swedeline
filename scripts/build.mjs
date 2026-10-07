@@ -20,7 +20,7 @@ const FIREFOX_ID = 'swedeline@swedeline-extension';
 
 function manifestFor(browser) {
   const m = JSON.parse(fs.readFileSync(path.join(SRC, 'manifest.base.json'), 'utf8'));
-  m.version = pkg.version;
+  m.version = pkg.version; // calendar version, YYYY.M.N: see scripts/version-next.mjs
   if (browser === 'chrome') {
     m.background = { service_worker: 'background.js' };
     m.minimum_chrome_version = '121';

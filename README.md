@@ -91,6 +91,8 @@ toolbar). Set your own:
 | `npm run dict-report` | List every word Swedeline would replace in the test articles, for reviewing translation quality |
 | `npm run icons` | Render `assets/*.svg` to the PNG icons |
 | `npm run zip` | Store-ready zips in `dist/` |
+| `npm run version:next` | Set the next calendar version, `YYYY.M.N` (year, month, release number in that month: 2026.10.1, 2026.10.2, 2026.11.1) |
+| `npm run screenshots` | Regenerate the 1280×800 store screenshots in `docs/screenshots/` (needs a build and network access) |
 
 ### Project layout
 
