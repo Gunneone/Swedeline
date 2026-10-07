@@ -19,8 +19,9 @@ so it works offline and nothing you read leaves your browser.
 - **Recognizable style**: a soft Swedish-yellow marker with a blue underline
   that keeps the page's font and color. A brighter variant is used on dark pages.
 - **Hover card** with the original word, its language, the Swedish lemma with
-  *en/ett*, and a 🔊 button that uses your system's Swedish voice. The button
-  is hidden if no Swedish voice is installed.
+  *en/ett*, and a 🔊 button that uses a Swedish voice from your system
+  (preferred) or browser. Browser voices can be online services: see
+  [PRIVACY.md](PRIVACY.md). The button is hidden if no Swedish voice is available.
 - **Amount slider** (1–10 = roughly 1–20 % of the words). Changes apply live.
   Raising it only adds words and lowering it only removes words, and the same
   words come back after a reload.
