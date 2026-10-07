@@ -1,18 +1,18 @@
 {
   "extName": {
-    "message": "Trana",
+    "message": "Swedeline",
     "description": "Name of the extension"
   },
   "extDescription": {
-    "message": "Aprende sueco mientras navegas: Trana cambia algunas palabras de páginas en inglés, alemán, francés y español por palabras suecas.",
+    "message": "Aprende sueco mientras navegas: Swedeline cambia palabras de páginas en inglés, alemán, francés y español por palabras suecas.",
     "description": "Store description"
   },
   "actionTitle": {
-    "message": "Trana: aprende sueco mientras navegas",
+    "message": "Swedeline: aprende sueco mientras navegas",
     "description": "Toolbar button tooltip"
   },
   "cmdToggleSite": {
-    "message": "Activar o desactivar Trana en el sitio actual",
+    "message": "Activar o desactivar Swedeline en el sitio actual",
     "description": "Keyboard command description"
   },
   "popupGlobal": {
@@ -78,7 +78,7 @@
     "description": "Status"
   },
   "statusOff": {
-    "message": "Trana está desactivado.",
+    "message": "Swedeline está desactivado.",
     "description": "Status"
   },
   "statusSiteOff": {
@@ -98,11 +98,11 @@
     "description": "Status"
   },
   "statusUnavailable": {
-    "message": "Trana no puede funcionar en esta página.",
+    "message": "Swedeline no puede funcionar en esta página.",
     "description": "Status"
   },
   "statusReload": {
-    "message": "Recarga la página para iniciar Trana aquí.",
+    "message": "Recarga la página para iniciar Swedeline aquí.",
     "description": "Status"
   },
   "shortcutSet": {
@@ -124,11 +124,11 @@
     "description": "Shown when the shortcut page cannot be opened directly"
   },
   "grantAccess": {
-    "message": "Permitir Trana en los sitios web",
+    "message": "Permitir Swedeline en los sitios web",
     "description": "Button"
   },
   "grantAccessHint": {
-    "message": "Trana necesita acceso a los sitios web para mostrar palabras en sueco.",
+    "message": "Swedeline necesita acceso a los sitios web para mostrar palabras en sueco.",
     "description": "Above the button"
   },
   "credits": {
@@ -136,7 +136,7 @@
     "description": "Attribution"
   },
   "creditsTitle": {
-    "message": "Acerca de Trana",
+    "message": "Acerca de Swedeline",
     "description": "Expandable section"
   },
   "tooltipListen": {

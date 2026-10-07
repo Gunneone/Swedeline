@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Shows which words Trana would replace in a text, to review dictionary quality.
+// Shows which words Swedeline would replace in a text, to review dictionary quality.
 // Every candidate is listed (not just the ones the density setting would pick).
 //
 //   node scripts/dict-report.mjs                    all fixture articles

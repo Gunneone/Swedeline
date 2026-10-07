@@ -1,8 +1,8 @@
-<p align="center"><img src="src/icons/icon-128.png" width="96" alt="Trana icon: a yellow crane on Swedish blue"></p>
+<p align="center"><img src="src/icons/icon-128.png" width="96" alt="Swedeline icon: a blue underline under a yellow marker, rising into an S"></p>
 
-# Trana
+# Swedeline
 
-Learn Swedish while you browse. Trana replaces a few words on English, German,
+Learn Swedish while you browse. Swedeline replaces a few words on English, German,
 French and Spanish web pages with their Swedish translation. Hover a word to
 see the original, the Swedish base form with its gender (*en bil*, *ett hus*),
 and hear it pronounced.
@@ -42,7 +42,7 @@ so it works offline and nothing you read leaves your browser.
 
 Translations come from a word list built offline from Wiktionary (via
 WikDict) and word-frequency data; see [How the dictionaries are built](#how-the-dictionaries-are-built).
-Word-by-word translation has no context, so Trana goes for precision over
+Word-by-word translation has no context, so Swedeline goes for precision over
 coverage. It skips words that are ambiguous (*light* = ljus or lätt), names,
 words at the start of a sentence, and words that are also common verb forms.
 The exception is nouns that follow an article, possessive, number or
@@ -61,10 +61,10 @@ npm run build
 **Chrome / Edge / Brave:** open `chrome://extensions`, enable *Developer
 mode*, click *Load unpacked* and pick `dist/chrome`.
 
-**Firefox (140+):** run `npm run run:firefox` to start a Firefox with Trana
+**Firefox (140+):** run `npm run run:firefox` to start a Firefox with Swedeline
 loaded. To install temporarily in your own Firefox, open
 `about:debugging#/runtime/this-firefox` → *Load Temporary Add-on…* → pick
-`dist/firefox/manifest.json`. If the popup says Trana needs access to
+`dist/firefox/manifest.json`. If the popup says Swedeline needs access to
 websites, click *Allow*.
 
 ### Keyboard shortcut
@@ -73,7 +73,7 @@ The "toggle this site" command ships without a default key, because common
 picks such as Alt+Shift+T are already taken (in Chrome it focuses the
 toolbar). Set your own:
 
-- Chrome: `chrome://extensions/shortcuts`, or the link in Trana's popup.
+- Chrome: `chrome://extensions/shortcuts`, or the link in Swedeline's popup.
 - Firefox: Add-ons Manager → ⚙️ → *Manage Extension Shortcuts*.
 
 ## Development
@@ -88,7 +88,7 @@ toolbar). Set your own:
 | `npm run lint:firefox` | `web-ext lint` on the Firefox build |
 | `npm run harness` | Dev server at http://localhost:5178: the test articles with the content script and a fake extension API, plus a popup preview |
 | `npm run dicts` | Rebuild the dictionaries (downloads ~2.5 GB of source data into `.cache/` the first time) |
-| `npm run dict-report` | List every word Trana would replace in the test articles, for reviewing translation quality |
+| `npm run dict-report` | List every word Swedeline would replace in the test articles, for reviewing translation quality |
 | `npm run icons` | Render `assets/*.svg` to the PNG icons |
 | `npm run zip` | Store-ready zips in `dist/` |
 

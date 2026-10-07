@@ -1,7 +1,7 @@
 /* Replaced words: the page's own font and color, a soft Swedish-yellow marker
    and a thin Swedish-blue underline. `all: unset` shields the word from page
    styles that target unknown elements or `*`. */
-trana-w {
+swedeline-w {
   all: unset;
   display: inline !important;
   font: inherit !important;
@@ -20,22 +20,22 @@ trana-w {
   transition: background-color 0.15s ease !important;
 }
 
-trana-w:hover {
+swedeline-w:hover {
   background: rgba(254, 204, 2, 0.6) !important;
 }
 
 /* Dark pages (light text): a brighter blue that stays visible. */
-trana-w[data-dark] {
+swedeline-w[data-dark] {
   background: rgba(254, 204, 2, 0.24) !important;
   box-shadow: inset 0 -0.12em 0 #5fb4f0 !important;
 }
 
-trana-w[data-dark]:hover {
+swedeline-w[data-dark]:hover {
   background: rgba(254, 204, 2, 0.4) !important;
 }
 
 @media print {
-  trana-w {
+  swedeline-w {
     background: none !important;
     box-shadow: none !important;
   }

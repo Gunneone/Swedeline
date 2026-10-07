@@ -1,18 +1,18 @@
 {
   "extName": {
-    "message": "Trana",
+    "message": "Swedeline",
     "description": "Name of the extension"
   },
   "extDescription": {
-    "message": "Learn Swedish while you browse: Trana swaps some words on English, German, French and Spanish pages for Swedish ones.",
+    "message": "Learn Swedish while you browse: Swedeline swaps some words on English, German, French and Spanish pages for Swedish ones.",
     "description": "Store description"
   },
   "actionTitle": {
-    "message": "Trana: learn Swedish while browsing",
+    "message": "Swedeline: learn Swedish while browsing",
     "description": "Toolbar button tooltip"
   },
   "cmdToggleSite": {
-    "message": "Turn Trana on or off for the current site",
+    "message": "Turn Swedeline on or off for the current site",
     "description": "Keyboard command description"
   },
   "popupGlobal": {
@@ -78,7 +78,7 @@
     "description": "Status"
   },
   "statusOff": {
-    "message": "Trana is switched off.",
+    "message": "Swedeline is switched off.",
     "description": "Status"
   },
   "statusSiteOff": {
@@ -98,11 +98,11 @@
     "description": "Status"
   },
   "statusUnavailable": {
-    "message": "Trana can't run on this page.",
+    "message": "Swedeline can't run on this page.",
     "description": "Status"
   },
   "statusReload": {
-    "message": "Reload the page to start Trana here.",
+    "message": "Reload the page to start Swedeline here.",
     "description": "Status"
   },
   "shortcutSet": {
@@ -124,11 +124,11 @@
     "description": "Shown when the shortcut page cannot be opened directly"
   },
   "grantAccess": {
-    "message": "Allow Trana on websites",
+    "message": "Allow Swedeline on websites",
     "description": "Button"
   },
   "grantAccessHint": {
-    "message": "Trana needs access to websites to show Swedish words.",
+    "message": "Swedeline needs access to websites to show Swedish words.",
     "description": "Above the button"
   },
   "credits": {
@@ -136,7 +136,7 @@
     "description": "Attribution"
   },
   "creditsTitle": {
-    "message": "About Trana",
+    "message": "About Swedeline",
     "description": "Expandable section"
   },
   "tooltipListen": {

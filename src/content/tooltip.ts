@@ -81,7 +81,7 @@ function languageName(code: string): string {
 
 function ensureCard(): HTMLElement {
   if (card?.isConnected) return card;
-  const host = document.createElement('trana-tooltip');
+  const host = document.createElement('swedeline-tooltip');
   const root = host.attachShadow({ mode: 'open' });
   const style = document.createElement('style');
   style.textContent = CSS;

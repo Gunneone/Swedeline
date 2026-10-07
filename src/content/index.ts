@@ -33,11 +33,11 @@ let state: PageState = 'loading';
 /** Bumped by every restart, so async work from an earlier run stops. */
 let generation = 0;
 
-/** What Trana changed, per block element. */
+/** What Swedeline changed, per block element. */
 const applied = new Map<Element, Applied[]>();
 /** Split text nodes -> their block, to react when the page rewrites them. */
 const tracked = new Map<Text, Element>();
-/** Word elements Trana created (pages can clone them, and those copies are not Trana's). */
+/** Word elements Swedeline created (pages can clone them, and those copies are not Swedeline's). */
 const ownWords = new WeakSet<Element>();
 /** Blocks already handled, with their text at that time. */
 let handled = new WeakMap<Element, string>();
@@ -239,7 +239,7 @@ function applyJob({ block, lang, tokens }: Job, rate: number): void {
     perNode.set(i, list);
   }
 
-  flushRecords(); // page changes so far are handled before Trana's own
+  flushRecords(); // page changes so far are handled before Swedeline's own
   const dark = hasLightText(block.el);
   const list: Applied[] = [];
   for (const [i, reps] of perNode) {
@@ -251,7 +251,7 @@ function applyJob({ block, lang, tokens }: Job, rate: number): void {
     tracked.set(node, block.el);
     for (const w of a.words) ownWords.add(w);
   }
-  observer?.takeRecords(); // the mutations just made are Trana's own
+  observer?.takeRecords(); // the mutations just made are Swedeline's own
   if (list.length) applied.set(block.el, [...(applied.get(block.el) ?? []), ...list]);
 }
 
@@ -304,18 +304,18 @@ function flushRecords(): void {
   if (observer) onMutations(observer.takeRecords());
 }
 
-function isTrana(node: Node): boolean {
+function isSwedeline(node: Node): boolean {
   const el = node.nodeType === Node.ELEMENT_NODE ? (node as Element) : node.parentElement;
-  return !!el?.closest(`${WORD_TAG}, trana-tooltip`);
+  return !!el?.closest(`${WORD_TAG}, swedeline-tooltip`);
 }
 
 function onMutations(records: MutationRecord[]): void {
   if (!records.length) return;
   for (const r of records) {
-    if (isTrana(r.target)) continue;
+    if (isSwedeline(r.target)) continue;
     if (r.type === 'characterData') {
       const block = tracked.get(r.target as Text);
-      // The page rewrote a node Trana had split: drop the leftovers, keep the new text.
+      // The page rewrote a node Swedeline had split: drop the leftovers, keep the new text.
       if (block) revertBlock(block, false);
       addPending(r.target, false);
       continue;
@@ -323,7 +323,7 @@ function onMutations(records: MutationRecord[]): void {
     for (const n of r.removedNodes) {
       if (n.nodeType === Node.TEXT_NODE && tracked.has(n as Text)) revertBlock(tracked.get(n as Text)!, false);
     }
-    for (const n of r.addedNodes) if (!isTrana(n)) addPending(n, true);
+    for (const n of r.addedNodes) if (!isSwedeline(n)) addPending(n, true);
     // Only the target's own block can have changed; its other descendants did not.
     addPending(r.target, false);
   }
@@ -393,7 +393,7 @@ function originalText(el: Element): string {
   let text = '';
   const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT, {
     acceptNode: (n) =>
-      n.nodeType === Node.ELEMENT_NODE && (n as Element).tagName === 'TRANA-W'
+      n.nodeType === Node.ELEMENT_NODE && (n as Element).tagName === 'SWEDELINE-W'
         ? NodeFilter.FILTER_ACCEPT
         : n.nodeType === Node.TEXT_NODE
           ? NodeFilter.FILTER_ACCEPT

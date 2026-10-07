@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Renders the icon SVGs to PNGs: icons/icon-{16,32,48,128}.png and greyscale
-// "-off" variants for when Trana is switched off. Small sizes use a simplified drawing.
+// "-off" variants for when Swedeline is switched off. Small sizes use a simplified drawing.
 import { Resvg } from '@resvg/resvg-js';
 import fs from 'node:fs';
 import path from 'node:path';

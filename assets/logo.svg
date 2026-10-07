@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 128">
+  <style>
+    .word { fill: #00314F; font-family: 'Avenir Next', Avenir, 'Futura', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: 74px; letter-spacing: -1px; }
+    @media (prefers-color-scheme: dark) { .word { fill: #FFFFFF; } }
+  </style>
+  <g>
+    <rect x="1" y="1" width="126" height="126" rx="27" fill="#FFFFFF" stroke="#D5E3EE" stroke-width="2"/>
+    <rect x="18" y="64" width="44" height="22" rx="4" fill="#FECC02"/>
+    <path d="M18 98 H70 C88 98 100 90 100 79 C100 66 88 62 76 59 C64 56 54 52 54 42 C54 32 64 26 76 26 C86 26 94 30 98 36" fill="none" stroke="#006AA7" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text class="word" x="152" y="90">Swedeline</text>
+</svg>

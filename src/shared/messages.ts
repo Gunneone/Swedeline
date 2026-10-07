@@ -3,7 +3,7 @@ import type { SourceLang } from '../content/langdata';
 /** Dictionary value: [Swedish as shown, Swedish lemma, gender, part of speech, flags]. */
 export type Entry = [shown: string, lemma: string, gender: '' | 'en' | 'ett', pos: 'n' | 'a' | 'r', flags: string];
 
-/** What Trana is doing on a page; shown in the popup. */
+/** What Swedeline is doing on a page; shown in the popup. */
 export type PageState =
   | 'loading'
   | 'active'

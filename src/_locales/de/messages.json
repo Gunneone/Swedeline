@@ -1,18 +1,18 @@
 {
   "extName": {
-    "message": "Trana",
+    "message": "Swedeline",
     "description": "Name of the extension"
   },
   "extDescription": {
-    "message": "Schwedisch lernen beim Surfen: Trana ersetzt einige Wörter auf englischen, deutschen, französischen und spanischen Seiten durch schwedische.",
+    "message": "Schwedisch lernen beim Surfen: Swedeline ersetzt Wörter auf Seiten in Englisch, Deutsch, Französisch und Spanisch durch schwedische.",
     "description": "Store description"
   },
   "actionTitle": {
-    "message": "Trana: Schwedisch lernen beim Surfen",
+    "message": "Swedeline: Schwedisch lernen beim Surfen",
     "description": "Toolbar button tooltip"
   },
   "cmdToggleSite": {
-    "message": "Trana für die aktuelle Website ein- oder ausschalten",
+    "message": "Swedeline für die aktuelle Website ein- oder ausschalten",
     "description": "Keyboard command description"
   },
   "popupGlobal": {
@@ -78,7 +78,7 @@
     "description": "Status"
   },
   "statusOff": {
-    "message": "Trana ist ausgeschaltet.",
+    "message": "Swedeline ist ausgeschaltet.",
     "description": "Status"
   },
   "statusSiteOff": {
@@ -98,11 +98,11 @@
     "description": "Status"
   },
   "statusUnavailable": {
-    "message": "Trana kann auf dieser Seite nicht laufen.",
+    "message": "Swedeline kann auf dieser Seite nicht laufen.",
     "description": "Status"
   },
   "statusReload": {
-    "message": "Lade die Seite neu, um Trana hier zu starten.",
+    "message": "Lade die Seite neu, um Swedeline hier zu starten.",
     "description": "Status"
   },
   "shortcutSet": {
@@ -124,11 +124,11 @@
     "description": "Shown when the shortcut page cannot be opened directly"
   },
   "grantAccess": {
-    "message": "Trana auf Websites erlauben",
+    "message": "Swedeline auf Websites erlauben",
     "description": "Button"
   },
   "grantAccessHint": {
-    "message": "Trana braucht Zugriff auf Websites, um schwedische Wörter anzuzeigen.",
+    "message": "Swedeline braucht Zugriff auf Websites, um schwedische Wörter anzuzeigen.",
     "description": "Above the button"
   },
   "credits": {
@@ -136,7 +136,7 @@
     "description": "Attribution"
   },
   "creditsTitle": {
-    "message": "Über Trana",
+    "message": "Über Swedeline",
     "description": "Expandable section"
   },
   "tooltipListen": {

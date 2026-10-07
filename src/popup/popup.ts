@@ -37,7 +37,7 @@ async function pageStatus(): Promise<PageStatus | null> {
   try {
     return (await ext.tabs.sendMessage(tab.id, { type: 'get-status' } satisfies Message)) ?? null;
   } catch {
-    return null; // no content script: restricted page, or loaded before Trana was installed
+    return null; // no content script: restricted page, or loaded before Swedeline was installed
   }
 }
 

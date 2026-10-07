@@ -12,7 +12,7 @@ const webExt = path.join(ROOT, 'node_modules', '.bin', 'web-ext');
 for (const browser of ['chrome', 'firefox']) {
   const source = path.join(ROOT, 'dist', browser);
   if (!fs.existsSync(path.join(source, 'manifest.json'))) throw new Error(`${source} missing: run npm run build`);
-  const filename = `trana-${browser}-${version}.zip`;
+  const filename = `swedeline-${browser}-${version}.zip`;
   execFileSync(webExt, ['build', '-s', source, '-a', path.join(ROOT, 'dist'), '--filename', filename, '--overwrite-dest'], {
     stdio: 'inherit',
   });
