@@ -27,56 +27,56 @@ const setStorage = (worker: Worker, items: Record<string, unknown>) =>
 test('replaces words in body text only and shows the original on hover', async ({ page, worker }) => {
   await setStorage(worker, { density: 6 });
   await page.goto(`${BASE}/en-article.html`);
-  const words = page.locator('trana-w');
+  const words = page.locator('swedeline-w');
   await expect(words.first()).toBeVisible();
   expect(await words.count()).toBeGreaterThan(5);
   for (const sel of ['h1', 'nav', 'header', 'label', 'button', 'pre', 'footer']) {
-    await expect(page.locator(`${sel} trana-w`)).toHaveCount(0);
+    await expect(page.locator(`${sel} swedeline-w`)).toHaveCount(0);
   }
   const first = words.first();
   const original = await first.getAttribute('data-orig');
   await first.hover();
-  const tooltip = page.locator('trana-tooltip .orig');
+  const tooltip = page.locator('swedeline-tooltip .orig');
   await expect(tooltip).toHaveText(original!);
 });
 
 test('switching the site off restores the page, switching on brings words back', async ({ page, worker }) => {
   await page.goto(`${BASE}/en-article.html`);
   const article = page.locator('article');
-  await expect(page.locator('trana-w').first()).toBeVisible();
+  await expect(page.locator('swedeline-w').first()).toBeVisible();
   await setStorage(worker, { 'site:localhost': false });
-  await expect(page.locator('trana-w')).toHaveCount(0);
+  await expect(page.locator('swedeline-w')).toHaveCount(0);
   const original = await page.evaluate(async () => {
     const html = await (await fetch(location.href)).text();
     return new DOMParser().parseFromString(html, 'text/html').querySelector('article')!.textContent;
   });
   expect(await article.textContent()).toBe(original);
   await worker.evaluate(() => chrome.storage.sync.remove('site:localhost'));
-  await expect(page.locator('trana-w').first()).toBeVisible();
+  await expect(page.locator('swedeline-w').first()).toBeVisible();
 });
 
 test('the slider changes the number of words live', async ({ page, worker }) => {
   await setStorage(worker, { density: 1 });
   await page.goto(`${BASE}/en-article.html`);
-  await expect(page.locator('trana-w').first()).toBeVisible();
-  const few = await page.locator('trana-w').count();
+  await expect(page.locator('swedeline-w').first()).toBeVisible();
+  const few = await page.locator('swedeline-w').count();
   await setStorage(worker, { density: 10 });
-  await expect.poll(() => page.locator('trana-w').count()).toBeGreaterThan(few * 2);
+  await expect.poll(() => page.locator('swedeline-w').count()).toBeGreaterThan(few * 2);
 });
 
 test('leaves Swedish pages alone and handles German, French and Spanish', async ({ page }) => {
   await page.goto(`${BASE}/sv-article.html`);
   await page.waitForTimeout(1500);
-  await expect(page.locator('trana-w')).toHaveCount(0);
+  await expect(page.locator('swedeline-w')).toHaveCount(0);
   for (const lang of ['de', 'fr', 'es']) {
     await page.goto(`${BASE}/${lang}-article.html`);
-    await expect(page.locator(`trana-w[data-lang="${lang}"]`).first()).toBeVisible();
+    await expect(page.locator(`swedeline-w[data-lang="${lang}"]`).first()).toBeVisible();
   }
 });
 
 test('picks up text added later by the page', async ({ page }) => {
   await page.goto(`${BASE}/en-article.html`);
-  await expect(page.locator('trana-w').first()).toBeVisible();
+  await expect(page.locator('swedeline-w').first()).toBeVisible();
   await page.evaluate(() => {
     const p = document.createElement('p');
     p.id = 'late';
@@ -84,12 +84,12 @@ test('picks up text added later by the page', async ({ page }) => {
       'Later that evening the children walked down to the water with their father, and the whole family watched the sun go down behind the mountains near the old house.';
     document.querySelector('article')!.append(p);
   });
-  await expect(page.locator('#late trana-w').first()).toBeVisible();
+  await expect(page.locator('#late swedeline-w').first()).toBeVisible();
 });
 
 test('popup shows the page status', async ({ context, page, worker }) => {
   await page.goto(`${BASE}/en-article.html`);
-  await expect(page.locator('trana-w').first()).toBeVisible();
+  await expect(page.locator('swedeline-w').first()).toBeVisible();
   const id = new URL(worker.url()).host;
   const popup = await context.newPage();
   await popup.goto(`chrome-extension://${id}/popup/popup.html`);
@@ -100,11 +100,11 @@ test('popup shows the page status', async ({ context, page, worker }) => {
 test('copied text has the original words', async ({ context, page }) => {
   await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: 'http://localhost:5179' });
   await page.goto(`${BASE}/en-article.html`);
-  const paragraph = page.locator('article p').filter({ has: page.locator('trana-w') }).first();
-  await expect(paragraph.locator('trana-w').first()).toBeVisible();
+  const paragraph = page.locator('article p').filter({ has: page.locator('swedeline-w') }).first();
+  await expect(paragraph.locator('swedeline-w').first()).toBeVisible();
   const original = await paragraph.evaluate((p) => {
     const clone = p.cloneNode(true) as HTMLElement;
-    for (const w of clone.querySelectorAll<HTMLElement>('trana-w')) w.replaceWith(w.dataset.orig!);
+    for (const w of clone.querySelectorAll<HTMLElement>('swedeline-w')) w.replaceWith(w.dataset.orig!);
     return clone.textContent!.replace(/\s+/g, ' ').trim();
   });
   await paragraph.evaluate((p) => getSelection()!.selectAllChildren(p));
@@ -112,9 +112,9 @@ test('copied text has the original words', async ({ context, page }) => {
   const copied = await page.evaluate(() => navigator.clipboard.readText());
   expect(copied.replace(/\s+/g, ' ').trim()).toBe(original);
   // The page shows Swedish again right after.
-  await expect(paragraph.locator('trana-w').first()).not.toHaveText(original.split(' ')[0]);
-  expect(await paragraph.locator('trana-w').first().textContent()).not.toBe(
-    await paragraph.locator('trana-w').first().getAttribute('data-orig'),
+  await expect(paragraph.locator('swedeline-w').first()).not.toHaveText(original.split(' ')[0]);
+  expect(await paragraph.locator('swedeline-w').first().textContent()).not.toBe(
+    await paragraph.locator('swedeline-w').first().getAttribute('data-orig'),
   );
 });
 
@@ -127,8 +127,8 @@ test('unrelated page changes leave the replaced words alone', async ({ page }) =
       'On the first morning I walk down to the <em>quiet</em> <em>river</em> with a cup of coffee,<br>and the birds are loud while the sun is still low over the forest and the water.';
     document.querySelector('article')!.append(p);
   });
-  await expect(page.locator('#inline trana-w').first()).toBeVisible();
-  const words = await page.locator('trana-w').elementHandles();
+  await expect(page.locator('#inline swedeline-w').first()).toBeVisible();
+  const words = await page.locator('swedeline-w').elementHandles();
   await page.evaluate(async () => {
     for (let i = 0; i < 3; i++) {
       document.body.append(document.createElement('div'));
@@ -140,7 +140,7 @@ test('unrelated page changes leave the replaced words alone', async ({ page }) =
 
 test('text added to a page that keeps changing still gets processed', async ({ page }) => {
   await page.goto(`${BASE}/en-article.html`);
-  await expect(page.locator('trana-w').first()).toBeVisible();
+  await expect(page.locator('swedeline-w').first()).toBeVisible();
   await page.evaluate(() => {
     const clock = document.createElement('span');
     document.body.append(clock);
@@ -151,12 +151,12 @@ test('text added to a page that keeps changing still gets processed', async ({ p
       'Later that evening the children walked down to the water with their father, and the whole family watched the sun go down behind the mountains near the old house.';
     document.querySelector('article')!.append(p);
   });
-  await expect(page.locator('#late trana-w').first()).toBeVisible({ timeout: 5000 });
+  await expect(page.locator('#late swedeline-w').first()).toBeVisible({ timeout: 5000 });
 });
 
 test('the word count forgets text the page removed', async ({ context, page, worker }) => {
   await page.goto(`${BASE}/en-article.html`);
-  await expect(page.locator('trana-w').first()).toBeVisible();
+  await expect(page.locator('swedeline-w').first()).toBeVisible();
   const id = new URL(worker.url()).host;
   const popup = await context.newPage();
   await popup.goto(`chrome-extension://${id}/popup/popup.html`);

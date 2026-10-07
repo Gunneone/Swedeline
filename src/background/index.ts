@@ -20,7 +20,7 @@ ext.runtime.onMessage.addListener((msg: Message, sender, sendResponse) => {
   return false;
 });
 
-/** Grey icon in tabs where Trana is switched off for the site. */
+/** Grey icon in tabs where Swedeline is switched off for the site. */
 async function showTabState(tabId: number, state: PageState): Promise<void> {
   try {
     await ext.action.setIcon({ tabId, path: iconPaths(state === 'off' || state === 'site-off') });
@@ -29,7 +29,7 @@ async function showTabState(tabId: number, state: PageState): Promise<void> {
   }
 }
 
-/** Grey icon everywhere while Trana is switched off. */
+/** Grey icon everywhere while Swedeline is switched off. */
 async function showGlobalState(): Promise<void> {
   const { enabled } = await loadSettings();
   await ext.action.setIcon({ path: iconPaths(!enabled) });

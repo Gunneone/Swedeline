@@ -9,7 +9,7 @@ export function normalizeHost(hostOrUrl: string): string {
   return host.toLowerCase().replace(/^www\./, '');
 }
 
-/** Whether Trana can run on a URL at all (content scripts only match http and https). */
+/** Whether Swedeline can run on a URL at all (content scripts only match http and https). */
 export function isWebUrl(url: string | undefined): boolean {
   return !!url && /^https?:\/\//.test(url);
 }

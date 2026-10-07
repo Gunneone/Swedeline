@@ -22,7 +22,7 @@ http
     if (url.pathname === '/' || url.pathname === '/harness/') {
       const list = fs.readdirSync(path.join(ROOT, 'tests/fixtures')).filter((f) => f.endsWith('.html'));
       res.writeHead(200, { 'content-type': 'text/html' });
-      res.end(`<h1>Trana harness</h1><ul>${list.map((f) => `<li><a href="/harness/${f}">${f}</a></li>`).join('')}<li><a href="/popup">popup</a></li></ul>`);
+      res.end(`<h1>Swedeline harness</h1><ul>${list.map((f) => `<li><a href="/harness/${f}">${f}</a></li>`).join('')}<li><a href="/popup">popup</a></li></ul>`);
       return;
     } else if (url.pathname.startsWith('/harness/')) {
       file = path.join(ROOT, 'tests/fixtures', path.basename(url.pathname));
@@ -46,4 +46,4 @@ http
     res.writeHead(200, { 'content-type': TYPES[ext] ?? 'application/octet-stream', 'cache-control': 'no-store' });
     res.end(ext === '.html' ? transform(body.toString()) : body);
   })
-  .listen(PORT, () => console.log(`Trana harness on http://localhost:${PORT}/`));
+  .listen(PORT, () => console.log(`Swedeline harness on http://localhost:${PORT}/`));

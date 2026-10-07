@@ -7,7 +7,7 @@ export const EXCLUDED = [
   'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'nav', 'footer', 'aside', 'label', 'button',
   'legend', 'caption', 'th', 'summary', 'figcaption', 'title', 'option', 'optgroup', 'select',
   'input', 'textarea', 'code', 'pre', 'kbd', 'samp', 'var', 'script', 'style', 'noscript',
-  'template', 'svg', 'math', 'iframe', 'canvas', 'video', 'audio', 'trana-w', 'trana-tooltip',
+  'template', 'svg', 'math', 'iframe', 'canvas', 'video', 'audio', 'swedeline-w', 'swedeline-tooltip',
   '[contenteditable]:not([contenteditable="false"])', '[translate="no"]', '.notranslate',
   '[aria-hidden="true"]', '[hidden]', '[role="button"]', '[role="navigation"]', '[role="banner"]',
   '[role="menu"]', '[role="menubar"]', '[role="menuitem"]', '[role="tab"]', '[role="tablist"]',
@@ -40,7 +40,7 @@ export interface Block {
 /** The element whose text flow a node belongs to: its nearest non-inline ancestor. */
 export function blockOf(node: Node): Element | null {
   let el = node.nodeType === Node.ELEMENT_NODE ? (node as Element) : node.parentElement;
-  while (el && (INLINE.has(el.tagName) || (el.tagName.includes('-') && el.tagName !== 'TRANA-W'))) {
+  while (el && (INLINE.has(el.tagName) || (el.tagName.includes('-') && el.tagName !== 'SWEDELINE-W'))) {
     el = el.parentElement;
   }
   return el;

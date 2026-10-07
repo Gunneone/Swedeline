@@ -16,7 +16,7 @@ const targets = args.filter((a) => !a.startsWith('--'));
 const browsers = targets.length ? targets : ['chrome', 'firefox'];
 const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
 
-const FIREFOX_ID = 'trana@trana-extension';
+const FIREFOX_ID = 'swedeline@swedeline-extension';
 
 function manifestFor(browser) {
   const m = JSON.parse(fs.readFileSync(path.join(SRC, 'manifest.base.json'), 'utf8'));

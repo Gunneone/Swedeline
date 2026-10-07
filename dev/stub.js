@@ -1,7 +1,7 @@
 // Development stand-in for the WebExtension APIs, so the built content script and
 // popup can run in a normal page (see scripts/serve.mjs). Not part of the extension.
 (() => {
-  const KEY = 'trana-stub-storage';
+  const KEY = 'swedeline-stub-storage';
   const read = () => {
     try { return JSON.parse(sessionStorage.getItem(KEY) || '{}'); } catch { return {}; }
   };
@@ -103,10 +103,10 @@
     action: { setIcon: async () => {} },
   };
 
-  // Floating control panel for the harness pages (in a shadow root, so Trana ignores it).
+  // Floating control panel for the harness pages (in a shadow root, so Swedeline ignores it).
   if (!location.pathname.startsWith('/harness/')) return;
   addEventListener('DOMContentLoaded', () => {
-    const host = document.createElement('trana-dev-panel');
+    const host = document.createElement('swedeline-dev-panel');
     host.setAttribute('translate', 'no');
     const root = host.attachShadow({ mode: 'open' });
     root.innerHTML = `
@@ -116,7 +116,7 @@
         label{display:flex;gap:6px;align-items:center} input[type=range]{width:100%} b{font-size:11px;color:#555}
       </style>
       <div>
-        <b>Trana dev harness</b>
+        <b>Swedeline dev harness</b>
         <label><input type="checkbox" id="enabled"> enabled</label>
         <label><input type="checkbox" id="site"> this site</label>
         <label>density <input type="range" id="density" min="1" max="10"></label>

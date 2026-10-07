@@ -1,16 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <defs>
-    <clipPath id="tile"><rect width="128" height="128" rx="28"/></clipPath>
-  </defs>
-  <g clip-path="url(#tile)">
-    <rect width="128" height="128" fill="#006AA7"/>
-    <!-- neck rising from the bottom edge -->
-    <path d="M40 140 C 40 100, 74 92, 66 64 C 61 48, 56 40, 66 30" fill="none" stroke="#FECC02" stroke-width="20" stroke-linecap="round"/>
-    <!-- head -->
-    <ellipse cx="70" cy="30" rx="16" ry="14" fill="#FECC02"/>
-    <!-- beak -->
-    <path d="M80 21 L 122 38 L 80 39 Z" fill="#FECC02"/>
-    <!-- red crown -->
-    <path d="M56 22 C 59 10, 78 8, 84 18 C 75 20, 64 21, 56 22 Z" fill="#E4002B"/>
-  </g>
+  <rect width="128" height="128" rx="28" fill="#FFFFFF"/>
+  <!-- same drawing with heavier strokes for 16 and 32 px -->
+  <rect x="8" y="58" width="48" height="28" rx="5" fill="#FECC02"/>
+  <path d="M12 104 H68 C92 104 110 94 110 78 C110 62 94 58 80 55 C66 52 52 47 52 35 C52 23 64 14 80 14 C92 14 102 19 108 28" fill="none" stroke="#006AA7" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

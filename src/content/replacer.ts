@@ -1,7 +1,7 @@
 import type { Entry } from '../shared/messages';
 import type { SourceLang } from './langdata';
 
-export const WORD_TAG = 'trana-w';
+export const WORD_TAG = 'swedeline-w';
 
 export interface Replacement {
   /** Offsets within the text node. */
@@ -12,7 +12,7 @@ export interface Replacement {
 }
 
 /**
- * One text node Trana has split. The original node object stays in the
+ * One text node Swedeline has split. The original node object stays in the
  * document (holding the text before the first replacement), so frameworks that
  * keep a reference to it still find it; `inserted` are the nodes added after it.
  */
@@ -62,7 +62,7 @@ export function createWord(doc: Document, original: string, entry: Entry, lang: 
 
 /**
  * Puts the original text back. When the page itself has rewritten the node
- * (a framework re-render), only Trana's leftovers are removed and the page's
+ * (a framework re-render), only Swedeline's leftovers are removed and the page's
  * new text is kept.
  */
 export function revertApplied(applied: Applied, restoreText = true): void {

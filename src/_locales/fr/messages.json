@@ -1,18 +1,18 @@
 {
   "extName": {
-    "message": "Trana",
+    "message": "Swedeline",
     "description": "Name of the extension"
   },
   "extDescription": {
-    "message": "Apprenez le suédois en naviguant : Trana remplace quelques mots des pages en anglais, allemand, français et espagnol par du suédois.",
+    "message": "Apprenez le suédois en naviguant : Swedeline remplace des mots des pages en anglais, allemand, français et espagnol par du suédois.",
     "description": "Store description"
   },
   "actionTitle": {
-    "message": "Trana : apprendre le suédois en naviguant",
+    "message": "Swedeline : apprendre le suédois en naviguant",
     "description": "Toolbar button tooltip"
   },
   "cmdToggleSite": {
-    "message": "Activer ou désactiver Trana sur le site actuel",
+    "message": "Activer ou désactiver Swedeline sur le site actuel",
     "description": "Keyboard command description"
   },
   "popupGlobal": {
@@ -78,7 +78,7 @@
     "description": "Status"
   },
   "statusOff": {
-    "message": "Trana est désactivé.",
+    "message": "Swedeline est désactivé.",
     "description": "Status"
   },
   "statusSiteOff": {
@@ -98,11 +98,11 @@
     "description": "Status"
   },
   "statusUnavailable": {
-    "message": "Trana ne peut pas fonctionner sur cette page.",
+    "message": "Swedeline ne peut pas fonctionner sur cette page.",
     "description": "Status"
   },
   "statusReload": {
-    "message": "Rechargez la page pour démarrer Trana ici.",
+    "message": "Rechargez la page pour démarrer Swedeline ici.",
     "description": "Status"
   },
   "shortcutSet": {
@@ -124,11 +124,11 @@
     "description": "Shown when the shortcut page cannot be opened directly"
   },
   "grantAccess": {
-    "message": "Autoriser Trana sur les sites",
+    "message": "Autoriser Swedeline sur les sites",
     "description": "Button"
   },
   "grantAccessHint": {
-    "message": "Trana a besoin d'accéder aux sites pour afficher des mots suédois.",
+    "message": "Swedeline a besoin d'accéder aux sites pour afficher des mots suédois.",
     "description": "Above the button"
   },
   "credits": {
@@ -136,7 +136,7 @@
     "description": "Attribution"
   },
   "creditsTitle": {
-    "message": "À propos de Trana",
+    "message": "À propos de Swedeline",
     "description": "Expandable section"
   },
   "tooltipListen": {

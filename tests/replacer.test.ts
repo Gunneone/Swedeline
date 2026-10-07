@@ -16,7 +16,7 @@ describe('applyReplacements', () => {
     ], false)!;
     expect(p.textContent).toBe('A small hus near the sjö.');
     expect(p.firstChild).toBe(node);
-    const words = p.querySelectorAll('trana-w');
+    const words = p.querySelectorAll('swedeline-w');
     expect(words).toHaveLength(2);
     expect((words[0] as HTMLElement).dataset).toMatchObject({ orig: 'house', lemma: 'hus', g: 'ett', lang: 'en' });
     expect(applied.words).toHaveLength(2);
