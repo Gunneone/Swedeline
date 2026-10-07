@@ -1,6 +1,6 @@
 import { ext } from '../shared/ext';
 import { normalizeHost } from '../shared/host';
-import type { Entry, LookupResult, Message, PageState, PageStatus } from '../shared/messages';
+import { entryIn, type Entry, type LookupResult, type Message, type PageState, type PageStatus } from '../shared/messages';
 import {
   DEFAULTS,
   densityRate,
@@ -215,7 +215,7 @@ async function lookupWords(jobs: Job[]): Promise<void> {
         return;
       }
       const cache = dictCache[lang];
-      for (const w of list) cache.set(w, result[w] ?? null);
+      for (const w of list) cache.set(w, entryIn(result, w));
     }),
   );
 }

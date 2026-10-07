@@ -26,3 +26,7 @@ export type Message =
   | { type: 'get-status' };
 
 export type LookupResult = Record<string, Entry>;
+
+/** A word's entry in a lookup result. Results arrive as plain objects, so inherited keys ("constructor") don't count. */
+export const entryIn = (result: LookupResult, word: string): Entry | null =>
+  Object.hasOwn(result, word) ? result[word] : null;
