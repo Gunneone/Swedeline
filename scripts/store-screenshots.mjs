@@ -1,0 +1,160 @@
+#!/usr/bin/env node
+// Store screenshots for Chrome Web Store and AMO: 1280x800, a headline on Swedish blue over a
+// browser frame showing a public-domain Project Gutenberg book with Swedeline running.
+// Needs `npm run build` first and network access. Writes docs/screenshots/ (or the given dir);
+// pass a name prefix as the second argument to redo a single shot.
+import { chromium } from '@playwright/test';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const DIST = path.resolve('dist/chrome');
+const [OUT = 'docs/screenshots', ONLY] = process.argv.slice(2);
+fs.mkdirSync(OUT, { recursive: true });
+
+const G = 'https://www.gutenberg.org/cache/epub';
+const ZOOM = 1.75;
+const FRAME = { x: 80, y: 188, w: 1120, bar: 44 };
+const CONTENT = { w: FRAME.w, h: 800 - FRAME.y - FRAME.bar }; // runs off the bottom edge
+const VIEW = { width: Math.round(CONTENT.w / ZOOM), height: Math.ceil(CONTENT.h / ZOOM) };
+
+const SHOTS = [
+  {
+    name: '1-en', url: `${G}/289/pg289-images.html`, para: 0, above: 120, hover: 'house',
+    title: 'Learn Swedish while you browse',
+    sub: 'Swedeline swaps a few words in what you read for their Swedish translation.',
+  },
+  {
+    name: '2-de', url: `${G}/22367/pg22367-images.html`, para: 0, above: 24, hover: 'Zimmer',
+    title: 'Hover a word to see the original',
+    sub: 'With the Swedish base form, en or ett, and a button to hear it spoken.',
+  },
+  {
+    name: '3-fr', url: `${G}/13256/pg13256-images.html`, para: 1, above: 6, hover: 'bonheur',
+    title: 'Works in four languages',
+    sub: 'English, German, French and Spanish pages. The language is detected for you.',
+  },
+  {
+    name: '4-es', url: `${G}/17340/pg17340-images.html`, para: 0, above: 92, hover: 'noche',
+    title: 'Private and offline',
+    sub: 'No account and no tracking. The dictionaries ship with the extension.',
+  },
+  {
+    name: '5-popup', url: `${G}/289/pg289-images.html`, para: 0, above: 120, popup: true,
+    title: 'You decide how much Swedish',
+    sub: 'Pick the amount of words, and switch Swedeline off everywhere or per site.',
+  },
+];
+
+const context = await chromium.launchPersistentContext('', {
+  channel: 'chromium',
+  viewport: VIEW,
+  deviceScaleFactor: ZOOM,
+  locale: 'en-US',
+  args: [`--disable-extensions-except=${DIST}`, `--load-extension=${DIST}`],
+});
+// Opened as a page, the popup would find itself as the active tab: point it at the book instead.
+await context.addInitScript(() => {
+  if (location.protocol !== 'chrome-extension:') return;
+  const orig = chrome.tabs.query.bind(chrome.tabs);
+  chrome.tabs.query = async () => (await orig({})).filter((t) => t.url?.includes('gutenberg.org')).slice(0, 1);
+});
+const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
+const extId = new URL(worker.url()).host;
+await worker.evaluate(() => chrome.storage.sync.set({ density: 7 }));
+const page = context.pages()[0] ?? (await context.newPage());
+// The frame is composed at 1x so every file comes out at exactly 1280x800.
+const plain = await chromium.launch({ channel: 'chromium' });
+const composer = await plain.newContext({ viewport: { width: 1280, height: 800 }, deviceScaleFactor: 1 });
+
+async function capturePage(s) {
+  await page.goto(s.url, { waitUntil: 'networkidle', timeout: 60000 });
+  await page.addStyleTag({ content: '.pagenum, .pageno { display: none !important; }' });
+  await page.locator('swedeline-w').first().waitFor();
+  await page.evaluate(({ para, above }) => {
+    const ps = [...document.querySelectorAll('p')].filter((p) => !p.closest('#pg-header') && p.textContent.length > 300);
+    window.scrollTo(0, ps[para].getBoundingClientRect().top + scrollY - above);
+  }, s);
+  await page.waitForTimeout(500);
+  if (s.hover) {
+    const r = await page.evaluate((hover) => {
+      const w = [...document.querySelectorAll('swedeline-w')].find((w) => {
+        const b = w.getBoundingClientRect();
+        return w.dataset.orig === hover && b.top > 0 && b.bottom < innerHeight;
+      });
+      const b = w?.getBoundingClientRect();
+      return b && { x: b.left + b.width / 2, y: b.top + b.height / 2 };
+    }, s.hover);
+    if (!r) throw new Error(`${s.name}: no visible word "${s.hover}"`);
+    await page.mouse.move(r.x, r.y);
+    await page.locator('swedeline-tooltip').first().waitFor({ state: 'attached' });
+    await page.waitForTimeout(400);
+  } else {
+    await page.mouse.move(1, 1);
+  }
+  return page.screenshot();
+}
+
+async function capturePopup() {
+  const popup = await context.newPage();
+  await popup.setViewportSize({ width: 340, height: 600 });
+  await popup.goto(`chrome-extension://${extId}/popup/popup.html`);
+  await popup.waitForTimeout(800);
+  const h = await popup.evaluate(() => Math.ceil(document.body.getBoundingClientRect().bottom + parseFloat(getComputedStyle(document.body).marginBottom)));
+  await popup.setViewportSize({ width: 340, height: h });
+  const png = await popup.screenshot();
+  await popup.close();
+  return png;
+}
+
+const ICON = fs.readFileSync('assets/icon.svg').toString('base64');
+const b64 = (buf) => `data:image/png;base64,${buf.toString('base64')}`;
+
+async function compose(s, shot, pop) {
+  const comp = await composer.newPage();
+  const popW = 340 * 1.3;
+  await comp.setContent(`<!doctype html><html><head><style>
+    * { box-sizing: border-box; }
+    body { margin: 0; width: 1280px; height: 800px; overflow: hidden; position: relative;
+           background: linear-gradient(160deg, #0A78BA 0%, #006AA7 55%, #005A8F 100%);
+           font-family: 'Avenir Next', Avenir, 'Helvetica Neue', Arial, sans-serif; }
+    h1 { position: absolute; left: 80px; top: 50px; margin: 0; color: #fff; font-size: 46px; font-weight: 700; letter-spacing: -0.5px; }
+    h1 mark { background: none; color: #FECC02; }
+    p { position: absolute; left: 80px; top: 116px; margin: 0; color: #D6E8F5; font-size: 22px; font-weight: 500; }
+    .brand { position: absolute; right: 80px; top: 54px; width: 52px; height: 52px; }
+    .frame { position: absolute; left: ${FRAME.x}px; top: ${FRAME.y}px; width: ${FRAME.w}px; height: ${800 - FRAME.y + 20}px;
+             background: #fff; border-radius: 14px 14px 0 0; overflow: hidden; box-shadow: 0 24px 60px rgba(0, 25, 50, .45); }
+    .bar { height: ${FRAME.bar}px; background: #EEF1F4; display: flex; align-items: center; gap: 8px; padding: 0 16px; border-bottom: 1px solid #DDE3E8; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; background: #CDD4DA; }
+    .url { margin-left: 16px; flex: 0 1 460px; height: 28px; border-radius: 14px; background: #fff; color: #5B6B78;
+           font: 14px/28px -apple-system, system-ui, sans-serif; padding: 0 14px; }
+    .ext { margin-left: auto; width: 26px; height: 26px; border-radius: 6px; ${pop ? 'background: #DCE4EB;' : ''} display: grid; place-items: center; }
+    .ext img { width: 20px; height: 20px; }
+    .shot { display: block; width: ${CONTENT.w}px; }
+    .popup { position: absolute; right: ${80 + 6}px; top: ${FRAME.y + FRAME.bar - 4}px; width: ${popW}px; border-radius: 10px;
+             box-shadow: 0 16px 44px rgba(0, 0, 0, .3), 0 0 0 1px rgba(0, 0, 0, .08); }
+  </style></head><body>
+    <h1>${s.title}</h1>
+    <p>${s.sub}</p>
+    <img class="brand" src="data:image/svg+xml;base64,${ICON}" alt="">
+    <div class="frame">
+      <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="url">gutenberg.org</span>
+        <span class="ext"><img src="data:image/svg+xml;base64,${ICON}" alt=""></span></div>
+      <img class="shot" src="${b64(shot)}" alt="">
+    </div>
+    ${pop ? `<img class="popup" src="${b64(pop)}" alt="">` : ''}
+  </body></html>`);
+  await comp.waitForTimeout(200);
+  await comp.screenshot({ path: path.join(OUT, `${s.name}.png`) });
+  await comp.close();
+}
+
+for (const s of SHOTS) {
+  if (ONLY && !s.name.startsWith(ONLY)) continue;
+  const shot = await capturePage(s);
+  const pop = s.popup ? await capturePopup() : null;
+  await compose(s, shot, pop);
+  console.log('wrote', s.name);
+}
+await context.close();
+await plain.close();
