@@ -7,8 +7,9 @@
     "pistas", "acciones", "metro", "copa", "copas", "mando", "millas", "tira", "uniforme", "diario",
     "diarios", "cura", "curas", "extranjero", "fondos", "condición", "condiciones", "espacial",
     "pinta", "demanda", "heroína", "billetes", "billete", "revés", "diana", "mediodía", "solar",
-    "rollo", "velas", "vela", "papas", "cuyo", "francos", "capullo", "raya"
+    "rollo", "velas", "vela", "papas", "cuyo", "francos", "capullo", "raya", "masa"
   ],
+  "drop": ["polvos"],
   "fix": {
     "hombre": ["man", "man", "en", "n", ""],
     "hombres": ["män", "man", "en", "n", "p"],
@@ -32,6 +33,7 @@
     "permiso": ["tillstånd", "tillstånd", "ett", "n", ""],
     "canción": ["sång", "sång", "en", "n", ""],
     "comida": ["mat", "mat", "en", "n", ""],
+    "comidas": ["måltider", "måltid", "en", "n", "dp"],
     "señora": ["dam", "dam", "en", "n", ""],
     "auto": ["bil", "bil", "en", "n", ""],
     "doctor": ["läkare", "läkare", "en", "n", ""],

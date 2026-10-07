@@ -146,9 +146,22 @@
     "motor",
     "prick",
     "bonnie",
-    "craps"
+    "craps",
+    "principal",
+    "application",
+    "rider",
+    "driver",
+    "domestic",
+    "action"
   ],
   "fix": {
+    "foods": [
+      "livsmedel",
+      "livsmedel",
+      "ett",
+      "n",
+      "p"
+    ],
     "people": [
       "människor",
       "människa",

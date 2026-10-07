@@ -11,9 +11,9 @@
     "chouette", "foyer", "uniforme", "pis", "pratique", "veille", "entretien", "rayon", "pile",
     "miles", "égal", "aides", "voyant", "baise", "sure", "rigole", "rigoles", "volée", "évidence",
     "traverse", "traîne", "sein", "batterie", "combinaison", "audition", "revanche", "chatte",
-    "boucle", "mordu"
+    "boucle", "mordu", "action", "propriété", "terrestre", "matière", "extraction"
   ],
-  "drop": ["bas", "patiente"],
+  "drop": ["bas", "patiente", "monnaies", "nourritures", "poussières", "pâtes"],
   "fix": {
     "beaucoup": ["mycket", "mycket", "", "r", ""],
     "argent": ["pengar", "pengar", "", "n", ""],
@@ -83,6 +83,7 @@
     "intérêt": ["intresse", "intresse", "ett", "n", ""],
     "commandant": ["befälhavare", "befälhavare", "en", "n", ""],
     "dommage": ["synd", "synd", "en", "n", ""],
+    "dommages": ["skador", "skada", "en", "n", "p"],
     "sérieusement": ["allvarligt", "allvarligt", "", "r", ""],
     "bande": ["gäng", "gäng", "ett", "n", ""],
     "bandes": ["gäng", "gäng", "ett", "n", "dp"],
@@ -94,8 +95,6 @@
     "urgences": ["nödsituationer", "nödsituation", "en", "n", "p"],
     "carrière": ["karriär", "karriär", "en", "n", ""],
     "carrières": ["karriärer", "karriär", "en", "n", "p"],
-    "action": ["handling", "handling", "en", "n", ""],
-    "actions": ["handlingar", "handling", "en", "n", "p"],
     "marrant": ["rolig", "rolig", "", "a", ""],
     "île": ["ö", "ö", "en", "n", ""],
     "îles": ["öar", "ö", "en", "n", "p"],
@@ -141,8 +140,7 @@
     "chocolat": ["choklad", "choklad", "en", "n", ""],
     "chute": ["fall", "fall", "ett", "n", ""],
     "chutes": ["fall", "fall", "ett", "n", "p"],
-    "propriété": ["egendom", "egendom", "en", "n", ""],
-    "propriétés": ["egendomar", "egendom", "en", "n", "p"],
+    "propriétés": ["egenskaper", "egenskap", "en", "n", "p"],
     "matériel": ["utrustning", "utrustning", "en", "n", ""],
     "manteau": ["kappa", "kappa", "en", "n", ""],
     "manteaux": ["kappor", "kappa", "en", "n", "p"],

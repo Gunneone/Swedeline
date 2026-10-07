@@ -45,6 +45,8 @@ const FORM_DISCOUNT = 0.6;
 const MAX_RATIO = 0.4;
 const MAX_VERB_RATIO = 0.25;
 const MAX_NOUN_VERB_RATIO = 1.0;
+/** Translation rows (senses) scored within this of the best one are taken as equally likely. */
+const TIED_SCORE = 2;
 
 const isWord = (s) => /^\p{L}+$/u.test(s);
 /** Swedish language names: used without en/ett ("talar tyska"), and their plurals in the source mean people. */
@@ -133,7 +135,9 @@ class Swedish {
     let result = null;
     if (lex.length) {
       const forms = lex.flatMap((e) => this.formStmt.all(e.lexentry));
-      result = { gender: '', plural: null, adjPlural: null };
+      // Inflected forms carry much of a word's frequency (månen, not måne).
+      const rank = Math.min(this.rank(word), ...forms.map((f) => this.rank(f.other_written)));
+      result = { gender: '', plural: null, adjPlural: null, rank };
       if (pos === 'noun') {
         result.gender = this.#gender(word, lex, forms);
         result.plural = this.#nounPlural(forms);
@@ -219,6 +223,12 @@ function englishVerbForms(v) {
   }
   for (const f of EN_IRREGULAR[v] ?? []) out.add(f);
   return out;
+}
+
+/** Whether an English verb form is a past tense or past participle (ground <- grind, wounded <- wound). */
+function isEnglishPast(verb, form) {
+  if (/(s|ing)$/.test(form)) return false; // goes, has, being
+  return form.endsWith('ed') || (EN_IRREGULAR[verb] ?? []).includes(form);
 }
 
 const EN_IRREGULAR = Object.fromEntries(
@@ -421,7 +431,15 @@ async function buildLanguage(lang, sv) {
     if (stop.has(lower(lex.rep)) || blocked.has(key(lex.rep))) continue;
     if (lang !== 'de' && lex.rep !== lower(lex.rep)) continue; // proper nouns, acronyms
     if (lang === 'de' && lex.pos === 'noun' && lex.rep[0] === lower(lex.rep[0])) continue;
-    const choice = chooseTranslation(lex, sv);
+    let choice = chooseTranslation(lex, sv);
+    // A Swedish word that is not among the 50k most frequent in any form usually translates
+    // only a niche sense (variety -> varietet, metropolitan -> metropolit, Bestimmung -> bestämmelseort).
+    if (choice?.info.rank === Infinity) choice = null;
+    lex.generated = choice;
+    // A reviewed translation of the lemma (overrides.fix) holds for its other forms too (gute, Jahrhunderts).
+    const fixed = Object.hasOwn(overrides.fix, key(lex.rep)) ? overrides.fix[key(lex.rep)] : null;
+    const reviewed = fixed?.[3] === POS_CODE[lex.pos] && sv.info(fixed[1], lex.pos);
+    if (reviewed) choice = { word: fixed[1], info: { ...reviewed, gender: fixed[2] } };
     if (!choice) continue;
     lex.sv = choice.word;
     lex.svInfo = choice.info;
@@ -471,14 +489,14 @@ async function buildLanguage(lang, sv) {
   console.log(`  ${surfaces.size} candidate surface forms`);
 
   // 4. Every other reading of those surfaces in the source language.
-  const readings = new Map(); // key -> [{lexentry, pos, form}]
-  const addReading = (s, lexentry, pos, form) => {
+  const readings = new Map(); // key -> [{lexentry, pos, form, past}]
+  const addReading = (s, lexentry, pos, form, past = false) => {
     // Capitalized entries (Blue, CAR) are names or acronyms; capitalized words are never replaced there.
     if (!caseSensitive && s !== lower(s)) return;
     const k = key(s);
     if (!surfaces.has(k)) return;
     const list = readings.get(k) ?? [];
-    list.push({ lexentry, pos, form });
+    list.push({ lexentry, pos, form, past });
     readings.set(k, list);
   };
   const posOf = new Map();
@@ -492,7 +510,8 @@ async function buildLanguage(lang, sv) {
     // Short verbs (do, go, be, ir) count too: done, gone, van are among their forms.
     if (r.part_of_speech === 'verb' && r.written_rep.length >= 2 && isWord(r.written_rep) && inFreq(r.written_rep)) {
       const gen = { en: englishVerbForms, fr: frenchVerbForms, es: spanishVerbForms }[lang];
-      if (gen) for (const f of gen(lower(r.written_rep))) if (f !== lower(r.written_rep)) addReading(f, r.lexentry, 'verb', 'rule');
+      const v = lower(r.written_rep);
+      if (gen) for (const f of gen(v)) if (f !== v) addReading(f, r.lexentry, 'verb', 'rule', lang === 'en' && isEnglishPast(v, f));
     }
   }
   for (const r of srcDb
@@ -529,6 +548,7 @@ async function buildLanguage(lang, sv) {
     let flag = '';
     let verdict = 'ok';
     const seen = new Set();
+    const adjectival = (readings.get(k) ?? []).some((r) => r.pos === 'adjective' && r.lexentry !== main.lex.lexentry);
     for (const r of readings.get(k) ?? []) {
       if (r.lexentry === main.lex.lexentry || seen.has(r.lexentry + r.form)) continue;
       seen.add(r.lexentry + r.form);
@@ -548,9 +568,15 @@ async function buildLanguage(lang, sv) {
         // Forms of common verbs (works, casa) are frequent enough that a noun reading needs context.
         // English plurals double as 3rd-person verbs (leaks, works): always ask for noun context.
         const commonVerb = byFreq(repOf.get(r.lexentry) ?? '') >= 200 || (lang === 'en' && main.plural);
+        // A past participle that is also listed as an adjective (ground: mald) comes before nouns
+        // ("from ground beans", "the ground coffee"), so a noun context doesn't rule it out.
+        const limit = main.lex.pos === 'noun' || !r.form ? MAX_VERB_RATIO : MAX_VERB_RATIO / 2;
+        if (r.past && adjectival) {
+          if (ratio <= limit) continue;
+          verdict = 'ambiguous'; break;
+        }
         if (commonVerb && main.lex.pos === 'noun' && ratio <= MAX_NOUN_VERB_RATIO) { flag = 'd'; continue; }
         // Adjectives that double as participles (impressed, boring) are almost always verbs in text.
-        const limit = main.lex.pos === 'noun' || !r.form ? MAX_VERB_RATIO : MAX_VERB_RATIO / 2;
         if (ratio <= limit) continue;
         // A noun that is mostly a verb (abandon, remain) is skipped; otherwise it needs noun context.
         if (main.lex.pos === 'noun' && ratio <= MAX_NOUN_VERB_RATIO) { flag = 'd'; continue; }
@@ -561,12 +587,19 @@ async function buildLanguage(lang, sv) {
     if (debug) console.log(`  [debug]   => ${verdict}${flag ? ' (needs determiner)' : ''}`);
     if (verdict !== 'ok') { stats[verdict]++; continue; }
 
-    const info = main.lex.svInfo;
+    let { sv: lemma, svInfo: info } = main.lex;
+    // A plural with an entry of its own often has a sense of its own (securities: värdepapper,
+    // peoples: folk), which a reviewed translation of the singular doesn't cover.
+    const ownEntry = (readings.get(k) ?? []).some((r) => r.pos === 'noun' && !r.form && key(repOf.get(r.lexentry) ?? '') === k);
+    if (main.plural && ownEntry && lemma !== main.lex.generated?.word) {
+      if (!main.lex.generated) { stats.ambiguous++; continue; }
+      ({ word: lemma, info } = main.lex.generated);
+    }
     // "Acht", "huit": numbers, not the digit nouns (en åtta) WikDict offers.
-    if (NUMBER_NOUNS.has(main.lex.sv)) { stats.ambiguous++; continue; }
-    const noArticle = main.lex.pos === 'noun' && (LANGUAGES.has(main.lex.sv) || MONTHS.has(main.lex.sv));
+    if (NUMBER_NOUNS.has(lemma)) { stats.ambiguous++; continue; }
+    const noArticle = main.lex.pos === 'noun' && (LANGUAGES.has(lemma) || MONTHS.has(lemma));
     if (noArticle && main.plural) { stats.ambiguous++; continue; } // espagnols: Spaniards, not "spanskor"
-    let display = main.lex.sv;
+    let display = lemma;
     if (main.plural && main.lex.pos === 'noun') {
       if (!info.plural) { stats.noPlural++; continue; }
       display = info.plural;
@@ -574,7 +607,7 @@ async function buildLanguage(lang, sv) {
       display = info.adjPlural;
     }
     const flags = flag + (main.plural ? 'p' : '');
-    out[caseSensitive ? main.surface : k] = [display, main.lex.sv, noArticle ? '' : info.gender, POS_CODE[main.lex.pos], flags];
+    out[caseSensitive ? main.surface : k] = [display, lemma, noArticle ? '' : info.gender, POS_CODE[main.lex.pos], flags];
     stats.kept++;
     if (flag) stats.flagged++;
   }
@@ -613,19 +646,30 @@ function firstTranslation(rows) {
 function chooseTranslation(lex, sv) {
   // Same word in Swedish (problem -> problem): nothing to learn, and the alternatives are worse.
   if (lower(firstTranslation(lex.rows) ?? '') === lower(lex.rep)) return null;
-  for (const row of lex.rows.slice(0, 3)) {
-    const valid = row.trans_list
-      .split(' | ')
-      .map((t) => t.trim())
+  const valid = (row) =>
+    [...new Set(row.trans_list.split(' | ').map((t) => t.trim()))]
       .filter((t) => /^\p{Ll}{2,}$/u.test(t) && t !== lower(lex.rep))
       .map((t) => ({ word: t, info: sv.info(t, lex.pos) }))
       .filter((c) => c.info);
-    if (!valid.length) continue;
+  let choice = null;
+  for (const row of lex.rows.slice(0, 3)) {
+    const options = valid(row);
+    if (!options.length) continue;
     // Prefer the first listed translation unless only a later one is in common use.
-    const common = valid.find((c) => sv.freq.has(c.word));
-    return sv.freq.has(valid[0].word) ? valid[0] : (common ?? valid[0]);
+    const common = options.find((c) => sv.freq.has(c.word));
+    choice = sv.freq.has(options[0].word) ? options[0] : (common ?? options[0]);
+    break;
   }
-  return null;
+  if (!choice || sv.freq.has(choice.word)) return choice;
+  // An uncommon Swedish word often translates a niche sense that merely scored first among
+  // senses scored about the same (flavor: smakämne 101, smak 100, slag 100, smak 100).
+  // A common word offered for more of those senses than any other is the better choice.
+  const [top] = lex.rows;
+  const tied = lex.rows.filter((r) => r.is_good === top.is_good && r.score >= top.score - TIED_SCORE);
+  const votes = new Map();
+  for (const c of tied.flatMap(valid)) votes.set(c.word, { ...c, n: (votes.get(c.word)?.n ?? 0) + 1 });
+  const [best, next] = [...votes.values()].sort((a, b) => b.n - a.n);
+  return best && best.n > 1 && best.n > (next?.n ?? 0) && sv.freq.has(best.word) ? best : choice;
 }
 
 function loadOverrides(lang) {
