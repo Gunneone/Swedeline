@@ -25,6 +25,10 @@ describe('tokenize', () => {
     expect(tokens.filter((t) => !t.skip).map((t) => t.text)).toEqual(['voit', 'homme', 'et', 'arbre']);
   });
 
+  it('knows which tokens follow the previous one after plain whitespace', () => {
+    expect(tokenize('Joschka Fischer, Koch und (Bauer)', 'de').map((t) => t.afterSpace)).toEqual([false, true, false, true, false]);
+  });
+
   it('keeps offsets that point into the original text', () => {
     const text = 'the old house';
     for (const t of tokenize(text, 'en')) expect(text.slice(t.start, t.end)).toBe(t.text);

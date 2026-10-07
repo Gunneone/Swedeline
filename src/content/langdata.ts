@@ -18,7 +18,7 @@ export const STOPWORDS: Record<DetectLang, string[]> = {
     them then she many some so these would other into has more her him could no than been its
     who now my over did down only you he i they our should because through after before while
     where why just very those between under any me us also does being here off again once
-    both few most such own same too can't don't won't isn't
+    both few most such own same too can't don't won't isn't one
   `),
   de: words(`
     der die und in den von zu das mit sich des auf für ist im dem nicht ein eine als auch es an
@@ -26,7 +26,7 @@ export const STOPWORDS: Record<DetectLang, string[]> = {
     war haben nur oder aber vor zur bis mehr durch man sein wurde sei kann gegen vom können
     schon wenn habe seine ihre dann unter wir soll ich eines worden diese dieser keine weil ob
     hier jetzt sehr immer wurden waren ihr uns mich mir ihm ihn wo was wer doch nun also
-    zwischen ohne ganz denn dieses wieder etwa sondern seit beim ins kein
+    zwischen ohne ganz denn dieses wieder etwa sondern seit beim ins kein heute
   `),
   fr: words(`
     le la les de des du un une et est en que qui dans pour pas au aux sur ne se ce il elle ils
@@ -93,9 +93,11 @@ export const STOPWORDS: Record<DetectLang, string[]> = {
  * these, optionally with one known adjective in between.
  */
 export const NOUN_CONTEXT: Record<SourceLang, string[]> = {
+  // Left out because a verb follows them as often: this/that/which/what (pronouns,
+  // "things that need"), all/both ("we all want"), one ("no one knows"), her ("let her work").
   en: words(`
-    the a an this that these those my your his her its our their some any no every each many
-    much more most few several all both another other such what which whose one two three
+    the a an these those my your his its our their some any no every each many
+    much more most few several another other such whose two three
     four five six seven eight nine ten hundred thousand of in on at for with from by about
     into without under over through between after before during against among
   `),
@@ -112,14 +114,40 @@ export const NOUN_CONTEXT: Record<SourceLang, string[]> = {
     toutes en dans sur sous avec pour par sans chez entre vers deux trois quatre cinq dix cent
     mille certains certaines autre autres
   `),
+  // "lo" is left out: it comes before adjectives ("lo bueno") and participles ("lo hecho"), and is a pronoun.
   es: words(`
-    el la los las un una unos unas lo del al de este esta estos estas ese esa esos esas aquel
+    el la los las un una unos unas del al de este esta estos estas ese esa esos esas aquel
     aquella aquellos aquellas mi mis tu tus su sus nuestro nuestra nuestros nuestras vuestro
     vuestra vuestros vuestras cada algún alguna algunos algunas ningún ninguna mucho mucha
     muchos muchas poco poca pocos pocas varios varias otro otra otros otras todo toda todos
     todas en con sin por para sobre entre hacia desde dos tres cuatro cinco diez cien mil
   `),
 };
+
+/**
+ * Articles that are also object pronouns ("je l'aime", "il les voit", "yo la quiero").
+ * After one of PRONOUN_CUES they introduce a verb, not a noun.
+ */
+export const ARTICLE_PRONOUNS: Record<SourceLang, string[]> = {
+  en: [],
+  de: [],
+  fr: words(`le la les l`),
+  es: words(`la los las`),
+};
+
+/** Subject pronouns, negation and other clitics that put an object pronoun before the verb. */
+export const PRONOUN_CUES: Record<SourceLang, string[]> = {
+  en: [],
+  de: [],
+  fr: words(`je j tu il elle on nous vous ils elles ne n me m te t se s`),
+  es: words(`yo tú él ella usted nosotros nosotras vosotros vosotras ellos ellas ustedes no me te se nos os`),
+};
+
+/** German titles before a surname ("Herr Fischer", "Frau Koch"): the next word is a name, not a noun. */
+export const NAME_TITLES = words(`
+  Herr Herrn Frau Dr Prof Professor Professorin Familie Onkel Tante Sankt St Kollege Kollegin
+  Minister Ministerin Kanzler Kanzlerin Präsident Präsidentin Bürgermeister Bürgermeisterin
+`);
 
 /** French/Spanish/English elision prefixes split off before lookup (l'homme -> l' + homme). */
 export const ELISIONS: Record<SourceLang, string[]> = {

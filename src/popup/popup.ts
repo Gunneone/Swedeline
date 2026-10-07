@@ -99,9 +99,9 @@ function syncDisabledStates(): void {
   $('density-card').classList.toggle('disabled', off);
 }
 
-/** The page restarts after a settings change; show the new status once it has. */
+/** The page restarts after a settings change; show the new status once it has (large pages take longer). */
 function refreshStatusSoon(): void {
-  setTimeout(() => void renderStatus(), 350);
+  for (const delay of [350, 1500]) setTimeout(() => void renderStatus(), delay);
 }
 
 async function init(): Promise<void> {
@@ -124,7 +124,12 @@ async function init(): Promise<void> {
     refreshStatusSoon();
   });
   siteInput.addEventListener('change', async () => {
-    await setSiteEnabled(host, siteInput.checked);
+    try {
+      await setSiteEnabled(host, siteInput.checked);
+    } catch {
+      siteInput.checked = !siteInput.checked; // storage full (sync allows 512 items): show the real state
+      return;
+    }
     refreshStatusSoon();
   });
   let densityTimer = 0;

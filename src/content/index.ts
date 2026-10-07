@@ -22,6 +22,8 @@ import { hideTooltip, installTooltip } from './tooltip';
 /** Blocks at least this long get their own language check (mixed-language pages). */
 const BLOCK_DETECT_WORDS = 20;
 const MUTATION_DEBOUNCE = 400;
+/** Pages that never stop changing still get their new text processed this often. */
+const MUTATION_MAX_WAIT = 2000;
 
 const host = normalizeHost(location.hostname);
 let settings: Settings = { ...DEFAULTS };
@@ -35,6 +37,8 @@ let generation = 0;
 const applied = new Map<Element, Applied[]>();
 /** Split text nodes -> their block, to react when the page rewrites them. */
 const tracked = new Map<Text, Element>();
+/** Word elements Trana created (pages can clone them, and those copies are not Trana's). */
+const ownWords = new WeakSet<Element>();
 /** Blocks already handled, with their text at that time. */
 let handled = new WeakMap<Element, string>();
 const dictCache = Object.fromEntries(SOURCE_LANGS.map((l) => [l, new Map<string, Entry | null>()])) as Record<
@@ -43,8 +47,10 @@ const dictCache = Object.fromEntries(SOURCE_LANGS.map((l) => [l, new Map<string,
 >;
 
 let observer: MutationObserver | null = null;
-const pending = new Set<Node>();
+/** Nodes the page changed -> whether their subtree is new (added) rather than just modified. */
+const pending = new Map<Node, boolean>();
 let pendingTimer = 0;
+let pendingSince = 0;
 
 // ------------------------------------------------------------------ lifecycle
 
@@ -56,12 +62,13 @@ async function init(): Promise<void> {
   onSettingsChanged(onStorageChange);
   [settings, siteEnabled] = await Promise.all([loadSettings(), isSiteEnabled(host)]);
   installTooltip();
+  installOriginalsForCopyAndPrint();
   await start();
 }
 
 function status(): PageStatus {
   let count = 0;
-  for (const list of applied.values()) for (const a of list) count += a.words.length;
+  for (const [el, list] of applied) if (el.isConnected) for (const a of list) count += a.words.length;
   return { host, state, lang: pageLang, count };
 }
 
@@ -96,6 +103,7 @@ function stop(): void {
   observer?.disconnect();
   observer = null;
   clearTimeout(pendingTimer);
+  pendingSince = 0;
   pending.clear();
   revertAll();
   hideTooltip();
@@ -191,6 +199,8 @@ async function lookupWords(jobs: Job[]): Promise<void> {
       if (t.skip && t.skip !== 'sentence-start') continue;
       const key = lookupKey(t, lang);
       if (!cache.has(key)) set.add(key);
+      // German: "Gestern" is only capitalized by the sentence; the name check needs "gestern".
+      if (lang === 'de' && t.sentenceStart && !cache.has(t.lower)) set.add(t.lower);
     }
   }
   await Promise.all(
@@ -220,10 +230,12 @@ function applyJob({ block, lang, tokens }: Job, rate: number): void {
   const perNode = new Map<number, Replacement[]>();
   for (const c of picked) {
     const i = nodeIndexAt(block.offsets, c.token.start);
-    const nodeStart = block.offsets[i];
-    if (c.token.end > nodeStart + block.nodes[i].data.length) continue; // word split across elements
+    const start = c.token.start - block.offsets[i];
+    const end = c.token.end - block.offsets[i];
+    // The word is split across elements, or the page changed the text since it was read.
+    if (block.nodes[i].data.slice(start, end) !== c.token.text) continue;
     const list = perNode.get(i) ?? [];
-    list.push({ start: c.token.start - nodeStart, end: c.token.end - nodeStart, entry: c.entry, lang });
+    list.push({ start, end, entry: c.entry, lang });
     perNode.set(i, list);
   }
 
@@ -237,6 +249,7 @@ function applyJob({ block, lang, tokens }: Job, rate: number): void {
     if (!a) continue;
     list.push(a);
     tracked.set(node, block.el);
+    for (const w of a.words) ownWords.add(w);
   }
   observer?.takeRecords(); // the mutations just made are Trana's own
   if (list.length) applied.set(block.el, [...(applied.get(block.el) ?? []), ...list]);
@@ -304,36 +317,49 @@ function onMutations(records: MutationRecord[]): void {
       const block = tracked.get(r.target as Text);
       // The page rewrote a node Trana had split: drop the leftovers, keep the new text.
       if (block) revertBlock(block, false);
-      pending.add(r.target);
+      addPending(r.target, false);
       continue;
     }
     for (const n of r.removedNodes) {
       if (n.nodeType === Node.TEXT_NODE && tracked.has(n as Text)) revertBlock(tracked.get(n as Text)!, false);
     }
-    for (const n of r.addedNodes) if (!isTrana(n)) pending.add(n);
-    pending.add(r.target);
+    for (const n of r.addedNodes) if (!isTrana(n)) addPending(n, true);
+    // Only the target's own block can have changed; its other descendants did not.
+    addPending(r.target, false);
   }
   if (pending.size) {
+    // Debounce, but don't let a page that changes all the time postpone its new text forever.
     clearTimeout(pendingTimer);
-    pendingTimer = window.setTimeout(() => void processPending(), MUTATION_DEBOUNCE);
+    pendingSince ||= Date.now();
+    const wait = Math.min(MUTATION_DEBOUNCE, Math.max(0, pendingSince + MUTATION_MAX_WAIT - Date.now()));
+    pendingTimer = window.setTimeout(() => {
+      pendingSince = 0;
+      void processPending();
+    }, wait);
   }
+}
+
+function addPending(node: Node, added: boolean): void {
+  pending.set(node, added || (pending.get(node) ?? false));
 }
 
 async function processPending(): Promise<void> {
   const nodes = [...pending];
   pending.clear();
   if (state === 'no-text') {
-    await start();
+    // Rescan the page only once something with text has appeared.
+    if (nodes.some(([n, added]) => (added || n.nodeType === Node.TEXT_NODE) && n.textContent?.trim())) await start();
     return;
   }
   if (state !== 'active') return;
+  pruneDetached();
   const gen = generation;
   const els = new Set<Element>();
-  for (const n of nodes) {
+  for (const [n, added] of nodes) {
     if (!n.isConnected) continue;
     const el = blockOf(n);
     if (el) els.add(el);
-    if (n.nodeType === Node.ELEMENT_NODE) {
+    if (added && n.nodeType === Node.ELEMENT_NODE) {
       const walker = document.createTreeWalker(n, NodeFilter.SHOW_TEXT);
       for (let t = walker.nextNode(); t; t = walker.nextNode()) {
         const b = blockOf(t);
@@ -353,6 +379,15 @@ async function processPending(): Promise<void> {
   if (blocks.length) await processBlocks(blocks, gen);
 }
 
+/** Blocks the page removed: put their text back (the page may reinsert them) and forget them. */
+function pruneDetached(): void {
+  for (const el of [...applied.keys()]) {
+    if (el.isConnected) continue;
+    revertBlock(el);
+    handled.delete(el);
+  }
+}
+
 /** A block's text as the page has it, reading replaced words as their originals. */
 function originalText(el: Element): string {
   let text = '';
@@ -366,9 +401,15 @@ function originalText(el: Element): string {
   });
   for (let n = walker.nextNode(); n; n = walker.nextNode()) {
     if (n.nodeType === Node.ELEMENT_NODE) {
-      text += (n as HTMLElement).dataset.orig ?? '';
-      // Skip the replaced word's own text node.
-      walker.nextNode();
+      const word = n as HTMLElement;
+      // Words of nested blocks and copies made by the page are not part of this block's text.
+      if (ownWords.has(word) && blockOf(word.parentNode!) === el && !isExcluded(word.parentElement)) {
+        text += word.dataset.orig ?? '';
+      }
+      // Skip the word's own text.
+      let last: Node = word;
+      while (last.lastChild) last = last.lastChild;
+      walker.currentNode = last;
     } else if (blockOf(n) === el && !isExcluded((n as Text).parentElement)) {
       text += (n as Text).data;
     }
@@ -376,8 +417,54 @@ function originalText(el: Element): string {
   return squash(text);
 }
 
-/** Whitespace-insensitive form of a block's text, for change detection. */
-const squash = (text: string): string => text.replace(/\s+/g, ' ').trim();
+/** A block's text without any whitespace, for change detection (separators between nodes vary). */
+const squash = (text: string): string => text.replace(/\s+/g, '');
+
+// ------------------------------------------------------------------ copy and print
+
+/**
+ * Copied text and printouts get the page's original words: Swedish words in a
+ * quote or a pasted paragraph would be a surprise. Returns a function that
+ * switches the words back.
+ */
+function showOriginals(include: (word: HTMLElement) => boolean): () => void {
+  const swapped: [Text, string][] = [];
+  for (const list of applied.values()) {
+    for (const a of list) {
+      for (const word of a.words) {
+        const text = word.firstChild;
+        if (text?.nodeType !== Node.TEXT_NODE || !word.dataset.orig || !include(word)) continue;
+        swapped.push([text as Text, (text as Text).data]);
+        (text as Text).data = word.dataset.orig;
+      }
+    }
+  }
+  return () => {
+    for (const [text, data] of swapped) text.data = data;
+  };
+}
+
+function installOriginalsForCopyAndPrint(): void {
+  document.addEventListener(
+    'copy',
+    () => {
+      const selection = getSelection();
+      if (!selection || selection.isCollapsed || !applied.size) return;
+      // The browser copies the selection after this handler: switch back right after.
+      const restore = showOriginals((word) => selection.containsNode(word, true));
+      setTimeout(restore, 0);
+    },
+    true,
+  );
+  let restorePrint: (() => void) | null = null;
+  window.addEventListener('beforeprint', () => {
+    restorePrint ??= showOriginals(() => true);
+  });
+  window.addEventListener('afterprint', () => {
+    restorePrint?.();
+    restorePrint = null;
+  });
+}
 
 function idle(): Promise<IdleDeadline | null> {
   return new Promise((resolve) => {

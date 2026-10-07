@@ -9,6 +9,8 @@ export interface Token {
   lower: string;
   /** First word of a sentence: capitalization says nothing about it being a name, so it is skipped. */
   sentenceStart: boolean;
+  /** Only whitespace separates it from the previous token (no comma, bracket, etc.). */
+  afterSpace: boolean;
   /** Why the token can never be replaced, or '' if it can. */
   skip: '' | 'joined' | 'caps' | 'name' | 'sentence-start' | 'short';
 }
@@ -37,11 +39,12 @@ export function tokenize(text: string, lang: SourceLang): Token[] {
     const word = m[0];
     const lower = word.toLocaleLowerCase();
     const sentenceStart = isSentenceStart(text, start);
-    const token: Token = { start, end, text: word, lower, sentenceStart, skip: '' };
+    const prev = tokens.at(-1);
+    const afterSpace = !!prev && /^\s+$/u.test(text.slice(prev.end, start));
+    const token: Token = { start, end, text: word, lower, sentenceStart, afterSpace, skip: '' };
 
     const before = text[start - 1] ?? '';
     const after = text[end] ?? '';
-    const prev = tokens.at(-1);
     const elided =
       APOSTROPHES.has(before) && prev?.end === start - 1 && elisions.has(prev.lower);
     if (

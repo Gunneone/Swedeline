@@ -34,6 +34,8 @@ so it works offline and nothing you read leaves your browser.
   browser language (English otherwise).
 - Works on single-page apps and infinite scroll: new text gets processed as it
   appears.
+- Copying text or printing the page gives you the original words, not the
+  Swedish ones.
 
 ### How translation works (no AI)
 
@@ -120,10 +122,13 @@ FrequencyWords lists, then for each source language:
    translations, function-word uses, or verb forms. Rule-based conjugation
    covers English, French and Spanish, where WikDict has no verb forms. Nouns
    that clash with a verb form get flag `d` (needs noun context).
-5. Applies `src/dict/overrides/<lang>.json`: a `block` list and `fix`ed entries.
+5. Applies `src/dict/overrides/<lang>.json`: a `block` list (the word and all
+   its forms), a `drop` list (only that exact form: *einfach* but not
+   *einfache*) and `fix`ed entries.
 
 To correct a translation, add it to the language's override file, run
-`npm run dicts`, and check it with `npm run dict-report`.
+`npm run dicts`, and check it with `npm run dict-report`. Add the sentence
+where it went wrong to `tests/translations.test.ts` so it stays fixed.
 
 Entry format: `"surface": ["shown in page", "Swedish lemma", "en|ett|", "n|a|r", "flags"]`.
 

@@ -1,5 +1,5 @@
 import type { Entry } from '../shared/messages';
-import { NOUN_CONTEXT, type SourceLang } from './langdata';
+import { ARTICLE_PRONOUNS, NAME_TITLES, NOUN_CONTEXT, PRONOUN_CUES, STOPWORDS, type SourceLang } from './langdata';
 import type { Token } from './tokenizer';
 
 /** Words between two replacements, at least. */
@@ -19,7 +19,7 @@ export const lookupKey = (token: Token, lang: SourceLang): string => (lang === '
 
 /** Tokens of one block that have a usable translation in this context. */
 export function findCandidates(tokens: Token[], lang: SourceLang, lookup: Lookup): Candidate[] {
-  const context = nounContext(lang);
+  const words = wordSets(lang);
   const out: Candidate[] = [];
   tokens.forEach((token, index) => {
     if (token.skip) return;
@@ -27,26 +27,62 @@ export function findCandidates(tokens: Token[], lang: SourceLang, lookup: Lookup
     if (!entry) return;
     // Flag "d": the word is also a common verb form, so require a noun context
     // (an article, possessive, number or preposition, maybe with an adjective between).
-    if (entry[4].includes('d') && !hasNounContext(tokens, index, lang, context, lookup)) return;
+    if (entry[4].includes('d') && !hasNounContext(tokens, index, lang, words, lookup)) return;
+    if (lang === 'de' && isLikelyName(tokens, index, words, lookup)) return;
     out.push({ token, index, entry });
   });
   return out;
 }
 
-const contextCache = new Map<SourceLang, Set<string>>();
-function nounContext(lang: SourceLang): Set<string> {
-  let set = contextCache.get(lang);
-  if (!set) contextCache.set(lang, (set = new Set(NOUN_CONTEXT[lang])));
-  return set;
+interface WordSets {
+  context: Set<string>;
+  articlePronouns: Set<string>;
+  pronounCues: Set<string>;
+  functionWords: Set<string>;
 }
 
-function hasNounContext(tokens: Token[], index: number, lang: SourceLang, context: Set<string>, lookup: Lookup): boolean {
+const setsCache = new Map<SourceLang, WordSets>();
+function wordSets(lang: SourceLang): WordSets {
+  let sets = setsCache.get(lang);
+  if (!sets) {
+    sets = {
+      context: new Set(NOUN_CONTEXT[lang]),
+      articlePronouns: new Set(ARTICLE_PRONOUNS[lang]),
+      pronounCues: new Set(PRONOUN_CUES[lang]),
+      functionWords: new Set([...STOPWORDS[lang], ...NOUN_CONTEXT[lang]]),
+    };
+    setsCache.set(lang, sets);
+  }
+  return sets;
+}
+
+function hasNounContext(tokens: Token[], index: number, lang: SourceLang, words: WordSets, lookup: Lookup): boolean {
   const prev = tokens[index - 1];
   if (!prev || tokens[index].sentenceStart) return false;
-  if (context.has(prev.lower)) return true;
   const prev2 = tokens[index - 2];
+  if (words.context.has(prev.lower)) {
+    // "je l'aime", "tu la quieres": the article is an object pronoun and a verb follows.
+    return !(words.articlePronouns.has(prev.lower) && prev2 && words.pronounCues.has(prev2.lower));
+  }
   const prevEntry = lookup(lookupKey(prev, lang));
-  return !!prev2 && prevEntry?.[3] === 'a' && !prev.sentenceStart && context.has(prev2.lower);
+  return !!prev2 && prevEntry?.[3] === 'a' && !prev.sentenceStart && words.context.has(prev2.lower);
+}
+
+const TITLES = new Set(NAME_TITLES);
+
+/**
+ * German capitalizes nouns and names alike, and many surnames are nouns
+ * (Fischer, Koch, Bauer). A capitalized word right after a title or after
+ * another capitalized word that is no known word (a first name) is taken as a name.
+ */
+function isLikelyName(tokens: Token[], index: number, words: WordSets, lookup: Lookup): boolean {
+  const token = tokens[index];
+  const prev = tokens[index - 1];
+  if (!prev || !token.afterSpace || token.text === token.lower) return false;
+  if (TITLES.has(prev.text)) return true;
+  if (prev.text === prev.lower || prev.skip === 'joined' || prev.skip === 'short') return false;
+  if (words.functionWords.has(prev.lower)) return false;
+  return !lookup(prev.text) && !lookup(prev.lower);
 }
 
 /**
