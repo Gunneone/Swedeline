@@ -21,6 +21,9 @@ const CASES: Record<SourceLang, [string, string[], string[]][]> = {
     ['It was a common mistake with a fresh team and a new trick.', ['common=vanlig', 'fresh=färsk', 'trick=knep'], []],
     ['The knight and the bishop took a cab to the port.', ['knight=riddare', 'bishop=biskop', 'cab=taxi', 'port=hamn'], []],
     ['Throw the trash in the corner, because the elevator is broken.', ['trash=skräp', 'elevator=hiss'], []],
+    // Vulgar words and slurs are translated like any other word, in the same register.
+    ['This fucking car is a piece of shit, said the bastard.', ['fucking=jävla', 'shit=skit', 'bastard=jävel'], []],
+    ['The rights of gays and lesbians were discussed for hours.', ['gays=homosexuella', 'lesbians=lesbiska'], []],
   ],
   es: [
     ['Mañana ellos van a la playa con sus amigos del colegio.', ['playa=strand'], ['van']],
@@ -31,6 +34,7 @@ const CASES: Record<SourceLang, [string, string[], string[]][]> = {
     ['En julio vamos a la isla con un miembro de la familia.', ['julio=juli', 'isla=ö', 'miembro=medlem'], []],
     ['No sé cuyo es el perro, pero vimos una colina muy verde.', ['colina=kulle'], ['cuyo']],
     ['Los músicos tienen un plazo muy corto para el concurso.', ['músicos=musiker', 'plazo=frist'], []],
+    ['Esta mierda no funciona, dijo la puta de la esquina.', ['mierda=skit', 'puta=hora'], []],
   ],
   fr: [
     ["Je pense que je l'aime beaucoup, et tu l'as bien vu.", ['beaucoup=mycket'], ['aime', 'as']],
@@ -41,6 +45,7 @@ const CASES: Record<SourceLang, [string, string[], string[]][]> = {
     ['Il est membre du club depuis huit ans avec un professeur.', ['membre=medlem', 'professeur=lärare'], ['huit']],
     ['Elle cherche un indice dans la vieille cassette de la demoiselle.', ['indice=ledtråd', 'cassette=kassett', 'demoiselle=fröken'], []],
     ['Il nous faut un enregistrement de la réception pour le dossier.', ['enregistrement=inspelning', 'réception=mottagning'], []],
+    ['Ce salaud a cassé mon engin, quelle merde.', ['salaud=skitstövel', 'engin=maskin', 'merde=skit'], []],
   ],
   de: [
     ['Ich war zum ersten Mal in der großen Stadt bei meiner Mutter.', ['Mal=gång', 'Stadt=stad'], []],
@@ -51,6 +56,7 @@ const CASES: Record<SourceLang, [string, string[], string[]][]> = {
     ['Der lange Flug war um Acht vorbei, sagte der kleine Geist.', ['Flug=flygning', 'Geist=ande'], ['Acht']],
     ['Nach dem Vorfall hat die alte Puppe ihre Stärke verloren.', ['Vorfall=incident', 'Puppe=docka', 'Stärke=styrka'], []],
     ['Der junge Künstler wohnt jetzt im Westen der Stadt.', ['Künstler=konstnär', 'Westen=väster'], []],
+    ['Dieser Mist ist echt Scheiße, sagte das alte Arschloch.', ['Mist=skit', 'Scheiße=skit', 'Arschloch=arsle'], []],
   ],
 };
 

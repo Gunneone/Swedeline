@@ -45,22 +45,8 @@
     "rose",
     "grace",
     "fuck",
-    "fucking",
-    "fucker",
-    "shit",
-    "bitch",
-    "ass",
-    "damn",
-    "crap",
-    "dick",
     "cock",
     "pussy",
-    "bastard",
-    "whore",
-    "slut",
-    "cunt",
-    "hell",
-    "goddamn",
     "right",
     "first",
     "else",
@@ -101,7 +87,6 @@
     "pack",
     "condition",
     "conditions",
-    "ho",
     "male",
     "lift",
     "lifts",
@@ -122,8 +107,6 @@
     "jerk",
     "jerks",
     "glasses",
-    "asshole",
-    "bullshit",
     "appointment",
     "appointments",
     "rick",
@@ -133,7 +116,6 @@
     "stock",
     "cutting",
     "policy",
-    "chick",
     "sally",
     "firing",
     "quarter",
@@ -158,14 +140,13 @@
     "coke",
     "dope",
     "smash",
-    "chicks",
     "polish",
     "plot",
     "quarters",
-    "tits",
     "motor",
     "prick",
-    "bonnie"
+    "bonnie",
+    "craps"
   ],
   "fix": {
     "people": [
@@ -1616,6 +1597,265 @@
       "en",
       "n",
       ""
+    ],
+    "fucking": [
+      "jävla",
+      "jävla",
+      "",
+      "a",
+      ""
+    ],
+    "fucker": [
+      "jävel",
+      "jävel",
+      "en",
+      "n",
+      ""
+    ],
+    "fuckers": [
+      "jävlar",
+      "jävel",
+      "en",
+      "n",
+      "p"
+    ],
+    "shit": [
+      "skit",
+      "skit",
+      "en",
+      "n",
+      ""
+    ],
+    "crap": [
+      "skit",
+      "skit",
+      "en",
+      "n",
+      ""
+    ],
+    "bullshit": [
+      "skitsnack",
+      "skitsnack",
+      "ett",
+      "n",
+      ""
+    ],
+    "bitch": [
+      "subba",
+      "subba",
+      "en",
+      "n",
+      ""
+    ],
+    "bitches": [
+      "subbor",
+      "subba",
+      "en",
+      "n",
+      "p"
+    ],
+    "ass": [
+      "röv",
+      "röv",
+      "en",
+      "n",
+      ""
+    ],
+    "asses": [
+      "rövar",
+      "röv",
+      "en",
+      "n",
+      "p"
+    ],
+    "asshole": [
+      "arsle",
+      "arsle",
+      "ett",
+      "n",
+      ""
+    ],
+    "assholes": [
+      "arslen",
+      "arsle",
+      "ett",
+      "n",
+      "p"
+    ],
+    "damn": [
+      "jävla",
+      "jävla",
+      "",
+      "a",
+      ""
+    ],
+    "goddamn": [
+      "jävla",
+      "jävla",
+      "",
+      "a",
+      ""
+    ],
+    "hell": [
+      "helvete",
+      "helvete",
+      "ett",
+      "n",
+      ""
+    ],
+    "dick": [
+      "kuk",
+      "kuk",
+      "en",
+      "n",
+      ""
+    ],
+    "dicks": [
+      "kukar",
+      "kuk",
+      "en",
+      "n",
+      "p"
+    ],
+    "bastard": [
+      "jävel",
+      "jävel",
+      "en",
+      "n",
+      ""
+    ],
+    "bastards": [
+      "jävlar",
+      "jävel",
+      "en",
+      "n",
+      "p"
+    ],
+    "whore": [
+      "hora",
+      "hora",
+      "en",
+      "n",
+      ""
+    ],
+    "whores": [
+      "horor",
+      "hora",
+      "en",
+      "n",
+      "p"
+    ],
+    "slut": [
+      "slampa",
+      "slampa",
+      "en",
+      "n",
+      ""
+    ],
+    "sluts": [
+      "slampor",
+      "slampa",
+      "en",
+      "n",
+      "p"
+    ],
+    "cunt": [
+      "fitta",
+      "fitta",
+      "en",
+      "n",
+      ""
+    ],
+    "cunts": [
+      "fittor",
+      "fitta",
+      "en",
+      "n",
+      "p"
+    ],
+    "tits": [
+      "tuttar",
+      "tutte",
+      "en",
+      "n",
+      "p"
+    ],
+    "ho": [
+      "hora",
+      "hora",
+      "en",
+      "n",
+      "d"
+    ],
+    "chick": [
+      "brud",
+      "brud",
+      "en",
+      "n",
+      "d"
+    ],
+    "chicks": [
+      "brudar",
+      "brud",
+      "en",
+      "n",
+      "dp"
+    ],
+    "motherfucker": [
+      "jävel",
+      "jävel",
+      "en",
+      "n",
+      ""
+    ],
+    "motherfuckers": [
+      "jävlar",
+      "jävel",
+      "en",
+      "n",
+      "p"
+    ],
+    "wanker": [
+      "runkare",
+      "runkare",
+      "en",
+      "n",
+      ""
+    ],
+    "retard": [
+      "efterbliven",
+      "efterbliven",
+      "",
+      "n",
+      ""
+    ],
+    "retards": [
+      "efterblivna",
+      "efterbliven",
+      "",
+      "n",
+      "p"
+    ],
+    "gays": [
+      "homosexuella",
+      "homosexuell",
+      "",
+      "n",
+      "p"
+    ],
+    "lesbians": [
+      "lesbiska",
+      "lesbisk",
+      "",
+      "n",
+      "p"
+    ],
+    "tarts": [
+      "pajer",
+      "paj",
+      "en",
+      "n",
+      "dp"
     ]
   }
 }

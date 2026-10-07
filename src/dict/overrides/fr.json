@@ -1,17 +1,17 @@
 {
   "block": [
     "accord", "personne", "raison", "coup", "suite", "envie", "abord", "tour", "face", "rapport",
-    "grâce", "lieu", "pièce", "sort", "bois", "putain", "merde", "bordel", "autour", "or", "but",
-    "exact", "avance", "mal", "fond", "espèce", "six", "non", "as", "juste", "aime", "super",
-    "laisse", "train", "trains", "écoute", "écoutes", "première", "premières", "pardon", "droit",
-    "compte", "plutôt", "derrière", "peine", "propre", "courant", "sauf", "moyen", "reçu", "seconde",
-    "planque", "bar", "bars", "poste", "postes", "con", "vol", "vols", "bête", "bêtes", "approche",
-    "revenu", "revenus", "toucher", "course", "courses", "aise", "enchanté", "étranger", "billets",
-    "patient", "patients", "mandat", "mandats", "siège", "cabinet", "normale", "midi", "pousse",
-    "bob", "richard", "salope", "pute", "salaud", "couilles", "mine", "chouette", "foyer", "uniforme",
-    "pis", "pratique", "veille", "entretien", "rayon", "pile", "miles", "égal", "aides", "voyant",
-    "baise", "garce", "sure", "rigole", "rigoles", "volée", "évidence", "traverse", "traîne", "sein",
-    "batterie", "combinaison", "audition", "revanche", "chatte", "boucle", "mordu"
+    "grâce", "lieu", "pièce", "sort", "bois", "putain", "bordel", "autour", "or", "but", "exact",
+    "avance", "mal", "fond", "espèce", "six", "non", "as", "juste", "aime", "super", "laisse",
+    "train", "trains", "écoute", "écoutes", "première", "premières", "pardon", "droit", "compte",
+    "plutôt", "derrière", "peine", "propre", "courant", "sauf", "moyen", "reçu", "seconde", "planque",
+    "bar", "bars", "poste", "postes", "vol", "vols", "bête", "bêtes", "approche", "revenu", "revenus",
+    "toucher", "course", "courses", "aise", "enchanté", "étranger", "billets", "patient", "patients",
+    "mandat", "mandats", "siège", "cabinet", "normale", "midi", "pousse", "bob", "richard", "mine",
+    "chouette", "foyer", "uniforme", "pis", "pratique", "veille", "entretien", "rayon", "pile",
+    "miles", "égal", "aides", "voyant", "baise", "sure", "rigole", "rigoles", "volée", "évidence",
+    "traverse", "traîne", "sein", "batterie", "combinaison", "audition", "revanche", "chatte",
+    "boucle", "mordu"
   ],
   "drop": ["bas", "patiente"],
   "fix": {
@@ -274,6 +274,25 @@
     "revue": ["tidskrift", "tidskrift", "en", "n", ""],
     "revues": ["tidskrifter", "tidskrift", "en", "n", "p"],
     "magnifiques": ["underbara", "underbar", "", "a", "p"],
-    "stupides": ["dumma", "dum", "", "a", "p"]
+    "stupides": ["dumma", "dum", "", "a", "p"],
+    "merde": ["skit", "skit", "en", "n", ""],
+    "con": ["idiot", "idiot", "en", "n", ""],
+    "cons": ["idioter", "idiot", "en", "n", "p"],
+    "pute": ["hora", "hora", "en", "n", ""],
+    "putes": ["horor", "hora", "en", "n", "p"],
+    "salope": ["slampa", "slampa", "en", "n", ""],
+    "salopes": ["slampor", "slampa", "en", "n", "p"],
+    "salaud": ["skitstövel", "skitstövel", "en", "n", ""],
+    "salauds": ["skitstövlar", "skitstövel", "en", "n", "p"],
+    "garce": ["subba", "subba", "en", "n", ""],
+    "garces": ["subbor", "subba", "en", "n", "p"],
+    "couille": ["balle", "balle", "en", "n", ""],
+    "couilles": ["ballar", "balle", "en", "n", "p"],
+    "engin": ["maskin", "maskin", "en", "n", ""],
+    "engins": ["maskiner", "maskin", "en", "n", "p"],
+    "plate": ["platt", "platt", "", "a", ""],
+    "plates": ["platta", "platt", "", "a", "p"],
+    "lesbienne": ["lesbisk", "lesbisk", "", "n", ""],
+    "lesbiennes": ["lesbiska", "lesbisk", "", "n", "p"]
   }
 }

@@ -1,14 +1,13 @@
 {
   "block": [
-    "favor", "acuerdo", "media", "sal", "principio", "mierda", "puta", "culo", "demonios", "diablos",
-    "maldición", "dado", "haya", "pasa", "sitio", "asunto", "vez", "tan", "mañana", "tarde", "haces",
-    "haz", "cara", "caras", "bastante", "toma", "segundo", "medio", "pueblo", "perdón", "falta",
-    "faltas", "frente", "pena", "carrera", "abuelo", "abuelos", "novios", "suelos", "golfo", "filo",
-    "seno", "corte", "radio", "verme", "estación", "estaciones", "pista", "pistas", "acciones",
-    "metro", "copa", "copas", "mando", "millas", "tira", "uniforme", "diario", "diarios", "cura",
-    "curas", "extranjero", "tetas", "fondos", "condición", "condiciones", "espacial", "pinta",
-    "demanda", "heroína", "billetes", "billete", "revés", "diana", "mediodía", "solar", "rollo",
-    "velas", "vela", "papas", "cuyo", "francos", "polla", "capullo", "raya", "lesbiana"
+    "favor", "acuerdo", "media", "sal", "principio", "dado", "haya", "pasa", "sitio", "asunto", "vez",
+    "tan", "mañana", "tarde", "haces", "haz", "cara", "caras", "bastante", "toma", "segundo", "medio",
+    "pueblo", "perdón", "falta", "faltas", "frente", "pena", "carrera", "abuelo", "abuelos", "novios",
+    "suelos", "golfo", "filo", "seno", "corte", "radio", "verme", "estación", "estaciones", "pista",
+    "pistas", "acciones", "metro", "copa", "copas", "mando", "millas", "tira", "uniforme", "diario",
+    "diarios", "cura", "curas", "extranjero", "fondos", "condición", "condiciones", "espacial",
+    "pinta", "demanda", "heroína", "billetes", "billete", "revés", "diana", "mediodía", "solar",
+    "rollo", "velas", "vela", "papas", "cuyo", "francos", "capullo", "raya"
   ],
   "fix": {
     "hombre": ["man", "man", "en", "n", ""],
@@ -279,6 +278,20 @@
     "tierno": ["öm", "öm", "", "a", ""],
     "competición": ["tävling", "tävling", "en", "n", ""],
     "declaraciones": ["uttalanden", "uttalande", "ett", "n", "p"],
-    "compañías": ["företag", "företag", "ett", "n", "p"]
+    "compañías": ["företag", "företag", "ett", "n", "p"],
+    "mierda": ["skit", "skit", "en", "n", ""],
+    "puta": ["hora", "hora", "en", "n", ""],
+    "putas": ["horor", "hora", "en", "n", "p"],
+    "culo": ["röv", "röv", "en", "n", ""],
+    "culos": ["rövar", "röv", "en", "n", "p"],
+    "demonios": ["demoner", "demon", "en", "n", "p"],
+    "diablos": ["djävlar", "djävul", "en", "n", "p"],
+    "maldición": ["förbannelse", "förbannelse", "en", "n", ""],
+    "teta": ["tutte", "tutte", "en", "n", ""],
+    "tetas": ["tuttar", "tutte", "en", "n", "p"],
+    "polla": ["kuk", "kuk", "en", "n", ""],
+    "pollas": ["kukar", "kuk", "en", "n", "p"],
+    "lesbiana": ["lesbisk", "lesbisk", "", "n", ""],
+    "lesbianas": ["lesbiska", "lesbisk", "", "n", "p"]
   }
 }
