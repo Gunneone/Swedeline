@@ -1,6 +1,6 @@
 {
   "name": "swedeline",
-  "version": "0.1.0",
+  "version": "2026.10.1",
   "private": true,
   "description": "Learn Swedish while you browse: replaces some words on English, German, French and Spanish pages with Swedish translations.",
   "license": "MIT",
@@ -23,7 +23,8 @@
     "run:firefox": "web-ext run -s dist/firefox",
     "zip": "node scripts/zip.mjs",
     "harness": "node scripts/serve.mjs",
-    "screenshots": "node scripts/store-screenshots.mjs"
+    "screenshots": "node scripts/store-screenshots.mjs",
+    "version:next": "node scripts/version-next.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0",

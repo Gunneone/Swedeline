@@ -57,7 +57,7 @@ Translations are built from Wiktionary (via WikDict) and word-frequency data, li
 **Privacy policy URL:** https://github.com/Gunneone/Swedeline/blob/main/PRIVACY.md (the repo must be public, or host the page elsewhere)
 
 ## Notes to reviewer (AMO)
-No account needed. Build from source: `npm ci && npm run build:firefox` (Node 22.13+); output is `dist/firefox`. The dictionaries in `src/dict/*.json` are generated offline by `npm run dicts` from public Wiktionary/WikDict data and are committed, so the build does not need network access.
+No account needed. Build from source: `npm ci && npm run build:firefox` (Node 22.13+); output is `dist/firefox`. (Upload `dist/swedeline-source-<version>.zip` as the source code; make it with `git ls-files -z -- . ':!docs/screenshots' | xargs -0 zip dist/swedeline-source-<version>.zip`.) The dictionaries in `src/dict/*.json` are generated offline by `npm run dicts` from public Wiktionary/WikDict data and are committed, so the build does not need network access.
 
 ## Screenshots
 1280×800, in `docs/screenshots/` (upload in this order, same files for Chrome and AMO). Regenerate with `npm run build && npm run screenshots`. The pages are public-domain books on Project Gutenberg.
