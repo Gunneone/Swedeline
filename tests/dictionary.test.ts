@@ -30,6 +30,28 @@ describe('dictionaries', () => {
     expect(dictionary('es').flores?.slice(0, 3)).toEqual(['blommor', 'blomma', 'en']);
   });
 
+  it('skips words whose usual sense the translation misses', () => {
+    const skipped = {
+      en: ['ground', 'principal', 'applications', 'rider', 'metropolitan', 'domestic', 'driver', 'variety', 'action'],
+      de: ['Bestimmungen', 'zufällige', 'Grimm'],
+      fr: ['action', 'terrestre', 'matières', 'propriété'],
+      es: ['masa'],
+    } as const;
+    for (const [lang, words] of Object.entries(skipped)) {
+      const dict = dictionary(lang as keyof typeof skipped);
+      expect(words.filter((w) => Object.hasOwn(dict, w)), lang).toEqual([]);
+    }
+  });
+
+  it('picks the common sense', () => {
+    expect(dictionary('en').flavor?.[1]).toBe('smak');
+    expect(dictionary('en').foods?.[1]).toBe('livsmedel');
+    expect(dictionary('fr')['propriétés']?.[1]).toBe('egenskap');
+    // A reviewed translation of the lemma carries over to its other forms.
+    expect(dictionary('de').gute?.[1]).toBe('bra');
+    expect(dictionary('de').Jahrhunderts?.[1]).toBe('århundrade');
+  });
+
   it('keeps German noun capitalization in keys', () => {
     expect(dictionary('de').Haus).toBeDefined();
     expect(dictionary('de').haus).toBeUndefined();

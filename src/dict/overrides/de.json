@@ -13,9 +13,9 @@
     "Schneiden", "Kaufe", "not", "Wenden", "Planen", "Nix", "Auftauchen", "Vögeln", "Besitzen",
     "Heben", "Decken", "Normaler", "Normalen", "Fasse", "Dicke", "Verkaufe", "Freier", "Malen",
     "Ethan", "Kurzen", "Stürzen", "Täuschen", "Weine", "Steven", "Verrate", "Lade", "Liege",
-    "Betrügen", "Lautes", "Klingeln", "Angesichts", "Schicht"
+    "Betrügen", "Lautes", "Klingeln", "Angesichts", "Schicht", "zufällig", "Grimm", "Box"
   ],
-  "drop": ["einfach", "recht", "weit", "wenig"],
+  "drop": ["einfach", "recht", "weit", "wenig", "Erden", "Muttern", "Rechter"],
   "fix": {
     "Vater": ["far", "far", "en", "n", ""],
     "Mutter": ["mor", "mor", "en", "n", ""],
