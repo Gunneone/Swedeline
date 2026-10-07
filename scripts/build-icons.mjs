@@ -29,3 +29,10 @@ for (const [size, file] of Object.entries(SIZES)) {
   }
 }
 console.log(`wrote ${fs.readdirSync(OUT).length} icons to ${path.relative(ROOT, OUT)}`);
+
+// Chrome Web Store icon: 128x128 with the artwork at 96x96 and 16px transparent padding.
+const inner = fs.readFileSync(path.join(ROOT, 'assets', 'icon.svg'), 'utf8')
+  .replace('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">', '<svg x="16" y="16" width="96" height="96" viewBox="0 0 128 128">');
+const store = `<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128">${inner}</svg>`;
+fs.writeFileSync(path.join(ROOT, 'docs', 'store-icon-128.png'), new Resvg(store).render().asPng());
+console.log('wrote docs/store-icon-128.png');

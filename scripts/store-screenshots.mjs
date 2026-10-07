@@ -1,14 +1,18 @@
 #!/usr/bin/env node
-// Store screenshots for Chrome Web Store and AMO: 1280x800, a headline on Swedish blue over a
-// browser frame showing a public-domain Project Gutenberg book with Swedeline running.
-// Needs `npm run build` first and network access. Writes docs/screenshots/ (or the given dir);
-// pass a name prefix as the second argument to redo a single shot.
+// Store graphics for Chrome Web Store and AMO, from the built extension running on public-domain
+// Project Gutenberg books:
+// - screenshots, 1280x800: a headline on Swedish blue over a browser frame (docs/screenshots/)
+// - promo tiles, 440x280 and 1400x560, opaque as the Chrome Web Store asks (docs/)
+// Needs `npm run build` first and network access. Pass an output dir to write everything there
+// instead, and a name prefix ("1-en", "promo") as the second argument to redo only those.
 import { chromium } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
 
 const DIST = path.resolve('dist/chrome');
-const [OUT = 'docs/screenshots', ONLY] = process.argv.slice(2);
+const [OUT_ARG, ONLY] = process.argv.slice(2);
+const OUT = OUT_ARG ?? 'docs/screenshots';
+const PROMO_OUT = OUT_ARG ?? 'docs';
 fs.mkdirSync(OUT, { recursive: true });
 
 const G = 'https://www.gutenberg.org/cache/epub';
@@ -149,12 +153,67 @@ async function compose(s, shot, pop) {
   await comp.close();
 }
 
+
+const BG = 'background: linear-gradient(160deg, #0A78BA 0%, #006AA7 55%, #005A8F 100%);';
+const FONT = "font-family: 'Avenir Next', Avenir, 'Helvetica Neue', Arial, sans-serif;";
+// The extension's own marker style (src/content/content.css).
+const MARK = `background: rgba(254, 204, 2, 0.32); box-shadow: inset 0 -0.12em 0 #006aa7; border-radius: 0.18em; padding: 0 0.12em;`;
+
+async function render(html, width, height, file) {
+  const p = await composer.newPage();
+  await p.setViewportSize({ width, height });
+  await p.setContent(`<!doctype html><html><head><style>
+    * { box-sizing: border-box; }
+    body { margin: 0; width: ${width}px; height: ${height}px; overflow: hidden; position: relative; ${BG} ${FONT} }
+    .logo { display: flex; align-items: center; color: #fff; font-weight: 600; letter-spacing: -0.5px; }
+    .logo img { display: block; }
+    mark { ${MARK} color: inherit; }
+  </style></head><body>${html}</body></html>`);
+  await p.waitForTimeout(200);
+  // The page is opaque, so Chromium writes a 24-bit RGB PNG without alpha, as the store asks.
+  await p.screenshot({ path: file });
+  await p.close();
+}
+
+async function promoSmall() {
+  await render(`
+    <div class="logo" style="position:absolute; left:32px; top:30px; gap:12px; font-size:30px;">
+      <img src="data:image/svg+xml;base64,${ICON}" width="44" height="44" alt="">Swedeline</div>
+    <div style="position:absolute; left:32px; right:32px; top:100px; height:148px; background:#fff; border-radius:16px;
+                box-shadow:0 14px 34px rgba(0,25,50,.35); display:grid; place-items:center;
+                font: 33px/1.3 Georgia, 'Times New Roman', serif; color:#1d2328; text-align:center;">
+      <div>Every <mark>dag</mark> a few<br>new <mark>ord</mark> to learn</div>
+    </div>`, 440, 280, path.join(PROMO_OUT, 'promo-small-440x280.png'));
+}
+
+async function promoMarquee() {
+  // A real crop of the extension on a book page, with the word card open.
+  const crop = { name: 'promo-crop', url: `${G}/289/pg289-images.html`, para: 0, above: 6, hover: 'brooms' };
+  await page.setViewportSize({ width: 340, height: 262 });
+  const shot = await capturePage(crop);
+  await page.setViewportSize(VIEW);
+  await render(`
+    <div style="position:absolute; left:90px; top:0; bottom:0; width:560px; display:flex; flex-direction:column; justify-content:center; gap:22px;">
+      <div class="logo" style="gap:16px; font-size:40px;">
+        <img src="data:image/svg+xml;base64,${ICON}" width="60" height="60" alt="">Swedeline</div>
+      <div style="color:#fff; font-size:62px; font-weight:700; line-height:1.08; letter-spacing:-1px;">Learn Swedish<br>while you browse</div>
+      <div style="color:#D6E8F5; font-size:25px; font-weight:500; line-height:1.4;">Swedish words, right inside the pages you already read. Hover one for the original.</div>
+    </div>
+    <img src="${b64(shot)}" alt="" style="position:absolute; right:90px; top:50%; transform:translateY(-50%); width:595px;
+         border-radius:16px; box-shadow:0 24px 60px rgba(0,25,50,.45);">`, 1400, 560, path.join(PROMO_OUT, 'promo-marquee-1400x560.png'));
+}
+
 for (const s of SHOTS) {
   if (ONLY && !s.name.startsWith(ONLY)) continue;
   const shot = await capturePage(s);
   const pop = s.popup ? await capturePopup() : null;
   await compose(s, shot, pop);
   console.log('wrote', s.name);
+}
+if (!ONLY || ONLY === 'promo') {
+  await promoSmall();
+  await promoMarquee();
+  console.log('wrote promo tiles');
 }
 await context.close();
 await plain.close();
