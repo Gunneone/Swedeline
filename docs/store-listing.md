@@ -59,7 +59,10 @@ Translations are built from Wiktionary (via WikDict) and word-frequency data, li
 ## Notes to reviewer (AMO)
 No account needed. Build from source: `npm ci && npm run build:firefox` (Node 22.13+); output is `dist/firefox`. The dictionaries in `src/dict/*.json` are generated offline by `npm run dicts` from public Wiktionary/WikDict data and are committed, so the build does not need network access.
 
-## Screenshots to prepare
-1. An English article with Swedish words highlighted (1280×800).
-2. The hover card open on a word.
-3. The popup with the amount slider.
+## Screenshots
+1280×800, in `docs/screenshots/` (upload in this order, same files for Chrome and AMO). Regenerate with `npm run build && npm run screenshots`. The pages are public-domain books on Project Gutenberg.
+1. `1-en.png`: "Learn Swedish while you browse" (*The Wind in the Willows*, hover card *ett hus*).
+2. `2-de.png`: "Hover a word to see the original" (Kafka, *Die Verwandlung*, *ett rum*).
+3. `3-fr.png`: "Works in four languages" (Daudet, *Le Petit Chose*, *en lycka*).
+4. `4-es.png`: "Private and offline" (Galdós, *Marianela*, *en natt*).
+5. `5-popup.png`: "You decide how much Swedish" (the toolbar popup).
