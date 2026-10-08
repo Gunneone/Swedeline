@@ -59,6 +59,9 @@ Translations are built from Wiktionary (via WikDict) and word-frequency data, li
 ## Notes to reviewer (AMO)
 No account needed. Build from source: `npm ci && npm run build:firefox` (Node 22.13+); output is `dist/firefox`. (Upload `dist/swedeline-source-<version>.zip` as the source code; make it with `git ls-files -z -- . ':!docs/screenshots' | xargs -0 zip dist/swedeline-source-<version>.zip`.) The dictionaries in `src/dict/*.json` are generated offline by `npm run dicts` from public Wiktionary/WikDict data and are committed, so the build does not need network access.
 
+## Privacy policy (AMO)
+Paste the text of `PRIVACY-firefox.md` into the privacy policy field (AMO wants the text, not a link). It is plain text so it reads the same when pasted. Chrome uses `PRIVACY.md` by URL.
+
 ## Store icon
 `docs/store-icon-128.png`: 128×128, artwork 96×96 with 16 px transparent padding as the Chrome Web Store asks. Regenerate with `npm run icons`.
 
