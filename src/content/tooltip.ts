@@ -207,5 +207,12 @@ export function installTooltip(): void {
     const el = wordFrom(e.target);
     if (el) show(el);
   });
-  window.addEventListener('scroll', () => current && hideTooltip(), { passive: true, capture: true });
+  // Only scrolling that moves the word hides the card, not a carousel elsewhere on the page.
+  window.addEventListener(
+    'scroll',
+    (e) => {
+      if (current && e.target instanceof Node && e.target.contains(current)) hideTooltip();
+    },
+    { passive: true, capture: true },
+  );
 }
