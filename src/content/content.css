@@ -4,6 +4,7 @@
 swedeline-w {
   all: unset;
   display: inline !important;
+  visibility: inherit !important;
   font: inherit !important;
   color: inherit !important;
   letter-spacing: inherit !important;

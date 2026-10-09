@@ -40,6 +40,20 @@ test('replaces words in body text only and shows the original on hover', async (
   await expect(tooltip).toHaveText(original!);
 });
 
+test('the tooltip shows on pages that hide undefined custom elements', async ({ page }) => {
+  // Like Reddit, which hides custom elements until they are defined.
+  await page.addInitScript(() =>
+    document.addEventListener('DOMContentLoaded', () =>
+      document.head.append(Object.assign(document.createElement('style'), { textContent: ':not(:defined) { visibility: hidden; }' })),
+    ),
+  );
+  await page.goto(`${BASE}/en-article.html`);
+  const first = page.locator('swedeline-w').first();
+  await expect(first).toBeVisible();
+  await first.hover();
+  await expect(page.locator('swedeline-tooltip .card')).toBeVisible();
+});
+
 test('switching the site off restores the page, switching on brings words back', async ({ page, worker }) => {
   await page.goto(`${BASE}/en-article.html`);
   const article = page.locator('article');
