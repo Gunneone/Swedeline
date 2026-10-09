@@ -13,6 +13,11 @@ export const EXCLUDED = [
   '[role="menu"]', '[role="menubar"]', '[role="menuitem"]', '[role="tab"]', '[role="tablist"]',
   '[role="toolbar"]', '[role="heading"]', '[role="textbox"]', '[role="search"]',
   '[role="contentinfo"]', '[role="option"]', '[role="listbox"]', '[role="combobox"]',
+  // Cookie and consent dialogs: their boilerplate would decide the page language.
+  '[id*="consent" i]:not(html, body, main, article)', '[role="dialog"][aria-label*="cookie" i]',
+  '#didomi-host', '#CybotCookiebotDialog', '.qc-cmp2-container', '#cmpbox', '#usercentrics-root',
+  '#iubenda-cs-banner', '#BorlabsCookieBox', '#cookiescript_injected', '.cmplz-cookiebanner', '.osano-cm-window',
+  '[id^="sp_message_container"]',
 ].join(',');
 
 /** Inline elements: text inside them belongs to the surrounding block. */
