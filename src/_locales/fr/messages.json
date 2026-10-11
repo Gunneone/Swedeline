@@ -59,6 +59,108 @@
       }
     }
   },
+  "statsSummary": {
+    "message": "Swedeline a inséré $WORDS$ sur $PAGES$.",
+    "description": "Popup usage sentence; $WORDS$ is statsWordsOne/Other, $PAGES$ is statsPagesOne/Other",
+    "placeholders": {
+      "WORDS": {
+        "content": "$1",
+        "example": "12,483 Swedish words"
+      },
+      "PAGES": {
+        "content": "$2",
+        "example": "317 pages"
+      }
+    }
+  },
+  "statsWordsOne": {
+    "message": "$N$ mot suédois",
+    "description": "Inside statsSummary, for one word; $N$ is a number",
+    "placeholders": {
+      "N": {
+        "content": "$1",
+        "example": "317"
+      }
+    }
+  },
+  "statsWordsOther": {
+    "message": "$N$ mots suédois",
+    "description": "Inside statsSummary, for several words; $N$ is a number",
+    "placeholders": {
+      "N": {
+        "content": "$1",
+        "example": "317"
+      }
+    }
+  },
+  "statsPagesOne": {
+    "message": "$N$ page",
+    "description": "Inside statsSummary, for one page; $N$ is a number",
+    "placeholders": {
+      "N": {
+        "content": "$1",
+        "example": "317"
+      }
+    }
+  },
+  "statsPagesOther": {
+    "message": "$N$ pages",
+    "description": "Inside statsSummary, for several pages; $N$ is a number",
+    "placeholders": {
+      "N": {
+        "content": "$1",
+        "example": "317"
+      }
+    }
+  },
+  "statsNone": {
+    "message": "Swedeline n'a encore inséré aucun mot suédois.",
+    "description": "Popup usage sentence before any word was inserted"
+  },
+  "reviewTitle": {
+    "message": "Déjà $COUNT$ $ORD$ suédois !",
+    "description": "Review request heading; $COUNT$ is a large number (20,000, 50,000, 100,000, ...), $ORD$ is the Swedish word \"ord\" (words), highlighted like a replaced word",
+    "placeholders": {
+      "COUNT": {
+        "content": "$1",
+        "example": "20,000"
+      },
+      "ORD": {
+        "content": "$2",
+        "example": "ord"
+      }
+    }
+  },
+  "reviewText": {
+    "message": "Swedeline vous plaît ? Une petite note $STORE$ aide d'autres personnes qui apprennent le suédois à le découvrir.",
+    "description": "Review request; $STORE$ is reviewStoreChrome or reviewStoreFirefox, with its preposition",
+    "placeholders": {
+      "STORE": {
+        "content": "$1",
+        "example": "in the Chrome Web Store"
+      }
+    }
+  },
+  "reviewStoreChrome": {
+    "message": "sur le Chrome Web Store",
+    "description": "Inside reviewText; keep \"Chrome Web Store\" untranslated"
+  },
+  "reviewStoreFirefox": {
+    "message": "sur Firefox Add-ons",
+    "description": "Inside reviewText; keep \"Firefox Add-ons\" untranslated"
+  },
+  "reviewYes": {
+    "message": "Noter Swedeline",
+    "description": "Review request: main button, opens the store"
+  },
+  "reviewLater": {
+    "message": "Plus tard",
+    "description": "Review request: asks again at the next milestone"
+  },
+  "reviewNever": {
+    "message": "Ne plus demander",
+    "description": "Review request: small link, never asks again"
+  },
   "statusActive": {
     "message": "Page en $LANG$ · $COUNT$ mots en suédois",
     "description": "$LANG$ is a language name, $COUNT$ a number",

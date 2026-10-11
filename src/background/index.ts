@@ -3,9 +3,13 @@ import { ext } from '../shared/ext';
 import { isWebUrl, normalizeHost } from '../shared/host';
 import type { Message, PageState } from '../shared/messages';
 import { isSiteEnabled, loadSettings, onSettingsChanged, setSiteEnabled } from '../shared/settings';
+import { addStats, toStats } from '../shared/stats';
 import { lookup } from './dictionary';
 
 const ICON_SIZES = [16, 32, 48, 128];
+/** More than any page could show in one message: anything above is not a real count. */
+const MAX_WORDS_PER_MESSAGE = 100_000;
+
 const iconPaths = (off: boolean) =>
   Object.fromEntries(ICON_SIZES.map((s) => [s, `icons/icon-${s}${off ? '-off' : ''}.png`]));
 
@@ -16,6 +20,12 @@ ext.runtime.onMessage.addListener((msg: Message, sender, sendResponse) => {
   }
   if (msg?.type === 'page-state' && sender.tab?.id !== undefined) {
     void showTabState(sender.tab.id, msg.state);
+  }
+  if (msg?.type === 'stats' && sender.tab) {
+    const delta = toStats(msg);
+    if (delta.words <= MAX_WORDS_PER_MESSAGE && delta.pages <= delta.words && delta.words > 0) {
+      addStats(delta).catch(() => {});
+    }
   }
   return false;
 });

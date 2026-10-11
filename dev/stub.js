@@ -1,12 +1,13 @@
 // Development stand-in for the WebExtension APIs, so the built content script and
 // popup can run in a normal page (see scripts/serve.mjs). Not part of the extension.
 (() => {
-  const KEY = 'swedeline-stub-storage';
-  const read = () => {
-    try { return JSON.parse(sessionStorage.getItem(KEY) || '{}'); } catch { return {}; }
+  // One sessionStorage entry per storage area ("sync" keeps its old name).
+  const keyOf = (area) => (area === 'sync' ? 'swedeline-stub-storage' : `swedeline-stub-${area}`);
+  const read = (area = 'sync') => {
+    try { return JSON.parse(sessionStorage.getItem(keyOf(area)) || '{}'); } catch { return {}; }
   };
-  const write = (data) => {
-    try { sessionStorage.setItem(KEY, JSON.stringify(data)); } catch {}
+  const write = (data, area = 'sync') => {
+    try { sessionStorage.setItem(keyOf(area), JSON.stringify(data)); } catch {}
   };
   const storageListeners = [];
   const messageListeners = [];
@@ -22,7 +23,38 @@
   };
   const messages = loadLocale(uiLang) || loadLocale('en');
 
-  const fire = (changes) => storageListeners.forEach((fn) => fn(changes, 'sync'));
+  const fire = (changes, area) => storageListeners.forEach((fn) => fn(changes, area));
+
+  const storageArea = (area) => ({
+    async get(keys) {
+      const data = read(area);
+      if (keys && typeof keys === 'object' && !Array.isArray(keys)) {
+        return Object.fromEntries(Object.entries(keys).map(([k, d]) => [k, k in data ? data[k] : d]));
+      }
+      const list = typeof keys === 'string' ? [keys] : keys ?? Object.keys(data);
+      return Object.fromEntries(list.filter((k) => k in data).map((k) => [k, data[k]]));
+    },
+    async set(items) {
+      const data = read(area);
+      const changes = {};
+      for (const [k, v] of Object.entries(items)) {
+        changes[k] = { oldValue: data[k], newValue: v };
+        data[k] = v;
+      }
+      write(data, area);
+      fire(changes, area);
+    },
+    async remove(keys) {
+      const data = read(area);
+      const changes = {};
+      for (const k of [].concat(keys)) {
+        changes[k] = { oldValue: data[k] };
+        delete data[k];
+      }
+      write(data, area);
+      fire(changes, area);
+    },
+  });
 
   async function lookup(lang, words) {
     dicts[lang] ??= fetch(`/dist/chrome/dict/${lang}.json`).then((r) => r.json()).then((j) => j.w);
@@ -42,41 +74,14 @@
 
   globalThis.chrome = {
     runtime: {
+      id: 'stub',
       getURL: (p) => `chrome-extension://stub/${p}`,
       sendMessage: async (msg) => (msg?.type === 'lookup' ? lookup(msg.lang, msg.words) : undefined),
       onMessage: { addListener: (fn) => messageListeners.push(fn) },
     },
     storage: {
-      sync: {
-        async get(keys) {
-          const data = read();
-          if (keys && typeof keys === 'object' && !Array.isArray(keys)) {
-            return Object.fromEntries(Object.entries(keys).map(([k, d]) => [k, k in data ? data[k] : d]));
-          }
-          const list = typeof keys === 'string' ? [keys] : keys ?? Object.keys(data);
-          return Object.fromEntries(list.filter((k) => k in data).map((k) => [k, data[k]]));
-        },
-        async set(items) {
-          const data = read();
-          const changes = {};
-          for (const [k, v] of Object.entries(items)) {
-            changes[k] = { oldValue: data[k], newValue: v };
-            data[k] = v;
-          }
-          write(data);
-          fire(changes);
-        },
-        async remove(keys) {
-          const data = read();
-          const changes = {};
-          for (const k of [].concat(keys)) {
-            changes[k] = { oldValue: data[k] };
-            delete data[k];
-          }
-          write(data);
-          fire(changes);
-        },
-      },
+      sync: storageArea('sync'),
+      local: storageArea('local'),
       onChanged: { addListener: (fn) => storageListeners.push(fn) },
     },
     i18n: {
@@ -95,7 +100,7 @@
     tabs: {
       query: async () => [{ id: 1, url: location.href }],
       sendMessage: async (_id, msg) => sendToPage(msg),
-      create: async () => {},
+      create: async ({ url }) => console.log('[stub] would open a tab:', url),
       reload: async () => location.reload(),
     },
     commands: { getAll: async () => [{ name: 'toggle-site', shortcut: '' }] },
@@ -119,7 +124,7 @@
         <b>Swedeline dev harness</b>
         <label><input type="checkbox" id="enabled"> enabled</label>
         <label><input type="checkbox" id="site"> this site</label>
-        <label>density <input type="range" id="density" min="1" max="10"></label>
+        <label>percent <input type="range" id="density" min="2" max="20"></label>
         <span id="status"></span>
       </div>`;
     document.documentElement.append(host);
@@ -127,11 +132,11 @@
     const data = read();
     $('enabled').checked = data.enabled !== false;
     $('site').checked = data['site:localhost'] !== false;
-    $('density').value = data.density ?? 4;
+    $('density').value = data.percent ?? 5;
     $('enabled').onchange = (e) => chrome.storage.sync.set({ enabled: e.target.checked });
     $('site').onchange = (e) =>
       e.target.checked ? chrome.storage.sync.remove('site:localhost') : chrome.storage.sync.set({ 'site:localhost': false });
-    $('density').oninput = (e) => chrome.storage.sync.set({ density: Number(e.target.value) });
+    $('density').oninput = (e) => chrome.storage.sync.set({ percent: Number(e.target.value) });
     setInterval(async () => {
       const s = await sendToPage({ type: 'get-status' });
       if (s) $('status').textContent = `${s.state} · ${s.lang ?? '-'} · ${s.count} words`;

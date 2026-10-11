@@ -3,17 +3,33 @@ import { ext } from './ext';
 export interface Settings {
   /** Master switch. */
   enabled: boolean;
-  /** Slider level 1..10, see DENSITY_RATES. */
-  density: number;
+  /** Share of the words in eligible text replaced, in percent (PERCENT_MIN..PERCENT_MAX). */
+  percent: number;
 }
 
-export const DEFAULTS: Settings = { enabled: true, density: 4 };
+export const PERCENT_MIN = 2;
+export const PERCENT_MAX = 20;
+export const DEFAULTS: Settings = { enabled: true, percent: 5 };
 
-/** Share of the words in eligible text replaced at each slider level. */
-export const DENSITY_RATES = [0.01, 0.02, 0.03, 0.04, 0.06, 0.08, 0.1, 0.13, 0.16, 0.2];
+/** A stored percent, kept to whole steps within the slider's range. */
+export function toPercent(value: unknown): number {
+  if (typeof value !== 'number' || !Number.isFinite(value)) return DEFAULTS.percent;
+  return Math.min(PERCENT_MAX, Math.max(PERCENT_MIN, Math.round(value)));
+}
 
-export const densityRate = (level: number): number =>
-  DENSITY_RATES[Math.min(DENSITY_RATES.length, Math.max(1, Math.round(level))) - 1];
+// Up to 2026.10 the slider stored a level 1..10 under "density"; these were its percentages.
+const LEGACY_DENSITY_PERCENTS = [1, 2, 3, 4, 6, 8, 10, 13, 16, 20];
+
+/** Settings from what is stored, turning an old slider level into its percent. */
+export function settingsFrom(stored: Record<string, unknown>): Settings {
+  const { enabled, percent, density } = stored;
+  const legacy =
+    typeof density === 'number' ? LEGACY_DENSITY_PERCENTS[Math.min(10, Math.max(1, Math.round(density))) - 1] : undefined;
+  return {
+    enabled: typeof enabled === 'boolean' ? enabled : DEFAULTS.enabled,
+    percent: toPercent(percent ?? legacy),
+  };
+}
 
 // Disabled sites are stored one key each ("site:example.com": false) so the
 // list never runs into storage.sync's per-item size limit.
@@ -24,9 +40,7 @@ export const isSiteKey = (key: string): boolean => key.startsWith(SITE_PREFIX);
 const area = () => ext.storage.sync;
 
 export async function loadSettings(): Promise<Settings> {
-  // Passing the defaults returns them for keys that were never stored.
-  const stored = (await area().get({ ...DEFAULTS })) as Partial<Settings>;
-  return { ...DEFAULTS, ...stored };
+  return settingsFrom(await area().get(['enabled', 'percent', 'density']));
 }
 
 export async function saveSettings(patch: Partial<Settings>): Promise<void> {

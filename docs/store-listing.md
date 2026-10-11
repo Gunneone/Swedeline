@@ -23,7 +23,7 @@ Swedeline replaces a few words on English, German, French and Spanish web pages 
 HOW IT WORKS
 • Swedish words appear inside running text with a soft yellow marker and a blue underline.
 • Hover a word to see the original, the Swedish base form with its gender (en bil, ett hus), and press 🔊 to hear it spoken with a Swedish voice from your system or browser.
-• Pick how many words get replaced with the slider (roughly 1–20 %). Changes apply live.
+• Pick how many words get replaced with the slider (2–20 %, 5 % by default). Changes apply live.
 • Turn Swedeline on or off for all sites or just the current one from the toolbar popup. You can also set a keyboard shortcut.
 
 DESIGNED NOT TO GET IN YOUR WAY

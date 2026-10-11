@@ -23,7 +23,8 @@ export interface PageStatus {
 export type Message =
   | { type: 'lookup'; lang: SourceLang; words: string[] }
   | { type: 'page-state'; state: PageState }
-  | { type: 'get-status' };
+  | { type: 'get-status' }
+  | { type: 'stats'; words: number; pages: number };
 
 export type LookupResult = Record<string, Entry>;
 

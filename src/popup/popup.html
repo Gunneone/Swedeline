@@ -15,6 +15,16 @@
     </div>
   </header>
 
+  <section id="review" class="review" hidden>
+    <p class="title" id="review-title"></p>
+    <p class="hint" id="review-text"></p>
+    <div class="actions">
+      <button id="review-yes" class="primary" data-i18n="reviewYes"></button>
+      <button id="review-later" class="secondary" data-i18n="reviewLater"></button>
+      <button id="review-never" class="link quiet" data-i18n="reviewNever"></button>
+    </div>
+  </section>
+
   <section id="permission" class="banner" hidden>
     <p data-i18n="grantAccessHint"></p>
     <button id="grant" class="primary" data-i18n="grantAccess"></button>
@@ -42,11 +52,13 @@
       <label for="density" class="title" data-i18n="popupDensity"></label>
       <output id="density-value" for="density"></output>
     </div>
-    <input id="density" type="range" min="1" max="10" step="1">
+    <input id="density" type="range" min="2" max="20" step="1">
     <div class="scale"><span data-i18n="popupDensityFew"></span><span data-i18n="popupDensityMany"></span></div>
   </section>
 
   <p id="status" class="status" role="status"><span class="dot"></span><span id="status-text"></span></p>
+
+  <p id="stats" class="stats"></p>
 
   <footer>
     <button id="shortcut" class="link"></button>
