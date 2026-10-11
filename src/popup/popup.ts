@@ -1,7 +1,9 @@
 import { ext, isFirefox } from '../shared/ext';
 import { isWebUrl, normalizeHost } from '../shared/host';
 import type { Message, PageState, PageStatus } from '../shared/messages';
-import { densityRate, isSiteEnabled, loadSettings, saveSettings, setSiteEnabled } from '../shared/settings';
+import { isSiteEnabled, loadSettings, saveSettings, setSiteEnabled } from '../shared/settings';
+import { loadReviewState, reviewMilestone, reviewUrl, saveReviewState, shouldAskForReview } from '../shared/review';
+import { loadStats, onStatsChanged, type Stats } from '../shared/stats';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const t = (key: string, ...subs: (string | number)[]) => ext.i18n.getMessage(key, subs.map(String)) || key;
@@ -28,8 +30,8 @@ function languageName(code: string): string {
   }
 }
 
-function showDensity(level: number): void {
-  $('density-value').textContent = t('popupDensityValue', Math.round(densityRate(level) * 100));
+function showDensity(percent: number): void {
+  $('density-value').textContent = t('popupDensityValue', percent);
 }
 
 async function pageStatus(): Promise<PageStatus | null> {
@@ -67,6 +69,62 @@ async function renderStatus(): Promise<void> {
     text = t('statusUnavailable');
   }
   $('status-text').textContent = text;
+}
+
+/** A message with element substitutions: each sub fills one $n$ placeholder. */
+function richMessage(key: string, ...subs: Node[]): DocumentFragment {
+  const fragment = document.createDocumentFragment();
+  const marked = t(key, ...subs.map((_, i) => `\uE000${i}\uE000`));
+  marked.split(/\uE000(\d)\uE000/).forEach((part, i) => {
+    // Odd parts are the indexes captured from the markers.
+    fragment.append(i % 2 ? subs[Number(part)] : part);
+  });
+  return fragment;
+}
+
+/** "12,483 Swedish words", with the number in bold. */
+function countPhrase(n: number, key: 'statsWords' | 'statsPages'): DocumentFragment {
+  const form = new Intl.PluralRules(ext.i18n.getUILanguage()).select(n) === 'one' ? 'One' : 'Other';
+  return richMessage(key + form, boldNumber(n));
+}
+
+function showStats({ words, pages }: Stats): void {
+  const el = $('stats');
+  if (!words) el.textContent = t('statsNone');
+  else el.replaceChildren(richMessage('statsSummary', countPhrase(words, 'statsWords'), countPhrase(pages, 'statsPages')));
+}
+
+function boldNumber(n: number): HTMLElement {
+  const num = document.createElement('strong');
+  num.textContent = new Intl.NumberFormat(ext.i18n.getUILanguage()).format(n);
+  return num;
+}
+
+/** At 20k, 50k, 100k and every 100k words after that, a friendly request to rate Swedeline. */
+async function renderReview(words: number): Promise<void> {
+  const state = await loadReviewState();
+  const card = $('review');
+  card.hidden = !shouldAskForReview(words, state);
+  if (card.hidden) return;
+  const milestone = reviewMilestone(words);
+  // "ord" (Swedish for "words") is highlighted like a word Swedeline put on a page.
+  const ord = document.createElement('mark');
+  ord.textContent = 'ord';
+  ord.lang = 'sv';
+  const count = document.createTextNode(new Intl.NumberFormat(ext.i18n.getUILanguage()).format(milestone));
+  $('review-title').replaceChildren(richMessage('reviewTitle', count, ord));
+  $('review-text').textContent = t('reviewText', t(isFirefox() ? 'reviewStoreFirefox' : 'reviewStoreChrome'));
+  const answer = async (patch: Partial<typeof state>) => {
+    card.hidden = true;
+    await saveReviewState({ ...state, ...patch });
+  };
+  $('review-yes').onclick = async () => {
+    await answer({ done: true });
+    await ext.tabs.create({ url: reviewUrl() });
+    window.close();
+  };
+  $('review-later').onclick = () => void answer({ answered: milestone });
+  $('review-never').onclick = () => void answer({ done: true });
 }
 
 async function renderShortcut(): Promise<void> {
@@ -113,9 +171,9 @@ async function init(): Promise<void> {
   const settings = await loadSettings();
   enabledInput.checked = settings.enabled;
   siteInput.checked = host ? await isSiteEnabled(host) : false;
-  densityInput.value = String(settings.density);
+  densityInput.value = String(settings.percent);
   $('site-title').textContent = host ? t('popupSite', host) : t('statusUnavailable');
-  showDensity(settings.density);
+  showDensity(settings.percent);
   syncDisabledStates();
 
   enabledInput.addEventListener('change', async () => {
@@ -134,11 +192,11 @@ async function init(): Promise<void> {
   });
   let densityTimer = 0;
   densityInput.addEventListener('input', () => {
-    const level = Number(densityInput.value);
-    showDensity(level);
+    const percent = Number(densityInput.value);
+    showDensity(percent);
     clearTimeout(densityTimer);
     densityTimer = window.setTimeout(async () => {
-      await saveSettings({ density: level });
+      await saveSettings({ percent });
       refreshStatusSoon();
     }, 150);
   });
@@ -150,7 +208,12 @@ async function init(): Promise<void> {
     }
   });
 
-  await Promise.all([renderStatus(), renderShortcut(), checkPermission()]);
+  const showAll = (stats: Stats) => {
+    showStats(stats);
+    void renderReview(stats.words);
+  };
+  onStatsChanged(showAll);
+  await Promise.all([renderStatus(), renderShortcut(), checkPermission(), loadStats().then(showAll)]);
 }
 
 void init();

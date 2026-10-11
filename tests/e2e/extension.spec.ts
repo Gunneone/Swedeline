@@ -25,7 +25,7 @@ const setStorage = (worker: Worker, items: Record<string, unknown>) =>
   worker.evaluate((i) => chrome.storage.sync.set(i), items);
 
 test('replaces words in body text only and shows the original on hover', async ({ page, worker }) => {
-  await setStorage(worker, { density: 6 });
+  await setStorage(worker, { percent: 8 });
   await page.goto(`${BASE}/en-article.html`);
   const words = page.locator('swedeline-w');
   await expect(words.first()).toBeVisible();
@@ -91,11 +91,11 @@ test('switching the site off restores the page, switching on brings words back',
 });
 
 test('the slider changes the number of words live', async ({ page, worker }) => {
-  await setStorage(worker, { density: 1 });
+  await setStorage(worker, { percent: 2 });
   await page.goto(`${BASE}/en-article.html`);
   await expect(page.locator('swedeline-w').first()).toBeVisible();
   const few = await page.locator('swedeline-w').count();
-  await setStorage(worker, { density: 10 });
+  await setStorage(worker, { percent: 20 });
   await expect.poll(() => page.locator('swedeline-w').count()).toBeGreaterThan(few * 2);
 });
 
@@ -205,8 +205,94 @@ test('the word count forgets text the page removed', async ({ context, page, wor
   await expect.poll(count).toBe(0);
 });
 
+test('the popup counts Swedish words and pages, once per spot', async ({ context, page, worker }) => {
+  await setStorage(worker, { percent: 4 });
+  await page.goto(`${BASE}/en-article.html`);
+  await expect(page.locator('swedeline-w').first()).toBeVisible();
+  const stats = () =>
+    worker.evaluate(
+      async () => ((await chrome.storage.local.get('stats')).stats ?? { words: 0, pages: 0 }) as Record<string, number>,
+    );
+  await expect.poll(async () => (await stats()).pages).toBe(1);
+  const shown = await page.locator('swedeline-w').count();
+  await expect.poll(async () => (await stats()).words).toBe(shown);
+  const words = shown;
+
+  // Redrawing the same words (lower then back) adds nothing.
+  await setStorage(worker, { percent: 2 });
+  await setStorage(worker, { percent: 4 });
+  await page.waitForTimeout(2500);
+  expect(await stats()).toEqual({ words, pages: 1 });
+
+  const id = new URL(worker.url()).host;
+  const popup = await context.newPage();
+  await popup.goto(`chrome-extension://${id}/popup/popup.html`);
+  await expect(popup.locator('#stats')).toHaveText(
+    `Swedeline inserted ${words.toLocaleString('en')} Swedish words across 1 page.`,
+  );
+  await expect(popup.locator('#stats strong')).toHaveText([words.toLocaleString('en'), '1']);
+
+  // A new visit counts again, and the open popup follows along.
+  await page.reload();
+  await expect(popup.locator('#stats strong')).toHaveText([(words * 2).toLocaleString('en'), '2']);
+});
+
+test('the popup asks for a review at word milestones', async ({ context, worker }) => {
+  const id = new URL(worker.url()).host;
+  const setWords = (words: number) => worker.evaluate((w) => chrome.storage.local.set({ stats: { words: w, pages: 9 } }), words);
+  const review = () => worker.evaluate(async () => (await chrome.storage.local.get('review')).review);
+  const popup = await context.newPage();
+  const open = () => popup.goto(`chrome-extension://${id}/popup/popup.html`);
+  const card = popup.locator('#review');
+
+  await setWords(19_999);
+  await open();
+  await expect(popup.locator('#stats strong').first()).toHaveText('19,999');
+  await expect(card).toBeHidden();
+
+  // The open popup notices the milestone; "Not now" waits for the next one.
+  await setWords(20_000);
+  await expect(card).toBeVisible();
+  await expect(popup.locator('#review-title')).toHaveText('20,000 Swedish ord so far!');
+  await expect(popup.locator('#review-title mark')).toHaveText('ord');
+  await expect(popup.locator('#review-text')).toContainText('in the Chrome Web Store');
+  await popup.locator('#review-later').click();
+  await expect(card).toBeHidden();
+  await setWords(49_999);
+  await open();
+  await expect(popup.locator('#stats strong').first()).toHaveText('49,999');
+  await expect(card).toBeHidden();
+
+  // "Rate Swedeline" opens the store's reviews page (caught here, so the test stays offline) and stops asking.
+  await setWords(50_000);
+  await open();
+  await popup.evaluate(() => {
+    const w = window as unknown as { opened?: string };
+    chrome.tabs.create = (async ({ url }: { url: string }) => void (w.opened = url)) as unknown as typeof chrome.tabs.create;
+    window.close = () => {};
+  });
+  await popup.locator('#review-yes').click();
+  await expect
+    .poll(() => popup.evaluate(() => (window as unknown as { opened?: string }).opened))
+    .toBe(`https://chromewebstore.google.com/detail/swedeline/${id}/reviews`);
+  expect(await review()).toEqual({ answered: 20_000, done: true });
+});
+
+test('"Don\'t ask again" stops the review requests', async ({ context, worker }) => {
+  const id = new URL(worker.url()).host;
+  await worker.evaluate(() => chrome.storage.local.set({ stats: { words: 100_000, pages: 9 } }));
+  const popup = await context.newPage();
+  await popup.goto(`chrome-extension://${id}/popup/popup.html`);
+  await popup.locator('#review-never').click();
+  await expect(popup.locator('#review')).toBeHidden();
+  await worker.evaluate(() => chrome.storage.local.set({ stats: { words: 900_000, pages: 9 } }));
+  await popup.reload();
+  await expect(popup.locator('#stats strong').first()).toHaveText('900,000');
+  await expect(popup.locator('#review')).toBeHidden();
+});
+
 test('replaces words inside web components (open shadow roots)', async ({ page, worker }) => {
-  await setStorage(worker, { density: 8 });
+  await setStorage(worker, { percent: 13 });
   await page.goto(`${BASE}/shadow-article.html`);
   for (const id of ['first', 'quote', 'slotted']) {
     await expect(page.locator(`#${id} swedeline-w`).first()).toBeVisible();
@@ -256,7 +342,7 @@ test('switching the site off restores web components too', async ({ page, worker
 });
 
 test('web components on pages that render late keep being watched', async ({ page, worker }) => {
-  await setStorage(worker, { density: 10 });
+  await setStorage(worker, { percent: 20 });
   await page.goto(`${BASE}/shadow-late.html`);
   await expect(page.locator('story-box swedeline-w').first()).toBeVisible({ timeout: 6000 });
   await expect(page.locator('#more swedeline-w').first()).toBeVisible({ timeout: 8000 });
@@ -273,4 +359,21 @@ test('scrolling the page closes the tooltip of a word inside a web component', a
   await expect(card).toBeVisible();
   await page.evaluate(() => window.scrollBy(0, 2500));
   await expect(card).toBeHidden();
+});
+
+test('words inside web components are counted too', async ({ page, worker }) => {
+  await page.goto(`${BASE}/shadow-article.html`);
+  await expect(page.locator('#quote swedeline-w').first()).toBeVisible();
+  const shown = () =>
+    page.evaluate(() => {
+      const count = (root: Document | ShadowRoot): number =>
+        root.querySelectorAll('swedeline-w').length +
+        [...root.querySelectorAll('*')].reduce((n, el) => n + (el.shadowRoot ? count(el.shadowRoot) : 0), 0);
+      return count(document);
+    });
+  const counted = () =>
+    worker.evaluate(async () => ((await chrome.storage.local.get('stats')).stats as { words: number } | undefined)?.words ?? 0);
+  // Some components get their words later; the counter catches up.
+  await expect.poll(async () => (await counted()) - (await shown()), { timeout: 10_000 }).toBe(0);
+  expect(await page.locator('#quote swedeline-w').count()).toBeGreaterThan(0);
 });

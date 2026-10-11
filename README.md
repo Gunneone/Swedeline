@@ -22,12 +22,16 @@ so it works offline and nothing you read leaves your browser.
   *en/ett*, and a 🔊 button that uses a Swedish voice from your system
   (preferred) or browser. Browser voices can be online services: see
   [PRIVACY.md](PRIVACY.md). The button is hidden if no Swedish voice is available.
-- **Amount slider** (1–10 = roughly 1–20 % of the words). Changes apply live.
+- **Amount slider** from 2 to 20 % of the words in 1 % steps (5 % by default).
+  Changes apply live.
   Raising it only adds words and lowering it only removes words, and the same
   words come back after a reload.
 - **On/off everywhere** and **per site** from the toolbar popup. There is also
   an optional keyboard shortcut for "toggle this site". No default key is set,
   so you pick one that doesn't clash with anything (see below).
+- **Your counters** in the popup: Swedish words shown and pages they were
+  shown on. Each spot on a page counts once per visit, so moving the slider
+  or a page redrawing itself doesn't add up. Stored on your device only.
 - **Automatic language detection** (English, German, French, Spanish). Swedish
   pages and other languages are left untouched. Mixed pages are checked per
   paragraph.

@@ -3,14 +3,15 @@ import { normalizeHost } from '../shared/host';
 import { entryIn, type Entry, type LookupResult, type Message, type PageState, type PageStatus } from '../shared/messages';
 import {
   DEFAULTS,
-  densityRate,
   isSiteEnabled,
   loadSettings,
   onSettingsChanged,
   siteKey,
+  toPercent,
   type Settings,
   type StorageChanges,
 } from '../shared/settings';
+import { VisitCounter, visitUrl, type StatsDelta } from './counter';
 import { declaredLanguage, detectLanguage } from './langdetect';
 import { SOURCE_LANGS, type SourceLang } from './langdata';
 import { applyReplacements, revertApplied, WORD_TAG, type Applied, type Replacement } from './replacer';
@@ -26,6 +27,7 @@ const BLOCK_DETECT_WORDS = 20;
 const MUTATION_DEBOUNCE = 400;
 /** Pages that never stop changing still get their new text processed this often. */
 const MUTATION_MAX_WAIT = 2000;
+const STATS_DEBOUNCE = 1000;
 /** Components can get their shadow root long after they are in the page, unseen by observers: look again. */
 const SHADOW_SWEEPS = [1000, 3000, 8000, 20000];
 const OBSERVE: MutationObserverInit = { childList: true, subtree: true, characterData: true };
@@ -59,6 +61,11 @@ const pending = new Map<Node, boolean>();
 let pendingTimer = 0;
 let pendingSince = 0;
 
+const counter = new VisitCounter();
+/** Counter increments not yet sent to the background. */
+const pendingStats: StatsDelta = { words: 0, pages: 0 };
+let statsTimer = 0;
+
 // ------------------------------------------------------------------ lifecycle
 
 async function init(): Promise<void> {
@@ -70,6 +77,7 @@ async function init(): Promise<void> {
   [settings, siteEnabled] = await Promise.all([loadSettings(), isSiteEnabled(host)]);
   installTooltip();
   installOriginalsForCopyAndPrint();
+  installStatsFlush();
   await start();
 }
 
@@ -124,7 +132,7 @@ async function restart(): Promise<void> {
   await start();
 }
 
-/** Density changed: same language, new selection. */
+/** Amount of words changed: same language, new selection. */
 async function reselect(): Promise<void> {
   if (state !== 'active' || !pageLang) return;
   const gen = ++generation;
@@ -144,8 +152,8 @@ function onStorageChange(changes: StorageChanges): void {
     siteEnabled = changes[key].newValue !== false;
     needsRestart = true;
   }
-  if (changes.density) {
-    settings.density = (changes.density.newValue as number | undefined) ?? DEFAULTS.density;
+  if (changes.percent) {
+    settings.percent = toPercent(changes.percent.newValue);
     if (!needsRestart) void reselect();
   }
   if (needsRestart) void restart();
@@ -188,7 +196,7 @@ async function processBlocks(blocks: Block[], gen: number): Promise<void> {
   }
   if (!jobs.length) return;
   await lookupWords(jobs);
-  const rate = densityRate(settings.density);
+  const rate = settings.percent / 100;
   for (let i = 0; i < jobs.length; ) {
     const deadline = await idle();
     if (gen !== generation) return;
@@ -269,7 +277,10 @@ function applyJob({ block, lang, tokens }: Job, rate: number): void {
     }
   }
   observer?.takeRecords(); // the mutations just made are Swedeline's own
-  if (list.length) applied.set(block.el, [...(applied.get(block.el) ?? []), ...list]);
+  if (!list.length) return;
+  const all = [...(applied.get(block.el) ?? []), ...list];
+  applied.set(block.el, all);
+  countWords(block.el, all.reduce((n, a) => n + a.words.length, 0));
 }
 
 function nodeIndexAt(offsets: number[], pos: number): number {
@@ -464,6 +475,33 @@ function originalText(el: Element): string {
 
 /** A block's text without any whitespace, for change detection (separators between nodes vary). */
 const squash = (text: string): string => text.replace(/\s+/g, '');
+
+// ------------------------------------------------------------------ usage counters
+
+function countWords(el: Element, shown: number): void {
+  const delta = counter.record(visitUrl(location), el, shown);
+  if (!delta.words) return;
+  pendingStats.words += delta.words;
+  pendingStats.pages += delta.pages;
+  clearTimeout(statsTimer);
+  statsTimer = window.setTimeout(flushStats, STATS_DEBOUNCE);
+}
+
+function flushStats(): void {
+  clearTimeout(statsTimer);
+  if (!pendingStats.words) return;
+  const message = { type: 'stats', ...pendingStats } satisfies Message;
+  pendingStats.words = pendingStats.pages = 0;
+  ext.runtime.sendMessage(message).catch(() => {});
+}
+
+/** Counts are sent before the tab goes away or into the background. */
+function installStatsFlush(): void {
+  window.addEventListener('pagehide', flushStats);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') flushStats();
+  });
+}
 
 // ------------------------------------------------------------------ copy and print
 

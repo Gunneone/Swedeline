@@ -1,20 +1,21 @@
 Swedeline privacy policy (Firefox)
 
-Last updated: 2026-10-08
+Last updated: 2026-10-11
 
-Swedeline does not collect, store, transmit or sell any personal data. It has no server, no account, no analytics and no tracking. Its manifest declares to Firefox that it collects no data, which Firefox shows when you install it.
+Swedeline does not collect, transmit or sell any personal data. It has no server, no account, no analytics and no tracking. The only things it stores are your settings and two counters for you, described below, and they stay in Firefox. Its manifest declares to Firefox that it collects no data, which Firefox shows when you install it.
 
 What Swedeline does on your device
 
 - Page text: to replace words, Swedeline reads the text of the web pages you visit. This happens entirely inside Firefox. The text is never sent anywhere and is not saved.
 - Dictionaries: the translation word lists ship inside the add-on and are loaded from the add-on package. Swedeline makes no network requests.
 - Settings: your preferences (on/off, amount of words, sites you turned Swedeline off for) are saved in Firefox's add-on storage (storage.sync). If you are signed in to Firefox with a Mozilla account and have Add-ons ticked in your sync settings, Firefox may sync these settings between your devices under Mozilla's privacy policy. Swedeline itself never sees or receives them.
+- Your counters: the popup shows how many Swedish words Swedeline has shown you and on how many pages. These are two numbers, saved only on this device (storage.local). They hold no addresses, page content or words, are not synced and are never sent anywhere. Removing Swedeline deletes them. At a few milestones the popup asks whether you'd like to rate Swedeline on Firefox Add-ons; your answer is saved the same way, so it isn't asked again too soon. The add-on page only opens if you press the button.
 - Pronunciation: the speaker button uses Firefox's built-in speech synthesis. On desktop, Firefox uses the voices installed in your operating system, which run on your device, so nothing leaves it. On Android, Firefox uses your phone's text-to-speech engine. Depending on that engine and its settings, it may fetch the voice online: then, only when you press the button, the one Swedish word is handled by that engine under its own privacy policy. Nothing is spoken or sent until you press the button, and Swedeline never sends page text.
 
 Permissions
 
 - Access your data for all websites: needed so Swedeline can find and replace words in the text of the pages you read. No page content leaves Firefox.
-- Storage: to remember your settings. Firefox does not ask for this one.
+- Storage: to remember your settings and your counters. Firefox does not ask for this one.
 
 Third parties
 

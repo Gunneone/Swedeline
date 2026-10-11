@@ -64,7 +64,7 @@ await context.addInitScript(() => {
 });
 const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
 const extId = new URL(worker.url()).host;
-await worker.evaluate(() => chrome.storage.sync.set({ density: 7 }));
+await worker.evaluate(() => chrome.storage.sync.set({ percent: 10 }));
 const page = context.pages()[0] ?? (await context.newPage());
 // The frame is composed at 1x so every file comes out at exactly 1280x800.
 const plain = await chromium.launch({ channel: 'chromium' });
