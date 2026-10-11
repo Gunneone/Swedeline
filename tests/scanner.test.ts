@@ -30,6 +30,19 @@ describe('findBlocks', () => {
     expect(blocks[0].text).toContain('normal paragraph');
   });
 
+  it('skips cookie and consent dialogs, but not pages that mark consent on the body', () => {
+    document.body.id = 'consent-given';
+    document.body.innerHTML = `
+      <div id="onetrust-consent-sdk"><p>We use cookies and similar technologies to personalise content and ads for you.</p></div>
+      <div id="didomi-host"><p>You can remove your consent or set your preferences at any time in our cookie policy.</p></div>
+      <div role="dialog" aria-label="Cookie settings"><p>These partners process your data for measurement and audience insights.</p></div>
+      <p>This normal paragraph has more than twelve words in it, so it should be picked up.</p>`;
+    const blocks = findBlocks(document.body);
+    expect(blocks).toHaveLength(1);
+    expect(blocks[0].text).toContain('normal paragraph');
+    document.body.removeAttribute('id');
+  });
+
   it('treats inline elements as part of the surrounding block', () => {
     document.body.innerHTML =
       '<p>The <a href="#">small house</a> near the <em>lake</em> has a red door and a garden full of flowers.</p>';

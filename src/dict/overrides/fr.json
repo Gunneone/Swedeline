@@ -291,6 +291,11 @@
     "plate": ["platt", "platt", "", "a", ""],
     "plates": ["platta", "platt", "", "a", "p"],
     "lesbienne": ["lesbisk", "lesbisk", "", "n", ""],
-    "lesbiennes": ["lesbiska", "lesbisk", "", "n", "p"]
+    "lesbiennes": ["lesbiska", "lesbisk", "", "n", "p"],
+    "actuel": ["nuvarande", "nuvarande", "", "a", ""],
+    "actuelle": ["nuvarande", "nuvarande", "", "a", ""],
+    "actuels": ["nuvarande", "nuvarande", "", "a", "p"],
+    "actuelles": ["nuvarande", "nuvarande", "", "a", "p"],
+    "offres": ["erbjudanden", "erbjudande", "ett", "n", "p"]
   }
 }

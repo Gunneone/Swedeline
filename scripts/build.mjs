@@ -76,6 +76,8 @@ function buildOptions(out) {
     sourcemap: watch ? 'inline' : false,
     logLevel: 'warning',
     legalComments: 'none',
+    // content.css is also the manifest's stylesheet; shadow roots get it as text.
+    loader: { '.css': 'text' },
   };
 }
 

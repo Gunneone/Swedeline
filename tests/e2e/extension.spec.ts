@@ -40,6 +40,41 @@ test('replaces words in body text only and shows the original on hover', async (
   await expect(tooltip).toHaveText(original!);
 });
 
+test('the tooltip shows on pages that hide undefined custom elements', async ({ page }) => {
+  // Like Reddit, which hides custom elements until they are defined.
+  await page.addInitScript(() =>
+    document.addEventListener('DOMContentLoaded', () =>
+      document.head.append(Object.assign(document.createElement('style'), { textContent: ':not(:defined) { visibility: hidden; }' })),
+    ),
+  );
+  await page.goto(`${BASE}/en-article.html`);
+  const first = page.locator('swedeline-w').first();
+  await expect(first).toBeVisible();
+  await first.hover();
+  await expect(page.locator('swedeline-tooltip .card')).toBeVisible();
+});
+
+test('the tooltip stays open when something else on the page scrolls', async ({ page }) => {
+  await page.goto(`${BASE}/en-article.html`);
+  await page.evaluate(() => {
+    const box = Object.assign(document.createElement('div'), { id: 'scroller' });
+    box.style.cssText = 'height: 40px; overflow: auto';
+    box.innerHTML = '<div style="height: 400px"></div>';
+    document.body.prepend(box);
+    document.body.append(Object.assign(document.createElement('div'), { style: 'height: 3000px' }));
+  });
+  const first = page.locator('swedeline-w').first();
+  await expect(first).toBeVisible();
+  await first.hover();
+  const card = page.locator('swedeline-tooltip .card');
+  await expect(card).toBeVisible();
+  await page.evaluate(() => document.getElementById('scroller')!.scrollBy(0, 100));
+  await page.waitForTimeout(200);
+  await expect(card).toBeVisible();
+  await page.evaluate(() => window.scrollBy(0, 2500));
+  await expect(card).toBeHidden();
+});
+
 test('switching the site off restores the page, switching on brings words back', async ({ page, worker }) => {
   await page.goto(`${BASE}/en-article.html`);
   const article = page.locator('article');
@@ -254,4 +289,91 @@ test('"Don\'t ask again" stops the review requests', async ({ context, worker })
   await popup.reload();
   await expect(popup.locator('#stats strong').first()).toHaveText('900,000');
   await expect(popup.locator('#review')).toBeHidden();
+});
+
+test('replaces words inside web components (open shadow roots)', async ({ page, worker }) => {
+  await setStorage(worker, { percent: 13 });
+  await page.goto(`${BASE}/shadow-article.html`);
+  for (const id of ['first', 'quote', 'slotted']) {
+    await expect(page.locator(`#${id} swedeline-w`).first()).toBeVisible();
+  }
+  // Defined later, so its shadow root appears without a change the observer sees.
+  await expect(page.locator('#late swedeline-w').first()).toBeVisible({ timeout: 6000 });
+  await expect(page.locator('nav swedeline-w')).toHaveCount(0);
+  const background = await page
+    .locator('#first swedeline-w')
+    .first()
+    .evaluate((w) => getComputedStyle(w).backgroundColor);
+  expect(background).toContain('254, 204, 2');
+});
+
+test('the tooltip works when moving within a shadow root', async ({ page }) => {
+  await page.goto(`${BASE}/shadow-article.html`);
+  const word = page.locator('#first swedeline-w').first();
+  await expect(word).toBeVisible();
+  // Start on the paragraph's own text: the move into the word stays inside the shadow root.
+  const p = await page.locator('#first').boundingBox();
+  await page.mouse.move(p!.x + 2, p!.y + 2);
+  const box = await word.boundingBox();
+  await page.mouse.move(box!.x + box!.width / 2, box!.y + box!.height / 2, { steps: 4 });
+  await expect(page.locator('swedeline-tooltip .orig')).toHaveText((await word.getAttribute('data-orig'))!);
+});
+
+test('copied text from a shadow root has the original words', async ({ context, page }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: 'http://localhost:5179' });
+  await page.goto(`${BASE}/shadow-article.html`);
+  const paragraph = page.locator('#second');
+  await expect(paragraph.locator('swedeline-w').first()).toBeVisible();
+  await paragraph.click({ clickCount: 3 });
+  await page.keyboard.press('ControlOrMeta+C');
+  const copied = await page.evaluate(() => navigator.clipboard.readText());
+  expect(copied).toContain('On the first morning I usually walk down to the river with a cup of coffee.');
+});
+
+test('switching the site off restores web components too', async ({ page, worker }) => {
+  await page.goto(`${BASE}/shadow-article.html`);
+  const first = page.locator('#first');
+  await expect(first.locator('swedeline-w').first()).toBeVisible();
+  await setStorage(worker, { 'site:localhost': false });
+  await expect(page.locator('swedeline-w')).toHaveCount(0);
+  await expect(first).toHaveText(/^Every summer my family drives north to a small red house near the lake\./);
+  await worker.evaluate(() => chrome.storage.sync.remove('site:localhost'));
+  await expect(first.locator('swedeline-w').first()).toBeVisible();
+});
+
+test('web components on pages that render late keep being watched', async ({ page, worker }) => {
+  await setStorage(worker, { percent: 20 });
+  await page.goto(`${BASE}/shadow-late.html`);
+  await expect(page.locator('story-box swedeline-w').first()).toBeVisible({ timeout: 6000 });
+  await expect(page.locator('#more swedeline-w').first()).toBeVisible({ timeout: 8000 });
+});
+
+test('scrolling the page closes the tooltip of a word inside a web component', async ({ page }) => {
+  await page.goto(`${BASE}/shadow-article.html`);
+  await page.evaluate(() => document.body.append(Object.assign(document.createElement('div'), { style: 'height: 3000px' })));
+  const word = page.locator('#first swedeline-w').first();
+  await expect(word).toBeVisible();
+  // A hover event without moving the mouse, so leaving the word cannot be what closes the card.
+  await word.dispatchEvent('mouseover');
+  const card = page.locator('swedeline-tooltip .card');
+  await expect(card).toBeVisible();
+  await page.evaluate(() => window.scrollBy(0, 2500));
+  await expect(card).toBeHidden();
+});
+
+test('words inside web components are counted too', async ({ page, worker }) => {
+  await page.goto(`${BASE}/shadow-article.html`);
+  await expect(page.locator('#quote swedeline-w').first()).toBeVisible();
+  const shown = () =>
+    page.evaluate(() => {
+      const count = (root: Document | ShadowRoot): number =>
+        root.querySelectorAll('swedeline-w').length +
+        [...root.querySelectorAll('*')].reduce((n, el) => n + (el.shadowRoot ? count(el.shadowRoot) : 0), 0);
+      return count(document);
+    });
+  const counted = () =>
+    worker.evaluate(async () => ((await chrome.storage.local.get('stats')).stats as { words: number } | undefined)?.words ?? 0);
+  // Some components get their words later; the counter catches up.
+  await expect.poll(async () => (await counted()) - (await shown()), { timeout: 10_000 }).toBe(0);
+  expect(await page.locator('#quote swedeline-w').count()).toBeGreaterThan(0);
 });

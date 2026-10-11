@@ -1,15 +1,18 @@
 import { ext } from '../shared/ext';
 import { WORD_TAG } from './replacer';
+import { containsComposed } from './shadow';
 import { canSpeak, initSpeech, speak } from './speech';
 
 // A single hover card for all replaced words. It lives in a shadow root
 // so page styles cannot reach it, and is positioned with `position: fixed`.
+// The host itself is still styled by the page (Reddit hides undefined custom
+// elements), so its reset is !important: that beats any page rule on it.
 
 const SHOW_DELAY = 60;
 const HIDE_DELAY = 250;
 
 const CSS = `
-:host { all: initial; }
+:host { all: initial !important; }
 .card {
   --bg: #ffffff; --fg: #1c2733; --muted: #5d6b7a; --line: #e3e8ee; --blue: #006aa7; --yellow: #fecc02;
   position: fixed; z-index: 2147483647; box-sizing: border-box;
@@ -181,29 +184,46 @@ function wordFrom(target: EventTarget | null): HTMLElement | null {
 
 let installed = false;
 
+function onOver(e: Event): void {
+  const el = wordFrom(e.target);
+  if (el) show(el);
+}
+
+function onOut(e: Event): void {
+  const el = wordFrom(e.target);
+  if (el && !el.contains((e as MouseEvent).relatedTarget as Node | null)) scheduleHide();
+}
+
+function listen(target: Document | ShadowRoot): void {
+  target.addEventListener('mouseover', onOver, true);
+  target.addEventListener('mouseout', onOut, true);
+  target.addEventListener('focusin', onOver);
+}
+
 export function installTooltip(): void {
   if (installed) return;
   installed = true;
   initSpeech();
-  document.addEventListener(
-    'mouseover',
+  listen(document);
+  // Only scrolling that moves the word hides the card, not a carousel elsewhere on the page.
+  window.addEventListener(
+    'scroll',
     (e) => {
-      const el = wordFrom(e.target);
-      if (el) show(el);
+      if (current && e.target instanceof Node && containsComposed(e.target, current)) hideTooltip();
     },
-    true,
+    { passive: true, capture: true },
   );
-  document.addEventListener(
-    'mouseout',
-    (e) => {
-      const el = wordFrom(e.target);
-      if (el && !el.contains(e.relatedTarget as Node | null)) scheduleHide();
-    },
-    true,
-  );
-  document.addEventListener('focusin', (e) => {
-    const el = wordFrom(e.target);
-    if (el) show(el);
-  });
-  window.addEventListener('scroll', () => current && hideTooltip(), { passive: true, capture: true });
+}
+
+const watchedRoots = new WeakSet<ShadowRoot>();
+
+/**
+ * Hover events between two elements of one shadow root never reach the
+ * document, and the ones that do point at the host: each root with words gets
+ * its own listeners.
+ */
+export function watchTooltipIn(root: ShadowRoot): void {
+  if (watchedRoots.has(root)) return;
+  watchedRoots.add(root);
+  listen(root);
 }

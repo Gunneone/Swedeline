@@ -294,6 +294,8 @@
     "polla": ["kuk", "kuk", "en", "n", ""],
     "pollas": ["kukar", "kuk", "en", "n", "p"],
     "lesbiana": ["lesbisk", "lesbisk", "", "n", ""],
-    "lesbianas": ["lesbiska", "lesbisk", "", "n", "p"]
+    "lesbianas": ["lesbiska", "lesbisk", "", "n", "p"],
+    "precios": ["priser", "pris", "ett", "n", "p"],
+    "premios": ["priser", "pris", "ett", "n", "p"]
   }
 }

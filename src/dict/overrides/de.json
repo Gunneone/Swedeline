@@ -15,7 +15,7 @@
     "Ethan", "Kurzen", "Stürzen", "Täuschen", "Weine", "Steven", "Verrate", "Lade", "Liege",
     "Betrügen", "Lautes", "Klingeln", "Angesichts", "Schicht", "zufällig", "Grimm", "Box"
   ],
-  "drop": ["einfach", "recht", "weit", "wenig", "Erden", "Muttern", "Rechter"],
+  "drop": ["einfach", "recht", "weit", "wenig", "Erden", "Muttern", "Rechter", "Thrones"],
   "fix": {
     "Vater": ["far", "far", "en", "n", ""],
     "Mutter": ["mor", "mor", "en", "n", ""],
@@ -210,6 +210,22 @@
     "Bulle": ["snut", "snut", "en", "n", ""],
     "Bullen": ["snutar", "snut", "en", "n", "p"],
     "Lesbe": ["lesbisk", "lesbisk", "", "n", ""],
-    "Lesben": ["lesbiska", "lesbisk", "", "n", "p"]
+    "Lesben": ["lesbiska", "lesbisk", "", "n", "p"],
+    "Einstellung": ["inställning", "inställning", "en", "n", ""],
+    "Einstellungen": ["inställningar", "inställning", "en", "n", "p"],
+    "Preise": ["priser", "pris", "ett", "n", "p"],
+    "Preisen": ["priser", "pris", "ett", "n", "p"],
+    "Gerät": ["apparat", "apparat", "en", "n", ""],
+    "Geräts": ["apparat", "apparat", "en", "n", ""],
+    "Geräte": ["apparater", "apparat", "en", "n", "p"],
+    "Geräten": ["apparater", "apparat", "en", "n", "p"],
+    "Standort": ["plats", "plats", "en", "n", ""],
+    "Standorte": ["platser", "plats", "en", "n", "p"],
+    "günstig": ["billig", "billig", "", "a", ""],
+    "günstige": ["billig", "billig", "", "a", ""],
+    "günstigen": ["billig", "billig", "", "a", ""],
+    "Hinweis": ["upplysning", "upplysning", "en", "n", ""],
+    "Hinweise": ["upplysningar", "upplysning", "en", "n", "p"],
+    "Hinweisen": ["upplysningar", "upplysning", "en", "n", "p"]
   }
 }

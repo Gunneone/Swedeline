@@ -152,7 +152,8 @@
     "rider",
     "driver",
     "domestic",
-    "action"
+    "action",
+    "vintage"
   ],
   "fix": {
     "foods": [
@@ -1869,6 +1870,97 @@
       "en",
       "n",
       "dp"
+    ],
+    "countries": [
+      "länder",
+      "land",
+      "ett",
+      "n",
+      "p"
+    ],
+    "prices": [
+      "priser",
+      "pris",
+      "ett",
+      "n",
+      "dp"
+    ],
+    "prizes": [
+      "priser",
+      "pris",
+      "ett",
+      "n",
+      "dp"
+    ],
+    "awards": [
+      "priser",
+      "pris",
+      "ett",
+      "n",
+      "dp"
+    ],
+    "preference": [
+      "preferens",
+      "preferens",
+      "en",
+      "n",
+      ""
+    ],
+    "preferences": [
+      "preferenser",
+      "preferens",
+      "en",
+      "n",
+      "dp"
+    ],
+    "mode": [
+      "läge",
+      "läge",
+      "ett",
+      "n",
+      ""
+    ],
+    "modes": [
+      "lägen",
+      "läge",
+      "ett",
+      "n",
+      "p"
+    ],
+    "platform": [
+      "plattform",
+      "plattform",
+      "en",
+      "n",
+      ""
+    ],
+    "platforms": [
+      "plattformar",
+      "plattform",
+      "en",
+      "n",
+      "dp"
+    ],
+    "engagement": [
+      "engagemang",
+      "engagemang",
+      "ett",
+      "n",
+      ""
+    ],
+    "engagements": [
+      "engagemang",
+      "engagemang",
+      "ett",
+      "n",
+      "p"
+    ],
+    "dedication": [
+      "hängivenhet",
+      "hängivenhet",
+      "en",
+      "n",
+      ""
     ]
   }
 }
