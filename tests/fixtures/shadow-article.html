@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>A Weekend by the Lake (web components)</title>
+<style>body{font:18px/1.6 Georgia,serif;max-width:720px;margin:40px auto;padding:0 16px;color:#222}</style></head>
+<body>
+<nav><nav-teaser></nav-teaser></nav>
+<main>
+  <article-body></article-body>
+  <slot-card><p id="slotted">In the afternoon we swim, read books on the old wooden bridge, or take the boat to the island while the children play in the garden.</p></slot-card>
+  <late-card></late-card>
+</main>
+<script>
+  const define = (name, html) =>
+    customElements.define(name, class extends HTMLElement {
+      connectedCallback() {
+        if (!this.shadowRoot) this.attachShadow({ mode: 'open' }).innerHTML = html;
+      }
+    });
+  define('article-body', `
+    <style>p { margin: 0 0 1em }</style>
+    <p id="first">Every summer my family drives north to a small red house near the lake. The road is long, but the children always sleep in the car, and my father tells the same old stories about the first time he saw the water.</p>
+    <p id="second">On the first morning I usually walk down to the river with a cup of coffee. The birds are loud, the sun is still low, and the world feels very quiet before the family wakes up.</p>
+    <quote-box></quote-box>`);
+  define('quote-box', `<p id="quote">My mother prepares a simple dinner with fish, potatoes and a green salad, and we eat at the long table in the kitchen while the evening light turns the windows gold.</p>`);
+  define('slot-card', `<div><slot></slot></div>`);
+  define('nav-teaser', `<p>Read the most important stories about the family, the house, the water and the old forest near the beautiful lake.</p>`);
+  // Defined later: its shadow root appears without any change to the page's own DOM.
+  setTimeout(() => define('late-card', `<p id="late">It is not an expensive holiday, and the house is far from perfect, but it is the most important week of the year for the whole family.</p>`), 1500);
+</script>
+</body>
+</html>

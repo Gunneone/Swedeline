@@ -15,15 +15,20 @@ import { declaredLanguage, detectLanguage } from './langdetect';
 import { SOURCE_LANGS, type SourceLang } from './langdata';
 import { applyReplacements, revertApplied, WORD_TAG, type Applied, type Replacement } from './replacer';
 import { blockOf, findBlocks, isExcluded, rescanBlock, type Block } from './scanner';
+import { isShadowRoot, shadowRootsIn } from './shadow';
+import { styleShadowRoot } from './shadow-styles';
 import { findCandidates, lookupKey, selectReplacements } from './selector';
 import { tokenize, type Token } from './tokenizer';
-import { hideTooltip, installTooltip } from './tooltip';
+import { hideTooltip, installTooltip, watchTooltipIn } from './tooltip';
 
 /** Blocks at least this long get their own language check (mixed-language pages). */
 const BLOCK_DETECT_WORDS = 20;
 const MUTATION_DEBOUNCE = 400;
 /** Pages that never stop changing still get their new text processed this often. */
 const MUTATION_MAX_WAIT = 2000;
+/** Components can get their shadow root long after they are in the page, unseen by observers: look again. */
+const SHADOW_SWEEPS = [1000, 3000, 8000, 20000];
+const OBSERVE: MutationObserverInit = { childList: true, subtree: true, characterData: true };
 
 const host = normalizeHost(location.hostname);
 let settings: Settings = { ...DEFAULTS };
@@ -47,6 +52,8 @@ const dictCache = Object.fromEntries(SOURCE_LANGS.map((l) => [l, new Map<string,
 >;
 
 let observer: MutationObserver | null = null;
+/** Shadow roots the observer watches. */
+let watchedRoots = new WeakSet<ShadowRoot>();
 /** Nodes the page changed -> whether their subtree is new (added) rather than just modified. */
 const pending = new Map<Node, boolean>();
 let pendingTimer = 0;
@@ -82,19 +89,20 @@ async function start(): Promise<void> {
   if (!settings.enabled) return setState('off');
   if (!siteEnabled) return setState('site-off');
   if (!document.body) return;
-  const blocks = findBlocks(document.body);
+  const roots = shadowRootsIn(document.body);
+  const blocks = [document.body, ...roots].flatMap((root) => findBlocks(root));
   const lang = pageLanguage(blocks);
   if (lang === null) {
     // Nothing to read yet (single-page apps render later): wait for content.
     setState('no-text');
-    observe();
+    observe(roots);
     return;
   }
   if (lang === 'sv') return setState('swedish');
   if (lang === 'other') return setState('unsupported');
   pageLang = lang;
   setState('active');
-  observe();
+  observe(roots);
   await processBlocks(blocks, gen);
 }
 
@@ -102,6 +110,7 @@ function stop(): void {
   generation++;
   observer?.disconnect();
   observer = null;
+  watchedRoots = new WeakSet();
   clearTimeout(pendingTimer);
   pendingSince = 0;
   pending.clear();
@@ -120,7 +129,8 @@ async function reselect(): Promise<void> {
   if (state !== 'active' || !pageLang) return;
   const gen = ++generation;
   revertAll();
-  await processBlocks(findBlocks(document.body), gen);
+  const roots = [document.body, ...shadowRootsIn(document.body)];
+  await processBlocks(roots.flatMap((root) => findBlocks(root)), gen);
 }
 
 function onStorageChange(changes: StorageChanges): void {
@@ -251,6 +261,13 @@ function applyJob({ block, lang, tokens }: Job, rate: number): void {
     tracked.set(node, block.el);
     for (const w of a.words) ownWords.add(w);
   }
+  if (list.length) {
+    const root = block.el.getRootNode();
+    if (isShadowRoot(root)) {
+      styleShadowRoot(root);
+      watchTooltipIn(root);
+    }
+  }
   observer?.takeRecords(); // the mutations just made are Swedeline's own
   if (list.length) applied.set(block.el, [...(applied.get(block.el) ?? []), ...list]);
 }
@@ -294,10 +311,30 @@ function revertAll(): void {
 
 // ------------------------------------------------------------------ page changes
 
-function observe(): void {
-  if (observer || !document.body) return;
-  observer = new MutationObserver(onMutations);
-  observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+function observe(roots: ShadowRoot[]): void {
+  if (!document.body) return;
+  if (!observer) {
+    const current = (observer = new MutationObserver(onMutations));
+    current.observe(document.body, OBSERVE);
+    // Until stop() replaces the observer (a page that goes from no text to active keeps it).
+    for (const delay of SHADOW_SWEEPS) setTimeout(() => observer === current && sweepShadowRoots(), delay);
+  }
+  for (const root of roots) watchRoot(root);
+}
+
+/** Starts watching a shadow root; false if it was watched already. */
+function watchRoot(root: ShadowRoot): boolean {
+  if (!observer || watchedRoots.has(root)) return false;
+  watchedRoots.add(root);
+  observer.observe(root, OBSERVE);
+  return true;
+}
+
+/** Shadow roots that appeared without a change the observer could see are handled like added content. */
+function sweepShadowRoots(): void {
+  if (!document.body) return;
+  for (const root of shadowRootsIn(document.body)) if (watchRoot(root)) addPending(root, true);
+  schedulePending();
 }
 
 function flushRecords(): void {
@@ -327,16 +364,19 @@ function onMutations(records: MutationRecord[]): void {
     // Only the target's own block can have changed; its other descendants did not.
     addPending(r.target, false);
   }
-  if (pending.size) {
-    // Debounce, but don't let a page that changes all the time postpone its new text forever.
-    clearTimeout(pendingTimer);
-    pendingSince ||= Date.now();
-    const wait = Math.min(MUTATION_DEBOUNCE, Math.max(0, pendingSince + MUTATION_MAX_WAIT - Date.now()));
-    pendingTimer = window.setTimeout(() => {
-      pendingSince = 0;
-      void processPending();
-    }, wait);
-  }
+  schedulePending();
+}
+
+function schedulePending(): void {
+  if (!pending.size) return;
+  // Debounce, but don't let a page that changes all the time postpone its new text forever.
+  clearTimeout(pendingTimer);
+  pendingSince ||= Date.now();
+  const wait = Math.min(MUTATION_DEBOUNCE, Math.max(0, pendingSince + MUTATION_MAX_WAIT - Date.now()));
+  pendingTimer = window.setTimeout(() => {
+    pendingSince = 0;
+    void processPending();
+  }, wait);
 }
 
 function addPending(node: Node, added: boolean): void {
@@ -355,16 +395,21 @@ async function processPending(): Promise<void> {
   pruneDetached();
   const gen = generation;
   const els = new Set<Element>();
+  const addTextOf = (root: Node) => {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    for (let t = walker.nextNode(); t; t = walker.nextNode()) {
+      const b = blockOf(t);
+      if (b) els.add(b);
+    }
+  };
   for (const [n, added] of nodes) {
     if (!n.isConnected) continue;
     const el = blockOf(n);
     if (el) els.add(el);
-    if (added && n.nodeType === Node.ELEMENT_NODE) {
-      const walker = document.createTreeWalker(n, NodeFilter.SHOW_TEXT);
-      for (let t = walker.nextNode(); t; t = walker.nextNode()) {
-        const b = blockOf(t);
-        if (b) els.add(b);
-      }
+    if (added && (n.nodeType === Node.ELEMENT_NODE || isShadowRoot(n))) {
+      addTextOf(n);
+      // New components bring their shadow roots along.
+      for (const root of shadowRootsIn(n)) if (watchRoot(root)) addTextOf(root);
     }
   }
   const blocks: Block[] = [];
@@ -449,7 +494,8 @@ function installOriginalsForCopyAndPrint(): void {
     'copy',
     () => {
       const selection = getSelection();
-      if (!selection || selection.isCollapsed || !applied.size) return;
+      // A selection inside a shadow root reads as collapsed in Chrome, but has text.
+      if (!selection || (selection.isCollapsed && !selection.toString()) || !applied.size) return;
       // The browser copies the selection after this handler: switch back right after.
       const restore = showOriginals((word) => selection.containsNode(word, true));
       setTimeout(restore, 0);

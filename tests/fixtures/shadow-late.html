@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Rendered later (web components)</title></head>
+<body>
+<script>
+  customElements.define('story-box', class extends HTMLElement {
+    connectedCallback() {
+      if (this.shadowRoot) return;
+      this.attachShadow({ mode: 'open' }).innerHTML =
+        '<p>Every summer my family drives north to a small red house near the lake, and the children always sleep in the car.</p>';
+    }
+  });
+  // Like a single-page app: nothing to read at first, then content with a component
+  // (and a heading, so Swedeline restarts before its first look for shadow roots).
+  setTimeout(() => {
+    document.body.insertAdjacentHTML('beforeend', '<main><h2>Stories</h2><story-box></story-box></main>');
+  }, 300);
+  // Later, the component renders more text into its shadow root.
+  setTimeout(() => {
+    const p = document.createElement('p');
+    p.id = 'more';
+    p.textContent = 'On the first morning I usually walk down to the river with a cup of coffee while the birds are loud and the sun is low.';
+    document.querySelector('story-box').shadowRoot.append(p);
+  }, 4000);
+</script>
+</body>
+</html>

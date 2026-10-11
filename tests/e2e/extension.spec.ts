@@ -204,3 +204,73 @@ test('the word count forgets text the page removed', async ({ context, page, wor
   await page.evaluate(() => document.querySelector('main')!.remove());
   await expect.poll(count).toBe(0);
 });
+
+test('replaces words inside web components (open shadow roots)', async ({ page, worker }) => {
+  await setStorage(worker, { density: 8 });
+  await page.goto(`${BASE}/shadow-article.html`);
+  for (const id of ['first', 'quote', 'slotted']) {
+    await expect(page.locator(`#${id} swedeline-w`).first()).toBeVisible();
+  }
+  // Defined later, so its shadow root appears without a change the observer sees.
+  await expect(page.locator('#late swedeline-w').first()).toBeVisible({ timeout: 6000 });
+  await expect(page.locator('nav swedeline-w')).toHaveCount(0);
+  const background = await page
+    .locator('#first swedeline-w')
+    .first()
+    .evaluate((w) => getComputedStyle(w).backgroundColor);
+  expect(background).toContain('254, 204, 2');
+});
+
+test('the tooltip works when moving within a shadow root', async ({ page }) => {
+  await page.goto(`${BASE}/shadow-article.html`);
+  const word = page.locator('#first swedeline-w').first();
+  await expect(word).toBeVisible();
+  // Start on the paragraph's own text: the move into the word stays inside the shadow root.
+  const p = await page.locator('#first').boundingBox();
+  await page.mouse.move(p!.x + 2, p!.y + 2);
+  const box = await word.boundingBox();
+  await page.mouse.move(box!.x + box!.width / 2, box!.y + box!.height / 2, { steps: 4 });
+  await expect(page.locator('swedeline-tooltip .orig')).toHaveText((await word.getAttribute('data-orig'))!);
+});
+
+test('copied text from a shadow root has the original words', async ({ context, page }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: 'http://localhost:5179' });
+  await page.goto(`${BASE}/shadow-article.html`);
+  const paragraph = page.locator('#second');
+  await expect(paragraph.locator('swedeline-w').first()).toBeVisible();
+  await paragraph.click({ clickCount: 3 });
+  await page.keyboard.press('ControlOrMeta+C');
+  const copied = await page.evaluate(() => navigator.clipboard.readText());
+  expect(copied).toContain('On the first morning I usually walk down to the river with a cup of coffee.');
+});
+
+test('switching the site off restores web components too', async ({ page, worker }) => {
+  await page.goto(`${BASE}/shadow-article.html`);
+  const first = page.locator('#first');
+  await expect(first.locator('swedeline-w').first()).toBeVisible();
+  await setStorage(worker, { 'site:localhost': false });
+  await expect(page.locator('swedeline-w')).toHaveCount(0);
+  await expect(first).toHaveText(/^Every summer my family drives north to a small red house near the lake\./);
+  await worker.evaluate(() => chrome.storage.sync.remove('site:localhost'));
+  await expect(first.locator('swedeline-w').first()).toBeVisible();
+});
+
+test('web components on pages that render late keep being watched', async ({ page, worker }) => {
+  await setStorage(worker, { density: 10 });
+  await page.goto(`${BASE}/shadow-late.html`);
+  await expect(page.locator('story-box swedeline-w').first()).toBeVisible({ timeout: 6000 });
+  await expect(page.locator('#more swedeline-w').first()).toBeVisible({ timeout: 8000 });
+});
+
+test('scrolling the page closes the tooltip of a word inside a web component', async ({ page }) => {
+  await page.goto(`${BASE}/shadow-article.html`);
+  await page.evaluate(() => document.body.append(Object.assign(document.createElement('div'), { style: 'height: 3000px' })));
+  const word = page.locator('#first swedeline-w').first();
+  await expect(word).toBeVisible();
+  // A hover event without moving the mouse, so leaving the word cannot be what closes the card.
+  await word.dispatchEvent('mouseover');
+  const card = page.locator('swedeline-tooltip .card');
+  await expect(card).toBeVisible();
+  await page.evaluate(() => window.scrollBy(0, 2500));
+  await expect(card).toBeHidden();
+});

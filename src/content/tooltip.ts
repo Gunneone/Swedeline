@@ -1,5 +1,6 @@
 import { ext } from '../shared/ext';
 import { WORD_TAG } from './replacer';
+import { containsComposed } from './shadow';
 import { canSpeak, initSpeech, speak } from './speech';
 
 // A single hover card for all replaced words. It lives in a shadow root
@@ -183,36 +184,46 @@ function wordFrom(target: EventTarget | null): HTMLElement | null {
 
 let installed = false;
 
+function onOver(e: Event): void {
+  const el = wordFrom(e.target);
+  if (el) show(el);
+}
+
+function onOut(e: Event): void {
+  const el = wordFrom(e.target);
+  if (el && !el.contains((e as MouseEvent).relatedTarget as Node | null)) scheduleHide();
+}
+
+function listen(target: Document | ShadowRoot): void {
+  target.addEventListener('mouseover', onOver, true);
+  target.addEventListener('mouseout', onOut, true);
+  target.addEventListener('focusin', onOver);
+}
+
 export function installTooltip(): void {
   if (installed) return;
   installed = true;
   initSpeech();
-  document.addEventListener(
-    'mouseover',
-    (e) => {
-      const el = wordFrom(e.target);
-      if (el) show(el);
-    },
-    true,
-  );
-  document.addEventListener(
-    'mouseout',
-    (e) => {
-      const el = wordFrom(e.target);
-      if (el && !el.contains(e.relatedTarget as Node | null)) scheduleHide();
-    },
-    true,
-  );
-  document.addEventListener('focusin', (e) => {
-    const el = wordFrom(e.target);
-    if (el) show(el);
-  });
+  listen(document);
   // Only scrolling that moves the word hides the card, not a carousel elsewhere on the page.
   window.addEventListener(
     'scroll',
     (e) => {
-      if (current && e.target instanceof Node && e.target.contains(current)) hideTooltip();
+      if (current && e.target instanceof Node && containsComposed(e.target, current)) hideTooltip();
     },
     { passive: true, capture: true },
   );
+}
+
+const watchedRoots = new WeakSet<ShadowRoot>();
+
+/**
+ * Hover events between two elements of one shadow root never reach the
+ * document, and the ones that do point at the host: each root with words gets
+ * its own listeners.
+ */
+export function watchTooltipIn(root: ShadowRoot): void {
+  if (watchedRoots.has(root)) return;
+  watchedRoots.add(root);
+  listen(root);
 }
