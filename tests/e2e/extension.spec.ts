@@ -40,6 +40,41 @@ test('replaces words in body text only and shows the original on hover', async (
   await expect(tooltip).toHaveText(original!);
 });
 
+test('the tooltip shows on pages that hide undefined custom elements', async ({ page }) => {
+  // Like Reddit, which hides custom elements until they are defined.
+  await page.addInitScript(() =>
+    document.addEventListener('DOMContentLoaded', () =>
+      document.head.append(Object.assign(document.createElement('style'), { textContent: ':not(:defined) { visibility: hidden; }' })),
+    ),
+  );
+  await page.goto(`${BASE}/en-article.html`);
+  const first = page.locator('swedeline-w').first();
+  await expect(first).toBeVisible();
+  await first.hover();
+  await expect(page.locator('swedeline-tooltip .card')).toBeVisible();
+});
+
+test('the tooltip stays open when something else on the page scrolls', async ({ page }) => {
+  await page.goto(`${BASE}/en-article.html`);
+  await page.evaluate(() => {
+    const box = Object.assign(document.createElement('div'), { id: 'scroller' });
+    box.style.cssText = 'height: 40px; overflow: auto';
+    box.innerHTML = '<div style="height: 400px"></div>';
+    document.body.prepend(box);
+    document.body.append(Object.assign(document.createElement('div'), { style: 'height: 3000px' }));
+  });
+  const first = page.locator('swedeline-w').first();
+  await expect(first).toBeVisible();
+  await first.hover();
+  const card = page.locator('swedeline-tooltip .card');
+  await expect(card).toBeVisible();
+  await page.evaluate(() => document.getElementById('scroller')!.scrollBy(0, 100));
+  await page.waitForTimeout(200);
+  await expect(card).toBeVisible();
+  await page.evaluate(() => window.scrollBy(0, 2500));
+  await expect(card).toBeHidden();
+});
+
 test('switching the site off restores the page, switching on brings words back', async ({ page, worker }) => {
   await page.goto(`${BASE}/en-article.html`);
   const article = page.locator('article');

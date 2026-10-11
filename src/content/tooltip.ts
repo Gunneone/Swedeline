@@ -4,12 +4,14 @@ import { canSpeak, initSpeech, speak } from './speech';
 
 // A single hover card for all replaced words. It lives in a shadow root
 // so page styles cannot reach it, and is positioned with `position: fixed`.
+// The host itself is still styled by the page (Reddit hides undefined custom
+// elements), so its reset is !important: that beats any page rule on it.
 
 const SHOW_DELAY = 60;
 const HIDE_DELAY = 250;
 
 const CSS = `
-:host { all: initial; }
+:host { all: initial !important; }
 .card {
   --bg: #ffffff; --fg: #1c2733; --muted: #5d6b7a; --line: #e3e8ee; --blue: #006aa7; --yellow: #fecc02;
   position: fixed; z-index: 2147483647; box-sizing: border-box;
@@ -205,5 +207,12 @@ export function installTooltip(): void {
     const el = wordFrom(e.target);
     if (el) show(el);
   });
-  window.addEventListener('scroll', () => current && hideTooltip(), { passive: true, capture: true });
+  // Only scrolling that moves the word hides the card, not a carousel elsewhere on the page.
+  window.addEventListener(
+    'scroll',
+    (e) => {
+      if (current && e.target instanceof Node && e.target.contains(current)) hideTooltip();
+    },
+    { passive: true, capture: true },
+  );
 }
