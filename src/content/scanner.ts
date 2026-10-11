@@ -2,6 +2,8 @@
 // prose. Headings, labels, navigation, buttons, form controls, code and short
 // snippets are never touched.
 
+import { closestComposed } from './shadow';
+
 /** Text inside any of these is ignored. */
 export const EXCLUDED = [
   'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'nav', 'footer', 'aside', 'label', 'button',
@@ -52,7 +54,7 @@ export function blockOf(node: Node): Element | null {
 }
 
 export function isExcluded(el: Element | null): boolean {
-  return !el || !!el.closest(EXCLUDED);
+  return !el || !!closestComposed(el, EXCLUDED);
 }
 
 /** Groups the text under `root` into blocks and returns the ones that are long running text. */
