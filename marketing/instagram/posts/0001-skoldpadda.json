@@ -1,0 +1,65 @@
+{
+  "id": "0001-skoldpadda",
+  "series": "literally",
+  "headwords": [
+    "sköldpadda"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "sköldpadda",
+      "article": "en",
+      "fact": "is Swedish for turtle. Taken apart, it says _shield toad_."
+    },
+    {
+      "type": "breakdown",
+      "sv": "sköldpadda",
+      "parts": [
+        {
+          "sv": "sköld",
+          "en": "shield"
+        },
+        {
+          "sv": "padda",
+          "en": "toad"
+        }
+      ],
+      "literal": "shield toad",
+      "means": "turtle, tortoise"
+    },
+    {
+      "type": "list",
+      "title": "More animals, taken literally",
+      "items": [
+        {
+          "sv": "flodhäst",
+          "en": "hippo",
+          "lit": "river horse"
+        },
+        {
+          "sv": "fladdermus",
+          "en": "bat",
+          "lit": "flutter mouse"
+        },
+        {
+          "sv": "nyckelpiga",
+          "en": "ladybird",
+          "lit": "key maid"
+        }
+      ]
+    },
+    {
+      "type": "example",
+      "sv": "Vår *sköldpadda* är äldre än jag.",
+      "en": "Our turtle is older than me."
+    }
+  ],
+  "caption": "In Swedish, a turtle is a sköldpadda: a sköld (shield) plus a padda (toad). Once you see it, you can't unsee it.\n\nSwedish builds a lot of words by gluing simple ones together, so many of them explain themselves. A hippo is a flodhäst (river horse) and a bat is a fladdermus (flutter mouse).\n\nWhich one is your favourite?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishwords",
+    "swedishlanguage",
+    "languagelearning"
+  ]
+}

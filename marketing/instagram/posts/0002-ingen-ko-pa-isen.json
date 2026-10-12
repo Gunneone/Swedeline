@@ -1,0 +1,32 @@
+{
+  "id": "0002-ingen-ko-pa-isen",
+  "series": "idiom",
+  "headwords": [
+    "ingen ko på isen"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "ingen ko på isen",
+      "fact": "_There's no cow on the ice_: the Swedish way to say there's no rush."
+    },
+    {
+      "type": "note",
+      "title": "Where the cow comes from",
+      "body": "The full saying is *ingen ko på isen så länge rumpan är i land*: no cow on the ice as long as its rear end is on land.\n\nA cow out on thin ice is a real problem. A cow with its back half still on shore can easily back off. So relax, nothing is wrong yet."
+    },
+    {
+      "type": "example",
+      "sv": "Vi har gott om tid, det är *ingen ko på isen*.",
+      "en": "We have plenty of time, there's no rush."
+    }
+  ],
+  "caption": "Det är ingen ko på isen: literally \"there's no cow on the ice\". It means there's no need to worry or hurry.\n\nThe longer version adds \"så länge rumpan är i land\": as long as its rear end is still on land.\n\nWhat's the strangest idiom in your language?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishidioms",
+    "swedishlanguage",
+    "languagelearning"
+  ]
+}

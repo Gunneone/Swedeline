@@ -1,0 +1,14 @@
+{
+  "id": "q10-trollslanda",
+  "show": "*trollslända*",
+  "hint": "It flies, and it's very real.",
+  "question": "What is a trollslända?",
+  "options": [
+    "A dragonfly",
+    "A magic wand",
+    "A bat",
+    "A fairy"
+  ],
+  "answer": 0,
+  "reveal": "A *trollslända* is a dragonfly. *Troll* is a troll, and a *slända* is a spindle, an old tool for spinning wool."
+}

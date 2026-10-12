@@ -1,0 +1,64 @@
+{
+  "id": "0008-kramgo",
+  "series": "cute-word",
+  "headwords": [
+    "kramgo"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "kramgo",
+      "fact": "describes someone so sweet you just want to hug them: _huggable_."
+    },
+    {
+      "type": "breakdown",
+      "sv": "kramgo",
+      "parts": [
+        {
+          "sv": "kram",
+          "en": "hug"
+        },
+        {
+          "sv": "go",
+          "en": "sweet, nice"
+        }
+      ],
+      "literal": "hug-sweet",
+      "means": "huggable, cuddly"
+    },
+    {
+      "type": "list",
+      "title": "Hug words",
+      "items": [
+        {
+          "sv": "en kram",
+          "en": "a hug"
+        },
+        {
+          "sv": "krama",
+          "en": "to hug"
+        },
+        {
+          "sv": "kramas",
+          "en": "to hug each other"
+        }
+      ]
+    },
+    {
+      "type": "example",
+      "sv": "Valpen är så *kramgo*.",
+      "en": "The puppy is so cuddly."
+    }
+  ],
+  "caption": "Kramgo: so sweet you want to hug them. Kram means hug, and go is a casual word for sweet or nice.\n\nYou can say it about a person, a child, a puppy or a teddy bear.\n\nWho is the most kramgo person you know?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishwords",
+    "cutewords",
+    "languagelearning"
+  ],
+  "verified": [
+    "go"
+  ]
+}

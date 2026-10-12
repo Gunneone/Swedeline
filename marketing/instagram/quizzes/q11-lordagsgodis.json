@@ -1,0 +1,14 @@
+{
+  "id": "q11-lordagsgodis",
+  "show": "*lördagsgodis*",
+  "hint": "A much-loved Swedish habit.",
+  "question": "What is lördagsgodis?",
+  "options": [
+    "Sunday brunch",
+    "A weekend party",
+    "Saturday sweets",
+    "A lottery ticket"
+  ],
+  "answer": 2,
+  "reveal": "*Lördagsgodis* means Saturday sweets. Many Swedish families save candy for Saturdays, often *lösgodis*: pick-and-mix from big walls of bins."
+}

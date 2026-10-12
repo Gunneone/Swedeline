@@ -1,0 +1,49 @@
+{
+  "id": "0018-fart",
+  "series": "false-friend",
+  "headwords": [
+    "fart"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "fart",
+      "fact": "means _speed_. So a sign that says *Sänk farten* just wants you to slow down."
+    },
+    {
+      "type": "list",
+      "title": "Words you'll see on Swedish roads",
+      "items": [
+        {
+          "sv": "fartkamera",
+          "en": "speed camera"
+        },
+        {
+          "sv": "farthinder",
+          "en": "speed bump"
+        },
+        {
+          "sv": "infart",
+          "en": "way in for cars"
+        },
+        {
+          "sv": "utfart",
+          "en": "way out for cars"
+        }
+      ]
+    },
+    {
+      "type": "example",
+      "sv": "Bilen höll hög *fart*.",
+      "en": "The car was going fast."
+    }
+  ],
+  "caption": "Fart in Swedish just means speed. Infart is the way in for cars and utfart is the way out, so yes, you'll see \"Utfart\" on garage doors.\n\nA speed camera is a fartkamera, and a speed bump is a farthinder.\n\nCould you keep a straight face on a Swedish road trip?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "falsefriends",
+    "swedishwords",
+    "languagelearning"
+  ]
+}

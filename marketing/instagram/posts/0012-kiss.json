@@ -1,0 +1,53 @@
+{
+  "id": "0012-kiss",
+  "series": "false-friend",
+  "headwords": [
+    "kiss"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "kiss",
+      "fact": "isn't a kiss in Swedish. It means _pee_. A kiss is a *puss* or a *kyss*."
+    },
+    {
+      "type": "list",
+      "title": "Don't mix these up",
+      "items": [
+        {
+          "sv": "kiss",
+          "en": "pee"
+        },
+        {
+          "sv": "kissa",
+          "en": "to pee"
+        },
+        {
+          "sv": "puss",
+          "en": "a kiss, a peck"
+        },
+        {
+          "sv": "kyss",
+          "en": "a kiss"
+        },
+        {
+          "sv": "pussas",
+          "en": "to kiss"
+        }
+      ]
+    },
+    {
+      "type": "example",
+      "sv": "Jag måste *kissa* innan vi går.",
+      "en": "I need to pee before we go."
+    }
+  ],
+  "caption": "Kiss in Swedish means pee, and kissa means to pee. It's an everyday word that kids and adults both use.\n\nIf you want a kiss, ask for a puss (a quick one) or a kyss (a proper one).\n\nWhat's the funniest false friend you know?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "falsefriends",
+    "swedishwords",
+    "languagelearning"
+  ]
+}

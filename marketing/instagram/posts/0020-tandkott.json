@@ -1,0 +1,69 @@
+{
+  "id": "0020-tandkott",
+  "series": "literally",
+  "headwords": [
+    "tandkött"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "tandkött",
+      "fact": "means gums. Literally: _tooth meat_."
+    },
+    {
+      "type": "breakdown",
+      "sv": "tandkött",
+      "parts": [
+        {
+          "sv": "tand",
+          "en": "tooth"
+        },
+        {
+          "sv": "kött",
+          "en": "meat"
+        }
+      ],
+      "literal": "tooth meat",
+      "means": "gums"
+    },
+    {
+      "type": "list",
+      "title": "More body parts, literally",
+      "items": [
+        {
+          "sv": "knäskål",
+          "en": "kneecap",
+          "lit": "knee bowl"
+        },
+        {
+          "sv": "armbåge",
+          "en": "elbow",
+          "lit": "arm bow"
+        },
+        {
+          "sv": "handflata",
+          "en": "palm",
+          "lit": "hand flat"
+        },
+        {
+          "sv": "ögonfrans",
+          "en": "eyelash",
+          "lit": "eye fringe"
+        }
+      ]
+    },
+    {
+      "type": "example",
+      "sv": "Mitt *tandkött* blöder när jag borstar tänderna.",
+      "en": "My gums bleed when I brush my teeth."
+    }
+  ],
+  "caption": "Your gums, in Swedish, are your tandkött: tooth meat. Not pretty, but very clear.\n\nThe body is full of these: a kneecap is a knäskål (knee bowl) and an eyelash is an ögonfrans (eye fringe).\n\nWhich body part should we do next?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishwords",
+    "swedishlanguage",
+    "languagelearning"
+  ]
+}

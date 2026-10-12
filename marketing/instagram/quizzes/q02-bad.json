@@ -1,0 +1,14 @@
+{
+  "id": "q02-bad",
+  "show": "*ett bad*",
+  "hint": "Looks English. Isn't.",
+  "question": "What is ett bad?",
+  "options": [
+    "Something bad",
+    "A bed",
+    "A bath",
+    "A bet"
+  ],
+  "answer": 2,
+  "reveal": "*Ett bad* is a bath, or a swim. *Bada* means to take a bath, or to go for a swim in the lake."
+}

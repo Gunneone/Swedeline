@@ -1,0 +1,14 @@
+{
+  "id": "q04-rav-bakom-orat",
+  "show": "*ha en räv bakom örat*",
+  "hint": "Literally: to have a fox behind the ear.",
+  "question": "What does it mean?",
+  "options": [
+    "To be deaf",
+    "To be in love",
+    "To be lost",
+    "To be sly"
+  ],
+  "answer": 3,
+  "reveal": "Someone who *har en räv bakom örat* is sly and a little cunning, like a fox. It's usually said with a smile, not as an insult."
+}

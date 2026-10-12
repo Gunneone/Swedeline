@@ -1,0 +1,65 @@
+{
+  "id": "0013-fingerborg",
+  "series": "literally",
+  "headwords": [
+    "fingerborg"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "fingerborg",
+      "article": "en",
+      "fact": "means thimble. Taken apart, it's a _finger castle_."
+    },
+    {
+      "type": "breakdown",
+      "sv": "fingerborg",
+      "parts": [
+        {
+          "sv": "finger",
+          "en": "finger"
+        },
+        {
+          "sv": "borg",
+          "en": "castle, fortress"
+        }
+      ],
+      "literal": "finger castle",
+      "means": "thimble"
+    },
+    {
+      "type": "list",
+      "title": "More things you wear, literally",
+      "items": [
+        {
+          "sv": "örhänge",
+          "en": "earring",
+          "lit": "ear hanger"
+        },
+        {
+          "sv": "halsband",
+          "en": "necklace",
+          "lit": "neck band"
+        },
+        {
+          "sv": "armband",
+          "en": "bracelet",
+          "lit": "arm band"
+        }
+      ]
+    },
+    {
+      "type": "example",
+      "sv": "Mormor sydde alltid med *fingerborg*.",
+      "en": "Grandma always sewed with a thimble."
+    }
+  ],
+  "caption": "A thimble in Swedish is a fingerborg: a finger castle. Borg is an old word for a castle or fortress, as in Göteborg.\n\nOther things you wear are just as literal: an earring is an örhänge (ear hanger) and a necklace is a halsband (neck band).\n\nDo you still own a thimble?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishwords",
+    "swedishlanguage",
+    "languagelearning"
+  ]
+}

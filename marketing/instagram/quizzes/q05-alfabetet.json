@@ -1,0 +1,17 @@
+{
+  "id": "q05-alfabetet",
+  "show": "x y z *å* *ä* *ö*",
+  "hint": "The Swedish alphabet ends like this.",
+  "question": "How many letters does it have?",
+  "options": [
+    "26",
+    "28",
+    "29",
+    "31"
+  ],
+  "answer": 2,
+  "reveal": "29: the 26 you know, plus *å*, *ä* and *ö* at the very end. In a Swedish dictionary, the *ö* words come last.",
+  "verified": [
+    "ä"
+  ]
+}

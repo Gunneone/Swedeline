@@ -1,0 +1,14 @@
+{
+  "id": "q12-ingen-fara-pa-taket",
+  "show": "*ingen fara på taket*",
+  "hint": "Literally: no danger on the roof.",
+  "question": "What does it mean?",
+  "options": [
+    "The roof is leaking",
+    "No problem at all",
+    "Watch out above",
+    "Climb with care"
+  ],
+  "answer": 1,
+  "reveal": "*Det är ingen fara på taket* means don't worry, everything's fine. Swedes say it when something sounds worse than it is."
+}

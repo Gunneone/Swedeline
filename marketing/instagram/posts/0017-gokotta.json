@@ -1,0 +1,51 @@
+{
+  "id": "0017-gokotta",
+  "series": "no-english-word",
+  "headwords": [
+    "gökotta"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "gökotta",
+      "fact": "means getting up at dawn to go outside and hear the first birds sing."
+    },
+    {
+      "type": "breakdown",
+      "sv": "gökotta",
+      "parts": [
+        {
+          "sv": "gök",
+          "en": "cuckoo"
+        },
+        {
+          "sv": "otta",
+          "en": "early dawn"
+        }
+      ],
+      "literal": "cuckoo dawn",
+      "means": "a dawn outing for birdsong"
+    },
+    {
+      "type": "note",
+      "title": "A spring tradition",
+      "body": "*Gökotta* belongs to spring. Many people go on Ascension Day, often with a thermos of coffee and a sandwich.\n\nHearing a cuckoo is a bonus, not a must."
+    },
+    {
+      "type": "example",
+      "sv": "I morgon ska vi gå på *gökotta*.",
+      "en": "Tomorrow we're getting up at dawn to listen to the birds."
+    }
+  ],
+  "caption": "Gökotta: getting up very early to go out into nature and listen to the birds. Gök means cuckoo, and otta is an old word for the early hours of the morning.\n\nIt's a spring tradition, and many people do it on Ascension Day.\n\nWould you get up at dawn for this?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishwords",
+    "swedishlanguage",
+    "languagelearning"
+  ],
+  "verified": [
+    "gökotta"
+  ]
+}

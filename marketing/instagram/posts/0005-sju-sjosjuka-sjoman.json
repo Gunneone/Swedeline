@@ -1,0 +1,59 @@
+{
+  "id": "0005-sju-sjosjuka-sjoman",
+  "series": "say-it",
+  "headwords": [
+    "sju sjösjuka sjömän"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "sju sjösjuka sjömän",
+      "fact": "_seven seasick sailors_: the classic tongue twister for the Swedish sj-sound."
+    },
+    {
+      "type": "note",
+      "title": "What is the sj-sound?",
+      "body": "It's a breathy, rushing sound, a bit like a soft _sh_ said with rounded lips. English has nothing quite like it, and many learners find it the hardest sound in Swedish."
+    },
+    {
+      "type": "list",
+      "title": "One sound, many spellings",
+      "items": [
+        {
+          "sv": "sju",
+          "en": "seven"
+        },
+        {
+          "sv": "skjorta",
+          "en": "shirt"
+        },
+        {
+          "sv": "stjärna",
+          "en": "star"
+        },
+        {
+          "sv": "sked",
+          "en": "spoon"
+        },
+        {
+          "sv": "choklad",
+          "en": "chocolate"
+        }
+      ]
+    },
+    {
+      "type": "example",
+      "title": "The full twister",
+      "sv": "*Sju sjösjuka sjömän* sköttes av sju sköna sjuksköterskor.",
+      "en": "Seven seasick sailors were looked after by seven lovely nurses."
+    }
+  ],
+  "caption": "Sju sjösjuka sjömän: seven seasick sailors. It's the classic Swedish tongue twister for the sj-sound.\n\nThe long version keeps going: sju sjösjuka sjömän sköttes av sju sköna sjuksköterskor på skeppet Shanghai.\n\nCan you say it three times fast?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishpronunciation",
+    "tonguetwister",
+    "languagelearning"
+  ]
+}

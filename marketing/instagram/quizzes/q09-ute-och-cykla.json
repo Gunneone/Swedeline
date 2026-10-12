@@ -1,0 +1,14 @@
+{
+  "id": "q09-ute-och-cykla",
+  "show": "*vara ute och cykla*",
+  "hint": "Literally: to be out cycling.",
+  "question": "What does it mean?",
+  "options": [
+    "To be on holiday",
+    "To be running late",
+    "To be in great shape",
+    "To be totally wrong"
+  ],
+  "answer": 3,
+  "reveal": "If someone *är ute och cyklar*, they're completely wrong or confused about something. No bike needed."
+}

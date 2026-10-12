@@ -1,0 +1,55 @@
+{
+  "id": "0025-semester",
+  "series": "false-friend",
+  "headwords": [
+    "semester"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "semester",
+      "article": "en",
+      "fact": "doesn't mean half a school year. It means _vacation_, a holiday off work."
+    },
+    {
+      "type": "list",
+      "title": "Don't mix these up",
+      "items": [
+        {
+          "sv": "semester",
+          "en": "vacation, holiday"
+        },
+        {
+          "sv": "termin",
+          "en": "school term, semester"
+        },
+        {
+          "sv": "helgdag",
+          "en": "public holiday"
+        },
+        {
+          "sv": "ledig",
+          "en": "off work, free"
+        }
+      ]
+    },
+    {
+      "type": "note",
+      "title": "Summer is semester time",
+      "body": "By law, people working in Sweden get at least 25 days of *semester* a year. Many take several weeks in a row in July, and some offices get very quiet."
+    },
+    {
+      "type": "example",
+      "sv": "Vi åker till Gotland på *semester* i juli.",
+      "en": "We're going to Gotland on vacation in July."
+    }
+  ],
+  "caption": "Semester in Swedish means vacation. If you mean half a school year, the word is termin.\n\nBy law, people working in Sweden get at least 25 days of semester a year, and July is when most people take it.\n\nWhere would you spend a Swedish summer semester?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "falsefriends",
+    "swedishwords",
+    "languagelearning"
+  ]
+}

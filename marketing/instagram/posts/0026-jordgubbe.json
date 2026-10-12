@@ -1,0 +1,66 @@
+{
+  "id": "0026-jordgubbe",
+  "series": "literally",
+  "headwords": [
+    "jordgubbe"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "jordgubbe",
+      "article": "en",
+      "fact": "means strawberry. Taken apart, it says _earth old man_."
+    },
+    {
+      "type": "breakdown",
+      "sv": "jordgubbe",
+      "parts": [
+        {
+          "sv": "jord",
+          "en": "earth, soil"
+        },
+        {
+          "sv": "gubbe",
+          "en": "old man"
+        }
+      ],
+      "literal": "earth old man",
+      "means": "strawberry"
+    },
+    {
+      "type": "list",
+      "title": "Berries in Swedish",
+      "items": [
+        {
+          "sv": "blåbär",
+          "en": "blueberry"
+        },
+        {
+          "sv": "lingon",
+          "en": "lingonberry"
+        },
+        {
+          "sv": "hjortron",
+          "en": "cloudberry"
+        },
+        {
+          "sv": "hallon",
+          "en": "raspberry"
+        }
+      ]
+    },
+    {
+      "type": "example",
+      "sv": "Midsommar utan *jordgubbar* är ingen riktig midsommar.",
+      "en": "Midsummer without strawberries isn't a real Midsummer."
+    }
+  ],
+  "caption": "In Swedish, a strawberry is a jordgubbe. Take it apart and you get jord (earth) and gubbe (old man).\n\nStrawberries are a must at Midsummer, often with cream or in a big strawberry cake.\n\nWhich berry is your favourite?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishwords",
+    "swedishlanguage",
+    "languagelearning"
+  ]
+}

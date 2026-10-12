@@ -1,0 +1,49 @@
+{
+  "id": "0022-lag",
+  "series": "en-or-ett",
+  "headwords": [
+    "lag"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "lag",
+      "fact": "*En lag* is a law, but *ett lag* is a team. The little article changes the whole word."
+    },
+    {
+      "type": "list",
+      "title": "Same word, different article",
+      "items": [
+        {
+          "sv": "en lag / ett lag",
+          "en": "a law / a team"
+        },
+        {
+          "sv": "en val / ett val",
+          "en": "a whale / a choice, an election"
+        },
+        {
+          "sv": "en plan / ett plan",
+          "en": "a plan / a plane, a level"
+        },
+        {
+          "sv": "en ton / ett ton",
+          "en": "a tone / a tonne"
+        }
+      ]
+    },
+    {
+      "type": "example",
+      "sv": "Vårt *lag* vann matchen.",
+      "en": "Our team won the match."
+    }
+  ],
+  "caption": "En lag is a law. Ett lag is a team. Same word, different article, completely different meaning.\n\nThere are more pairs like it: en val is a whale, but ett val is a choice or an election.\n\nOne more reason to always learn nouns with en or ett. Did you know any of these?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishgrammar",
+    "swedishwords",
+    "languagelearning"
+  ]
+}

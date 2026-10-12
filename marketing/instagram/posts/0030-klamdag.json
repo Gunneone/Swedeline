@@ -1,0 +1,49 @@
+{
+  "id": "0030-klamdag",
+  "series": "no-english-word",
+  "headwords": [
+    "klämdag"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "klämdag",
+      "article": "en",
+      "fact": "is a working day squeezed between a public holiday and the weekend. Many people take it off."
+    },
+    {
+      "type": "breakdown",
+      "sv": "klämdag",
+      "parts": [
+        {
+          "sv": "kläm",
+          "en": "squeeze"
+        },
+        {
+          "sv": "dag",
+          "en": "day"
+        }
+      ],
+      "literal": "squeeze day",
+      "means": "a workday between days off"
+    },
+    {
+      "type": "note",
+      "title": "The Swedish long weekend",
+      "body": "When a holiday falls on a Thursday, the Friday becomes a *klämdag*. Take it off and you get four days in a row.\n\nSome workplaces close for it completely."
+    },
+    {
+      "type": "example",
+      "sv": "Jag är ledig på *klämdagen*.",
+      "en": "I'm off on the squeeze day."
+    }
+  ],
+  "caption": "Klämdag: a squeeze day. It's a working day stuck between a public holiday and the weekend, and many people take it off.\n\nAscension Day is always on a Thursday, so the Friday after it is the classic klämdag.\n\nWould you take the klämdag off?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishwords",
+    "worklife",
+    "languagelearning"
+  ]
+}

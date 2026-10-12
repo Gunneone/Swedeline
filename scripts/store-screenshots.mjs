@@ -8,6 +8,7 @@
 import { chromium } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
+import { BG, FONT, ICON, MARK } from './brand.mjs';
 
 const DIST = path.resolve('dist/chrome');
 const [OUT_ARG, ONLY] = process.argv.slice(2);
@@ -110,7 +111,6 @@ async function capturePopup() {
   return png;
 }
 
-const ICON = fs.readFileSync('assets/icon.svg').toString('base64');
 const b64 = (buf) => `data:image/png;base64,${buf.toString('base64')}`;
 
 async function compose(s, shot, pop) {
@@ -139,11 +139,11 @@ async function compose(s, shot, pop) {
   </style></head><body>
     <h1>${s.title}</h1>
     <p>${s.sub}</p>
-    <img class="brand" src="data:image/svg+xml;base64,${ICON}" alt="">
+    <img class="brand" src="${ICON}" alt="">
     <div class="frame">
       <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>
         <span class="url">gutenberg.org</span>
-        <span class="ext"><img src="data:image/svg+xml;base64,${ICON}" alt=""></span></div>
+        <span class="ext"><img src="${ICON}" alt=""></span></div>
       <img class="shot" src="${b64(shot)}" alt="">
     </div>
     ${pop ? `<img class="popup" src="${b64(pop)}" alt="">` : ''}
@@ -153,11 +153,6 @@ async function compose(s, shot, pop) {
   await comp.close();
 }
 
-
-const BG = 'background: linear-gradient(160deg, #0A78BA 0%, #006AA7 55%, #005A8F 100%);';
-const FONT = "font-family: 'Avenir Next', Avenir, 'Helvetica Neue', Arial, sans-serif;";
-// The extension's own marker style (src/content/content.css).
-const MARK = `background: rgba(254, 204, 2, 0.32); box-shadow: inset 0 -0.12em 0 #006aa7; border-radius: 0.18em; padding: 0 0.12em;`;
 
 async function render(html, width, height, file) {
   const p = await composer.newPage();
@@ -178,7 +173,7 @@ async function render(html, width, height, file) {
 async function promoSmall() {
   await render(`
     <div class="logo" style="position:absolute; left:32px; top:30px; gap:12px; font-size:30px;">
-      <img src="data:image/svg+xml;base64,${ICON}" width="44" height="44" alt="">Swedeline</div>
+      <img src="${ICON}" width="44" height="44" alt="">Swedeline</div>
     <div style="position:absolute; left:32px; right:32px; top:100px; height:148px; background:#fff; border-radius:16px;
                 box-shadow:0 14px 34px rgba(0,25,50,.35); display:grid; place-items:center;
                 font: 33px/1.3 Georgia, 'Times New Roman', serif; color:#1d2328; text-align:center;">
@@ -195,7 +190,7 @@ async function promoMarquee() {
   await render(`
     <div style="position:absolute; left:90px; top:0; bottom:0; width:560px; display:flex; flex-direction:column; justify-content:center; gap:22px;">
       <div class="logo" style="gap:16px; font-size:40px;">
-        <img src="data:image/svg+xml;base64,${ICON}" width="60" height="60" alt="">Swedeline</div>
+        <img src="${ICON}" width="60" height="60" alt="">Swedeline</div>
       <div style="color:#fff; font-size:62px; font-weight:700; line-height:1.08; letter-spacing:-1px;">Learn Swedish<br>while you browse</div>
       <div style="color:#D6E8F5; font-size:25px; font-weight:500; line-height:1.4;">Swedish words, right inside the pages you already read. Hover one for the original.</div>
     </div>
