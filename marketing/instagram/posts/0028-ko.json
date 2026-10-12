@@ -1,0 +1,59 @@
+{
+  "id": "0028-ko",
+  "series": "say-it",
+  "headwords": [
+    "kö",
+    "ko"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "kö",
+      "fact": "means queue, and its k sounds soft, close to _sh_. In *ko* (cow), the k stays hard."
+    },
+    {
+      "type": "note",
+      "title": "The rule",
+      "body": "Before _e_, _i_, _y_, _ä_ and _ö_, a Swedish *k* usually goes soft, a bit like a light _sh_.\n\nBefore _a_, _o_, _u_ and _å_, it stays a hard _k_."
+    },
+    {
+      "type": "list",
+      "title": "Hear the difference",
+      "items": [
+        {
+          "sv": "ko",
+          "en": "cow, hard k"
+        },
+        {
+          "sv": "kö",
+          "en": "queue, soft"
+        },
+        {
+          "sv": "kall",
+          "en": "cold, hard k"
+        },
+        {
+          "sv": "kär",
+          "en": "in love, soft"
+        },
+        {
+          "sv": "kyrka",
+          "en": "church, soft"
+        }
+      ]
+    },
+    {
+      "type": "example",
+      "sv": "Det var en lång *kö* till toaletten.",
+      "en": "There was a long queue for the toilet."
+    }
+  ],
+  "caption": "Kö (queue) and ko (cow) start with different sounds. Before e, i, y, ä and ö, the Swedish k usually turns soft, close to a light sh.\n\nThat's why kyrka (church) doesn't start like the English \"kirk\".\n\nWhich Swedish sound do you find hardest?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishpronunciation",
+    "swedishlanguage",
+    "languagelearning"
+  ]
+}

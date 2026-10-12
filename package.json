@@ -24,6 +24,9 @@
     "zip": "node scripts/zip.mjs",
     "harness": "node scripts/serve.mjs",
     "screenshots": "node scripts/store-screenshots.mjs",
+    "ig:check": "node scripts/instagram.mjs check",
+    "ig:render": "node scripts/instagram.mjs render",
+    "ig:status": "node scripts/instagram.mjs status",
     "version:next": "node scripts/version-next.mjs"
   },
   "devDependencies": {

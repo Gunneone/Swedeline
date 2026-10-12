@@ -1,0 +1,54 @@
+{
+  "id": "0023-sverige",
+  "series": "word-story",
+  "headwords": [
+    "Sverige"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "Sverige",
+      "say": "SVAIR-yeh",
+      "fact": "comes from *Svea rike*: the realm of the _Svear_, an early people of central Sweden."
+    },
+    {
+      "type": "list",
+      "title": "Sweden in Swedish",
+      "items": [
+        {
+          "sv": "Sverige",
+          "en": "Sweden"
+        },
+        {
+          "sv": "svenska",
+          "en": "Swedish, the language"
+        },
+        {
+          "sv": "en svensk",
+          "en": "a Swede"
+        },
+        {
+          "sv": "svenskar",
+          "en": "Swedes"
+        }
+      ]
+    },
+    {
+      "type": "example",
+      "sv": "Jag har bott i *Sverige* i tre år.",
+      "en": "I've lived in Sweden for three years."
+    }
+  ],
+  "caption": "Sverige, Swedish for Sweden, comes from Svea rike: the realm of the Svear, a people who lived around Lake Mälaren.\n\nThe g is soft, so it sounds roughly like \"SVAIR-yeh\".\n\nHow do you say Sweden in your language?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishwords",
+    "etymology",
+    "sweden"
+  ],
+  "verified": [
+    "svea",
+    "svear"
+  ]
+}

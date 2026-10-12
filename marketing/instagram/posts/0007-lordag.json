@@ -1,0 +1,68 @@
+{
+  "id": "0007-lordag",
+  "series": "word-story",
+  "headwords": [
+    "lördag",
+    "måndag",
+    "tisdag",
+    "onsdag",
+    "torsdag",
+    "fredag"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "lördag",
+      "fact": "means Saturday, and its name comes from an old word for _bath day_."
+    },
+    {
+      "type": "note",
+      "title": "The washing day",
+      "body": "*Lördag* goes back to Old Norse _laugardagr_, which means washing day or bath day.\n\nEnglish went another way: Saturday is named after the Roman god Saturn."
+    },
+    {
+      "type": "list",
+      "title": "And the rest of the week",
+      "items": [
+        {
+          "sv": "måndag",
+          "en": "Monday",
+          "lit": "moon's day"
+        },
+        {
+          "sv": "tisdag",
+          "en": "Tuesday",
+          "lit": "Tyr's day"
+        },
+        {
+          "sv": "onsdag",
+          "en": "Wednesday",
+          "lit": "Odin's day"
+        },
+        {
+          "sv": "torsdag",
+          "en": "Thursday",
+          "lit": "Thor's day"
+        },
+        {
+          "sv": "fredag",
+          "en": "Friday",
+          "lit": "Freyja's or Frigg's day"
+        }
+      ]
+    },
+    {
+      "type": "example",
+      "sv": "Ska vi ses på *lördag*?",
+      "en": "Shall we meet on Saturday?"
+    }
+  ],
+  "caption": "Lördag, Swedish for Saturday, comes from an Old Norse word for washing day.\n\nMost of the other weekdays are named after the moon and Norse gods, just like in English: onsdag is Odin's day and torsdag is Thor's day.\n\nWhich day of the week is your favourite?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishwords",
+    "etymology",
+    "languagelearning"
+  ]
+}

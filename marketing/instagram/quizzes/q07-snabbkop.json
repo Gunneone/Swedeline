@@ -1,0 +1,14 @@
+{
+  "id": "q07-snabbkop",
+  "show": "*snabbköp*",
+  "hint": "Literally: quick buy.",
+  "question": "What is a snabbköp?",
+  "options": [
+    "A supermarket",
+    "Fast food",
+    "An impulse buy",
+    "Speed dating"
+  ],
+  "answer": 0,
+  "reveal": "A *snabbköp* is a supermarket, literally a _quick buy_. It sounds a bit old-fashioned today: most people just say *mataffär*."
+}

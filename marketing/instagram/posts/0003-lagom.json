@@ -1,0 +1,50 @@
+{
+  "id": "0003-lagom",
+  "series": "no-english-word",
+  "headwords": [
+    "lagom"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "lagom",
+      "fact": "means not too much and not too little: _just the right amount_."
+    },
+    {
+      "type": "list",
+      "title": "Lagom goes with almost anything",
+      "items": [
+        {
+          "sv": "lagom varm",
+          "en": "just warm enough"
+        },
+        {
+          "sv": "lagom stor",
+          "en": "just the right size"
+        },
+        {
+          "sv": "lagom mycket",
+          "en": "just enough"
+        }
+      ]
+    },
+    {
+      "type": "note",
+      "title": "Not perfect, just right",
+      "body": "*Lagom* isn't about the best or the most. It's the amount that feels right, without fuss.\n\nYou can use it for food, weather, work, a walk or a cup of coffee."
+    },
+    {
+      "type": "example",
+      "sv": "Kaffet är *lagom* varmt nu.",
+      "en": "The coffee is just the right temperature now."
+    }
+  ],
+  "caption": "Lagom is the Swedish word for just the right amount: not too much, not too little.\n\nIt works for almost anything: food, weather, work, coffee. English needs a whole phrase for it, Swedish needs five letters.\n\nWhat in your life is lagom?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishwords",
+    "lagom",
+    "languagelearning"
+  ]
+}

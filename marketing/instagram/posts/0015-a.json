@@ -1,0 +1,52 @@
+{
+  "id": "0015-a",
+  "series": "say-it",
+  "headwords": [
+    "å",
+    "ä",
+    "ö"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "å",
+      "fact": "is a whole word in Swedish: a _stream_ or small river. And *ö* means _island_."
+    },
+    {
+      "type": "list",
+      "title": "How to say them (roughly)",
+      "items": [
+        {
+          "sv": "å",
+          "en": "like the o in more"
+        },
+        {
+          "sv": "ä",
+          "en": "like the e in bed"
+        },
+        {
+          "sv": "ö",
+          "en": "like the u in fur, without the r"
+        }
+      ]
+    },
+    {
+      "type": "note",
+      "title": "Three extra letters",
+      "body": "*Å*, *ä* and *ö* aren't a and o with decorations. They are separate letters with their own sounds.\n\nThey come last in the Swedish alphabet: x, y, z, *å*, *ä*, *ö*."
+    },
+    {
+      "type": "example",
+      "sv": "Stugan ligger vid en *å*.",
+      "en": "The cabin is by a stream."
+    }
+  ],
+  "caption": "In Swedish, å is a whole word: a stream. Ö is a word too: an island. And i means in.\n\nÅ, ä and ö are separate letters, not decorated versions of a and o, and they come at the very end of the alphabet.\n\nWhich one is hardest for you to say?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishpronunciation",
+    "swedishalphabet",
+    "languagelearning"
+  ]
+}

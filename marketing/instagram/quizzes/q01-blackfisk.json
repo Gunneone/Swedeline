@@ -1,0 +1,14 @@
+{
+  "id": "q01-blackfisk",
+  "show": "*bläckfisk*",
+  "hint": "A sea animal with a very honest name.",
+  "question": "What is a bläckfisk?",
+  "options": [
+    "A blackbird",
+    "An octopus",
+    "A swordfish",
+    "A jellyfish"
+  ],
+  "answer": 1,
+  "reveal": "*Bläckfisk* is an octopus, and it's used for squid too. Literally it means _ink fish_: *bläck* is ink and *fisk* is fish."
+}

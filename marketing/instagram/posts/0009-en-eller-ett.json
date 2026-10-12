@@ -1,0 +1,49 @@
+{
+  "id": "0009-en-eller-ett",
+  "series": "en-or-ett",
+  "headwords": [
+    "en eller ett"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "en eller ett",
+      "fact": "Every Swedish noun is either an _en_-word or an _ett_-word. Most of them are en-words."
+    },
+    {
+      "type": "note",
+      "title": "Why it matters",
+      "body": "It decides how you say _the_: *bilen* (the car), but *huset* (the house).\n\nIt changes adjectives too: *en stor bil*, but *ett stort hus*."
+    },
+    {
+      "type": "list",
+      "title": "Learn every noun with its article",
+      "items": [
+        {
+          "sv": "en bil",
+          "en": "a car"
+        },
+        {
+          "sv": "ett hus",
+          "en": "a house"
+        },
+        {
+          "sv": "en katt",
+          "en": "a cat"
+        },
+        {
+          "sv": "ett barn",
+          "en": "a child"
+        }
+      ]
+    }
+  ],
+  "caption": "Every Swedish noun is either an en-word or an ett-word, and there's no simple rule for which is which. Most nouns are en-words.\n\nThe trick is to learn every noun together with its article. Not \"bil\" but \"en bil\". Not \"hus\" but \"ett hus\".\n\nSwedeline's hover card shows en or ett for every word it swaps, so you see it every time.\n\nWhich noun always trips you up?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishgrammar",
+    "swedishlanguage",
+    "languagelearning"
+  ]
+}

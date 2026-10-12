@@ -1,0 +1,51 @@
+{
+  "id": "0010-ombudsman",
+  "series": "swedish-in-english",
+  "headwords": [
+    "ombudsman"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "ombudsman",
+      "fact": "is a Swedish word. Sweden set up the first parliamentary ombudsman in _1809_."
+    },
+    {
+      "type": "breakdown",
+      "sv": "ombudsman",
+      "parts": [
+        {
+          "sv": "ombud",
+          "en": "representative"
+        },
+        {
+          "sv": "man",
+          "en": "man"
+        }
+      ],
+      "literal": "representative man",
+      "means": "someone who speaks for others"
+    },
+    {
+      "type": "note",
+      "title": "From Sweden to the world",
+      "body": "Sweden's parliamentary ombudsman, *Justitieombudsmannen*, handles complaints about the authorities.\n\nMany countries later copied the idea, and the Swedish word came with it."
+    },
+    {
+      "type": "example",
+      "sv": "Hon jobbar som *ombudsman* på facket.",
+      "en": "She works as a representative at the union."
+    }
+  ],
+  "caption": "Ombudsman is Swedish. Ombud means representative, so an ombudsman is someone who speaks for others.\n\nSweden set up its parliamentary ombudsman in 1809 to handle complaints about the authorities. Other countries copied the idea and kept the Swedish name.\n\nDid you know this one was Swedish?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishwords",
+    "etymology",
+    "languagelearning"
+  ],
+  "verified": [
+    "justitieombudsmannen"
+  ]
+}

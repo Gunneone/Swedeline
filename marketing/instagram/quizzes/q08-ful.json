@@ -1,0 +1,14 @@
+{
+  "id": "q08-ful",
+  "show": "*ful*",
+  "hint": "Careful, it's a false friend.",
+  "question": "What does ful mean?",
+  "options": [
+    "Full",
+    "Ugly",
+    "Fool",
+    "Fuel"
+  ],
+  "answer": 1,
+  "reveal": "*Ful* means ugly. And careful with *full*: in Swedish it means _drunk_. After a big dinner, say *jag är mätt*."
+}

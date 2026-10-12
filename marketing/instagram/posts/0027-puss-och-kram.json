@@ -1,0 +1,54 @@
+{
+  "id": "0027-puss-och-kram",
+  "series": "cute-word",
+  "headwords": [
+    "puss och kram"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "puss och kram",
+      "fact": "_kiss and hug_: a sweet way to end a message to someone close to you."
+    },
+    {
+      "type": "list",
+      "title": "Ways to sign off",
+      "items": [
+        {
+          "sv": "kram",
+          "en": "hug: friends and family"
+        },
+        {
+          "sv": "puss och kram",
+          "en": "kiss and hug: your closest"
+        },
+        {
+          "sv": "ha det bra",
+          "en": "take care"
+        },
+        {
+          "sv": "hälsningar",
+          "en": "regards"
+        }
+      ]
+    },
+    {
+      "type": "note",
+      "title": "Kram is everywhere",
+      "body": "Swedes end lots of messages to friends with just *kram*, a hug.\n\n*Puss* is for partners, kids and close family."
+    },
+    {
+      "type": "example",
+      "sv": "Vi ses på fredag. *Puss och kram*, mamma",
+      "en": "See you on Friday. Hugs and kisses, Mum"
+    }
+  ],
+  "caption": "Puss och kram: kiss and hug. It's how many Swedes sign off messages to the people closest to them.\n\nFor friends, a simple \"kram\" (hug) is very common. For work emails, stick to \"hälsningar\".\n\nHow do you sign off your messages?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishwords",
+    "cutewords",
+    "languagelearning"
+  ]
+}

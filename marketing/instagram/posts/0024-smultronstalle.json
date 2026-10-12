@@ -1,0 +1,49 @@
+{
+  "id": "0024-smultronstalle",
+  "series": "no-english-word",
+  "headwords": [
+    "smultronställe"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "smultronställe",
+      "article": "ett",
+      "fact": "is your own special place, the one you love most. Literally: a _wild strawberry spot_."
+    },
+    {
+      "type": "breakdown",
+      "sv": "smultronställe",
+      "parts": [
+        {
+          "sv": "smultron",
+          "en": "wild strawberry"
+        },
+        {
+          "sv": "ställe",
+          "en": "place, spot"
+        }
+      ],
+      "literal": "wild strawberry spot",
+      "means": "a favourite place"
+    },
+    {
+      "type": "note",
+      "title": "Why strawberries?",
+      "body": "Wild strawberries grow in small patches in the forest. When you find a good one, you come back every summer, and you don't tell everyone.\n\nA *smultronställe* can be a café, a beach, a bench or a bookshop."
+    },
+    {
+      "type": "example",
+      "sv": "Den här lilla stranden är mitt *smultronställe*.",
+      "en": "This little beach is my favourite place."
+    }
+  ],
+  "caption": "Smultronställe: a wild strawberry spot. It means a small, special place that you love, and maybe keep a little secret.\n\nIngmar Bergman's 1957 film Smultronstället is known in English as Wild Strawberries.\n\nWhere is your smultronställe?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishwords",
+    "swedishlanguage",
+    "languagelearning"
+  ]
+}

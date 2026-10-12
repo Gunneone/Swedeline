@@ -1,0 +1,14 @@
+{
+  "id": "q06-apple",
+  "show": "*banan* · *äpple* · *apelsin* · *citron*",
+  "hint": "Three are en-words. One is an ett-word.",
+  "question": "Which one is an ett-word?",
+  "options": [
+    "banan",
+    "äpple",
+    "apelsin",
+    "citron"
+  ],
+  "answer": 1,
+  "reveal": "*Ett äpple*, an apple. The others are *en banan*, *en apelsin* and *en citron*. A pear is an ett-word too: *ett päron*."
+}

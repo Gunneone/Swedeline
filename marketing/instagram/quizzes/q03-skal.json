@@ -1,0 +1,14 @@
+{
+  "id": "q03-skal",
+  "show": "Cheers!",
+  "hint": "Glasses up. What do Swedes say?",
+  "question": "How do you say cheers in Swedish?",
+  "options": [
+    "Prost",
+    "Skål",
+    "Salud",
+    "Santé"
+  ],
+  "answer": 1,
+  "reveal": "*Skål!* The word means _bowl_. And no, it has nothing to do with Vikings drinking from skulls: that story is a myth."
+}

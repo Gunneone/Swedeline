@@ -1,0 +1,62 @@
+{
+  "id": "0019-gosedjur",
+  "series": "cute-word",
+  "headwords": [
+    "gosedjur"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "gosedjur",
+      "article": "ett",
+      "fact": "is a soft toy. Literally: a _cuddle animal_."
+    },
+    {
+      "type": "breakdown",
+      "sv": "gosedjur",
+      "parts": [
+        {
+          "sv": "gosa",
+          "en": "to cuddle"
+        },
+        {
+          "sv": "djur",
+          "en": "animal"
+        }
+      ],
+      "literal": "cuddle animal",
+      "means": "soft toy, stuffed animal"
+    },
+    {
+      "type": "list",
+      "title": "More cuddly words",
+      "items": [
+        {
+          "sv": "gosa",
+          "en": "to cuddle"
+        },
+        {
+          "sv": "gosig",
+          "en": "soft and cuddly"
+        },
+        {
+          "sv": "nalle",
+          "en": "teddy bear"
+        }
+      ]
+    },
+    {
+      "type": "example",
+      "sv": "Barnet somnade med sitt *gosedjur*.",
+      "en": "The child fell asleep with their soft toy."
+    }
+  ],
+  "caption": "Gosedjur: a cuddle animal. It's the Swedish word for any soft toy, from teddy bears to plush sharks.\n\nGosa means to cuddle, and a teddy bear has its own name too: nalle.\n\nDid you have a favourite gosedjur as a kid?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishwords",
+    "cutewords",
+    "languagelearning"
+  ]
+}

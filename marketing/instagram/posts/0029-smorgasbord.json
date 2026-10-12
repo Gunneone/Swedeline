@@ -1,0 +1,56 @@
+{
+  "id": "0029-smorgasbord",
+  "series": "swedish-in-english",
+  "headwords": [
+    "smörgåsbord"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "smörgåsbord",
+      "article": "ett",
+      "fact": "is Swedish: a _sandwich table_. And taken apart, *smörgås* even says _butter goose_."
+    },
+    {
+      "type": "breakdown",
+      "sv": "smörgåsbord",
+      "parts": [
+        {
+          "sv": "smör",
+          "en": "butter"
+        },
+        {
+          "sv": "gås",
+          "en": "goose"
+        },
+        {
+          "sv": "bord",
+          "en": "table"
+        }
+      ],
+      "literal": "butter goose table",
+      "means": "a buffet of many dishes"
+    },
+    {
+      "type": "note",
+      "title": "And in Sweden?",
+      "body": "In Sweden you'll often hear the buffet named after the holiday: a *julbord* at Christmas, a *påskbord* at Easter.\n\nA *smörgås* on its own is an open sandwich."
+    },
+    {
+      "type": "example",
+      "sv": "Vi äter *julbord* med hela familjen.",
+      "en": "We're having the Christmas buffet with the whole family."
+    }
+  ],
+  "caption": "Smörgåsbord is Swedish: a smörgås is an open sandwich, and bord means table. Take smörgås apart and it even says butter goose.\n\nAt Christmas, the big Swedish buffet is a julbord: a Yule table.\n\nWhat would be on your smörgåsbord?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishwords",
+    "etymology",
+    "swedishfood"
+  ],
+  "verified": [
+    "påskbord"
+  ]
+}

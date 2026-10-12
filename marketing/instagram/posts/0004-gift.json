@@ -1,0 +1,45 @@
+{
+  "id": "0004-gift",
+  "series": "false-friend",
+  "headwords": [
+    "gift"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "gift",
+      "fact": "doesn't mean a present. It means _married_, and it also means _poison_."
+    },
+    {
+      "type": "list",
+      "title": "Keep these apart",
+      "items": [
+        {
+          "sv": "gift",
+          "en": "married"
+        },
+        {
+          "sv": "ett gift",
+          "en": "a poison"
+        },
+        {
+          "sv": "en present",
+          "en": "a present, a gift"
+        }
+      ]
+    },
+    {
+      "type": "example",
+      "sv": "Hon är *gift* och har två barn.",
+      "en": "She is married and has two children."
+    }
+  ],
+  "caption": "If a Swede tells you they're gift, congratulate them: it means they're married.\n\nAs a noun, ett gift means a poison. If you want to give someone a gift, the Swedish word is en present or en gåva.\n\nWhich false friend has tricked you?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "falsefriends",
+    "swedishwords",
+    "languagelearning"
+  ]
+}

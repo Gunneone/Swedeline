@@ -1,0 +1,54 @@
+{
+  "id": "0011-fika",
+  "series": "no-english-word",
+  "headwords": [
+    "fika"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "fika",
+      "fact": "is a break for coffee and something sweet, and a reason to stop and talk."
+    },
+    {
+      "type": "note",
+      "title": "More than coffee",
+      "body": "*Fika* is a noun and a verb: you can have *en fika*, or you can just *fika*.\n\nIt's usually with other people, and many workplaces have set times for it. Tea or juice counts too."
+    },
+    {
+      "type": "list",
+      "title": "Fika words",
+      "items": [
+        {
+          "sv": "kanelbulle",
+          "en": "cinnamon bun"
+        },
+        {
+          "sv": "kaka",
+          "en": "cookie, cake"
+        },
+        {
+          "sv": "påtår",
+          "en": "a second cup"
+        },
+        {
+          "sv": "fikarast",
+          "en": "coffee break at work"
+        }
+      ]
+    },
+    {
+      "type": "example",
+      "sv": "Ska vi ta en *fika*?",
+      "en": "Shall we have a fika?"
+    }
+  ],
+  "caption": "Fika: a break for coffee (or tea) and something sweet, usually with other people. It's both a noun and a verb, so you can have a fika or simply fika.\n\nCinnamon buns, kanelbullar, are the classic choice. Sweden even has a Cinnamon Bun Day on 4 October.\n\nWhat's your perfect fika?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "fika",
+    "swedishwords",
+    "swedishlanguage"
+  ]
+}

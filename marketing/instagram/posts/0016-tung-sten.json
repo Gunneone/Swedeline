@@ -1,0 +1,48 @@
+{
+  "id": "0016-tung-sten",
+  "series": "swedish-in-english",
+  "headwords": [
+    "tung sten",
+    "volfram"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "tung sten",
+      "fact": "means _heavy stone_. English borrowed it as the word tungsten."
+    },
+    {
+      "type": "note",
+      "title": "A heavy Swedish name",
+      "body": "In the 1700s, Swedish chemists called a very heavy mineral *tungsten*, heavy stone. English kept the name for the metal inside it.\n\nThe twist: in Swedish, that metal is called *volfram*."
+    },
+    {
+      "type": "list",
+      "title": "More English words from Swedish",
+      "items": [
+        {
+          "sv": "orientering",
+          "en": "orienteering"
+        },
+        {
+          "sv": "gravlax",
+          "en": "gravlax",
+          "lit": "grave salmon"
+        },
+        {
+          "sv": "moped",
+          "en": "moped",
+          "lit": "motor + pedals"
+        }
+      ]
+    }
+  ],
+  "caption": "Tungsten comes from Swedish: tung sten means heavy stone. It was the Swedish name for a very heavy mineral, and English kept it for the metal.\n\nThe twist: in Swedish the metal itself is called volfram, which is where its chemical symbol W comes from.\n\nWhich English word would you never have guessed was Swedish?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishwords",
+    "etymology",
+    "languagelearning"
+  ]
+}

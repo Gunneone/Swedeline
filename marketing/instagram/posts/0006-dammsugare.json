@@ -1,0 +1,65 @@
+{
+  "id": "0006-dammsugare",
+  "series": "literally",
+  "headwords": [
+    "dammsugare"
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "sv": "dammsugare",
+      "article": "en",
+      "fact": "is a vacuum cleaner. Literally: a _dust sucker_."
+    },
+    {
+      "type": "breakdown",
+      "sv": "dammsugare",
+      "parts": [
+        {
+          "sv": "damm",
+          "en": "dust"
+        },
+        {
+          "sv": "sugare",
+          "en": "sucker"
+        }
+      ],
+      "literal": "dust sucker",
+      "means": "vacuum cleaner"
+    },
+    {
+      "type": "list",
+      "title": "More honest household words",
+      "items": [
+        {
+          "sv": "kylskåp",
+          "en": "fridge",
+          "lit": "cool cupboard"
+        },
+        {
+          "sv": "glödlampa",
+          "en": "light bulb",
+          "lit": "glow lamp"
+        },
+        {
+          "sv": "diskmaskin",
+          "en": "dishwasher",
+          "lit": "dish machine"
+        }
+      ]
+    },
+    {
+      "type": "example",
+      "sv": "Var står *dammsugaren*?",
+      "en": "Where's the vacuum cleaner?"
+    }
+  ],
+  "caption": "A vacuum cleaner in Swedish is a dammsugare: a dust sucker. Honest and to the point.\n\nA lot of household words work the same way. A fridge is a kylskåp (cool cupboard) and a light bulb is a glödlampa (glow lamp).\n\nWhich room of the house should we do next?",
+  "hashtags": [
+    "learnswedish",
+    "svenska",
+    "swedishwords",
+    "swedishlanguage",
+    "languagelearning"
+  ]
+}
